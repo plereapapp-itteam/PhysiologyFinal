@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physiology Rapid Review — PLE Board</title>
+<style>
+
+:root{
+  --ink:#1B2A2E;
+  --ink-soft:#3E4F52;
+  --paper:#F5F1E8;
+  --panel:#FFFFFF;
+  --line:#DAD2BE;
+  --gold:#A5761F;
+  --gold-bg:#F5ECD8;
+  --up:#B23A2E;
+  --down:#255C8A;
+  --serif:Georgia, 'Liberation Serif', 'Noto Serif', serif;
+  --sans:-apple-system, 'Segoe UI', 'Helvetica Neue', 'Liberation Sans', Arial, sans-serif;
+
+  --D:#2A5C77; --D-bg:#E4EDF0;
+  --C:#1E8449; --C-bg:#E3F5EA;
+  --PHI:#0E9488; --PHI-bg:#E0F5F2;
+  --P:#A8342E; --P-bg:#F7E7E4;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.app{ display:grid; grid-template-columns:260px 1fr; min-height:100vh; }
+
+/* ---------- SIDEBAR ---------- */
+.rail{
+  background:var(--ink); color:var(--paper);
+  padding:26px 0 20px; position:sticky; top:0; height:100vh; overflow-y:auto;
+}
+.rail-brand{ padding:0 22px 18px; border-bottom:1px solid rgba(245,241,232,0.15); margin-bottom:6px; }
+.rail-brand .kicker{ font-size:10.5px; letter-spacing:.06em; color:#C9B98A; margin-bottom:4px; }
+.rail-brand h1{ font-family:var(--serif); font-size:20px; font-weight:600; margin:0; line-height:1.15; }
+.rail-brand .sub{ font-size:11.5px; color:#9FB0AF; margin-top:6px; line-height:1.5; }
+nav.plates{ padding:10px 10px 0; }
+.plate-btn{
+  width:100%; display:flex; align-items:center; gap:9px;
+  background:none; border:none; color:#CBD6D2; text-align:left;
+  padding:8px 12px; border-radius:4px; cursor:pointer; font-family:var(--sans); font-size:12.8px; line-height:1.3;
+}
+.plate-btn .num{ font-family:var(--serif); font-size:14px; color:#8CA6A1; min-width:20px; }
+.plate-btn .pct{ margin-left:auto; font-size:10px; color:#8CA6A1; font-weight:600; }
+.plate-btn:hover{ background:rgba(245,241,232,0.08); color:#F5F1E8; }
+.plate-btn.active{ background:rgba(245,241,232,0.14); color:#fff; box-shadow:inset 3px 0 0 var(--gold); }
+.plate-btn.active .num{ color:var(--gold); }
+.plate-btn.active .pct{ color:var(--gold); }
+.rail-legend{ margin-top:18px; padding:14px 20px 4px; border-top:1px solid rgba(245,241,232,0.15); font-size:11.5px; color:#B7C4C2; }
+.rail-legend .lg-title{ font-size:10.5px; letter-spacing:.05em; color:#8CA6A1; margin-bottom:9px; }
+.lg-row{ display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+.lg-tag{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:4px; font-size:10.5px; font-weight:700; flex-shrink:0; }
+
+/* ---------- MAIN ---------- */
+main{ padding:38px 54px 90px; max-width:980px; }
+.plate-header{ display:flex; align-items:flex-end; gap:16px; border-bottom:2px solid var(--ink); padding-bottom:14px; margin-bottom:26px; border-bottom-color:var(--region, var(--ink)); }
+.plate-badge{ display:flex; align-items:center; gap:12px; }
+.plate-badge .icon-ring{
+  width:56px; height:56px; border-radius:50%;
+  background:var(--region-bg, var(--gold-bg)); border:2px solid var(--region, var(--gold));
+  display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;
+}
+.plate-badge .roman{ font-family:var(--serif); font-size:36px; color:var(--ink); }
+.plate-header .titles{ flex:1; }
+.plate-header .eyebrow{ font-size:11.5px; color:var(--region, var(--gold)); margin-bottom:2px; font-weight:600; }
+.plate-header h2{ font-family:var(--serif); font-size:27px; font-weight:600; margin:0; display:flex; align-items:center; gap:10px; }
+.plate-header .tos{ font-size:12px; color:var(--ink-soft); text-align:right; max-width:230px; line-height:1.5; }
+.plate-header .pct-badge{
+  display:inline-block; background:var(--region, var(--gold)); color:#fff; font-size:11px; font-weight:700;
+  padding:2px 9px; border-radius:10px; margin-left:2px;
+}
+
+section.block{ margin-bottom:36px; }
+h3.block-title{
+  font-family:var(--serif); font-size:18px; font-weight:600; margin:0 0 13px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); border-bottom-color:var(--region-bg2, var(--line));
+  display:flex; align-items:center; gap:8px; color:var(--region, var(--ink));
+}
+h3.block-title .emoji{ font-size:16px; }
+
+/* fact / chain lists */
+ul.facts{ list-style:none; margin:0; padding:0; }
+ul.facts li{
+  display:flex; gap:9px; padding:8px 0; border-bottom:1px dashed var(--line); border-bottom-color:var(--region-bg2, var(--line));
+  font-size:14px; line-height:1.6; align-items:flex-start;
+}
+ul.facts li:last-child{ border-bottom:none; }
+.tagset{ flex-shrink:0; display:flex; gap:3px; padding-top:2px; }
+.tag{
+  display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px;
+  border-radius:4px; font-size:10.5px; font-weight:700;
+}
+.tag-D{ background:var(--D-bg); color:var(--D); }
+.tag-C{ background:var(--C-bg); color:var(--C); }
+.tag-PHI{ background:var(--PHI-bg); color:var(--PHI); }
+.tag-P{ background:var(--P-bg); color:var(--P); }
+
+/* up/down arrow coloring, applied globally via post-process */
+.up{ color:var(--up); font-weight:700; }
+.down{ color:var(--down); font-weight:700; }
+
+/* tables */
+.table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:3px; margin-bottom:4px;}
+table{ width:100%; border-collapse:collapse; background:var(--panel); font-size:13.2px; }
+table caption{ text-align:left; font-family:var(--serif); font-size:14.5px; font-weight:600; padding:9px 13px; background:var(--region-bg, var(--paper)); border-bottom:1px solid var(--line); }
+th{ text-align:left; background:var(--region-bg, #EFE9D9); color:var(--ink); font-weight:600; padding:8px 13px; font-size:12px; border-bottom:1px solid var(--line); white-space:nowrap; }
+td{ padding:8px 13px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink-soft); }
+tr:last-child td{ border-bottom:none; }
+tr:hover td{ background:#FBF9F3; }
+td.strong, td strong{ color:var(--ink); font-weight:600; }
+
+.grid2{ display:flex; flex-wrap:wrap; gap:20px; }
+.grid2 > section{ flex:1 1 300px; min-width:280px; }
+
+/* equation card */
+.eq-card{
+  background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--region, var(--gold));
+  border-radius:3px; padding:12px 16px; margin-bottom:10px;
+}
+.eq-card .eq-name{ font-size:11.5px; font-weight:700; color:var(--region, var(--gold)); text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; }
+.eq-card .eq-formula{ font-family:var(--serif); font-size:17px; color:var(--ink); margin-bottom:3px; }
+.eq-card .eq-note{ font-size:12.5px; color:var(--ink-soft); }
+.eq-grid{ display:flex; flex-wrap:wrap; gap:12px; }
+.eq-grid .eq-card{ flex:1 1 260px; min-width:240px; margin-bottom:0; }
+
+/* danger-style callout (used for board traps / pathologic) */
+.trap-card{ background:var(--P-bg); border-left:4px solid var(--P); border-radius:3px; padding:12px 16px 11px 42px; margin-bottom:9px; position:relative; font-size:13.6px; line-height:1.55; }
+.trap-card::before{ content:"⚠"; position:absolute; left:12px; top:11px; width:20px; height:20px; border-radius:50%; background:var(--P); color:#fff; font-size:11px; display:flex; align-items:center; justify-content:center; }
+.trap-card .tag{ font-size:10.5px; font-weight:700; color:var(--P); letter-spacing:.03em; margin-bottom:3px; display:block; text-transform:uppercase; }
+
+mark.hl{ background:#FFE066; color:#1B2A2E; font-weight:700; padding:1px 4px; border-radius:2px; }
+
+/* diagram */
+.diagram-box{
+  background:var(--panel); border:1px solid var(--line); border-left:5px solid var(--region, var(--gold));
+  border-radius:3px; padding:18px 20px 14px;
+}
+.diagram-box svg{ display:block; margin:0 auto; }
+.diagram-caption{ font-size:11.5px; color:var(--ink-soft); text-align:center; margin-top:8px; font-style:italic; }
+
+footer.plate-foot{ margin-top:44px; padding-top:14px; border-top:1px solid var(--line); font-size:11px; color:#A79A79; display:flex; justify-content:space-between; }
+footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:600; }
+
+/* cover / toc reused from prior design */
+.cover-page{ min-height:calc(100vh - 130px); display:flex; flex-direction:column; justify-content:center; }
+.cover-kicker{ font-size:12.5px; color:#7A4632; letter-spacing:.02em; margin-bottom:10px; }
+.cover-title{ font-family:var(--serif); font-size:52px; font-weight:700; line-height:1.08; margin:0 0 14px; max-width:660px; display:flex; align-items:center; gap:14px; }
+.cover-sub{ font-size:15.5px; color:var(--ink-soft); max-width:520px; line-height:1.6; margin-bottom:30px; }
+.cover-tos{ display:flex; flex-wrap:wrap; gap:10px; max-width:680px; margin-bottom:30px; }
+.tos-chip{
+  display:flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--line);
+  border-radius:20px; padding:6px 14px 6px 8px; font-size:12.5px;
+}
+.tos-chip .chip-icon{
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px;
+}
+.tos-chip .chip-pct{ font-weight:700; }
+.cover-legend-strip{ display:flex; gap:22px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:20px; max-width:680px; }
+.cover-legend-strip .lg-item{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft); }
+
+.toc-list{ list-style:none; margin:0; padding:0; }
+.toc-list li{ display:flex; align-items:center; gap:16px; padding:14px 4px; border-bottom:1px solid var(--line); }
+.toc-list .toc-num{ font-family:var(--serif); font-size:20px; color:var(--gold); width:30px; }
+.toc-list .toc-icon{ width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px; }
+.toc-list .toc-text{ flex:1; }
+.toc-list .toc-title{ font-family:var(--serif); font-size:15.5px; font-weight:600; color:var(--ink); }
+.toc-list .toc-desc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.toc-list .toc-pct{ font-size:12px; color:var(--ink-soft); font-weight:700; }
+
+.supp-tag{
+  display:inline-block; font-size:9.5px; font-weight:700; color:var(--D); background:var(--D-bg);
+  padding:1px 6px; border-radius:3px; margin-left:4px; vertical-align:middle; text-transform:uppercase; letter-spacing:.02em;
+}
+
+.distractor-list{ list-style:none; margin:0; padding:0; }
+.distractor-list li{
+  font-size:14px; line-height:1.6; padding:9px 0 9px 24px; position:relative; border-bottom:1px dashed var(--line);
+  border-bottom-color:var(--region-bg2, var(--line));
+}
+.distractor-list li::before{ content:"→"; position:absolute; left:0; top:8px; color:var(--region, var(--gold)); font-size:13px; font-weight:700; }
+.distractor-list li:last-child{ border-bottom:none; }
+
+/* master chain + comparison tables (appendix) */
+.chain-flow{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; font-size:13.4px; }
+.chain-flow .node{ background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:5px 10px; }
+.chain-flow .arrow{ color:var(--ink-soft); }
+
+@media (max-width:900px){
+  .app{ grid-template-columns:1fr; }
+  .rail{ position:relative; height:auto; }
+  main{ padding:26px 18px 60px; }
+}
+
+
+.region-cell   { --region:#46557A; --region-bg:#E6E9F2; --region-bg2:#CBD1E6; }
+.region-cv     { --region:#C0392B; --region-bg:#FBEAE7; --region-bg2:#F6D9D3; }
+.region-resp   { --region:#1F6FB2; --region-bg:#E3F0FA; --region-bg2:#C4E1F5; }
+.region-gi     { --region:#D4720A; --region-bg:#FBEBD8; --region-bg2:#F5D9AF; }
+.region-endo   { --region:#7D3C98; --region-bg:#F0E4F5; --region-bg2:#DFC2EC; }
+.region-renal  { --region:#0E9488; --region-bg:#E0F5F2; --region-bg2:#BCEAE3; }
+.region-repro  { --region:#C0396B; --region-bg:#FBE7EF; --region-bg2:#F5C9DC; }
+.region-neuro  { --region:#6C3483; --region-bg:#EFE5F5; --region-bg2:#DCC2ED; }
+.region-sprint { --region:#A5761F; --region-bg:#F5ECD8; --region-bg2:#E9D4A2; }
+.region-neutral{ --region:#3E4F52; --region-bg:#EDEAE0; --region-bg2:#DAD2BE; }
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="rail-brand">
+      <div class="kicker">PLE BOARD REVIEW</div>
+      <h1>Physiology<br>Rapid Review</h1>
+      <div class="sub">Equations · normal values · curve shifts · receptors · directional chains</div>
+    </div>
+    <nav class="plates" id="plateNav">
+      <button class="plate-btn active" data-target="cover"><span class="num">📕</span><span>Cover</span></button>
+      <button class="plate-btn" data-target="toc"><span class="num">📖</span><span>Contents</span></button>
+      <button class="plate-btn" data-target="p1"><span class="num">🔋</span><span>I · General &amp; Cellular Physiology</span><span class="pct">15%</span></button>
+      <button class="plate-btn" data-target="p2"><span class="num">🫀</span><span>II · Cardiovascular System</span><span class="pct">17%</span></button>
+      <button class="plate-btn" data-target="p3"><span class="num">🫁</span><span>III · Respiratory System</span><span class="pct">12%</span></button>
+      <button class="plate-btn" data-target="p4"><span class="num">🍽️</span><span>IV · Gastrointestinal System</span><span class="pct">9%</span></button>
+      <button class="plate-btn" data-target="p5"><span class="num">🦋</span><span>V · Endocrine System</span><span class="pct">12%</span></button>
+      <button class="plate-btn" data-target="p6"><span class="num">🫘</span><span>VI · Renal &amp; Acid–Base Physiology</span><span class="pct">9%</span></button>
+      <button class="plate-btn" data-target="p7"><span class="num">🌸</span><span>VII · Reproductive Physiology</span><span class="pct">9%</span></button>
+      <button class="plate-btn" data-target="p8"><span class="num">🧠</span><span>VIII · Neurophysiology &amp; Special Senses</span><span class="pct">17%</span></button>
+      <button class="plate-btn" data-target="p9"><span class="num">🏁</span><span>✦ · Final Sprint</span></button>
+    </nav>
+    <div class="rail-legend">
+      <div class="lg-title">TAG LEGEND</div>
+      <div class="lg-row"><span class="lg-tag" style="background:var(--D-bg);color:var(--D);">D</span> Direct effect</div>
+      <div class="lg-row"><span class="lg-tag" style="background:var(--C-bg);color:var(--C);">C</span> Compensatory effect</div>
+      <div class="lg-row"><span class="lg-tag" style="background:var(--PHI-bg);color:var(--PHI);">&Phi;</span> Physiologic</div>
+      <div class="lg-row"><span class="lg-tag" style="background:var(--P-bg);color:var(--P);">P</span> Pathologic</div>
+      <div class="lg-row"><span class="up" style="font-size:15px;">&uarr;</span> Rises &nbsp; <span class="down" style="font-size:15px;">&darr;</span> Falls</div>
+    </div>
+  </aside>
+  <main id="mainContent">
+<article class="plate region-sprint" id="cover">
+  <div class="cover-page">
+    <div class="cover-kicker">PLE BOARD REVIEW · COMPRESSED RAPID REVIEW</div>
+    <h1 class="cover-title"><span class="emoji" style="font-size:44px;">🧪</span>Physiology: Equations, Values &amp; Directional Chains</h1>
+    <p class="cover-sub">Eight organ-system plates plus a final sprint, built around direction-of-change reasoning — identify the primary change, predict the direct effect, then predict the compensation. No pure recall items on this exam; every fact here is framed for application and analysis.</p>
+    <div class="cover-tos">
+<div class="tos-chip"><span class="chip-icon" style="background:#46557A22;">🔋</span><span>General & Cellular Physiology</span><span class="chip-pct" style="color:#46557A;">15%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#C0392B22;">🫀</span><span>Cardiovascular System</span><span class="chip-pct" style="color:#C0392B;">17%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#1F6FB222;">🫁</span><span>Respiratory System</span><span class="chip-pct" style="color:#1F6FB2;">12%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#D4720A22;">🍽️</span><span>Gastrointestinal System</span><span class="chip-pct" style="color:#D4720A;">9%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#7D3C9822;">🦋</span><span>Endocrine System</span><span class="chip-pct" style="color:#7D3C98;">12%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#0E948822;">🫘</span><span>Renal & Acid–Base Physiology</span><span class="chip-pct" style="color:#0E9488;">9%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#C0396B22;">🌸</span><span>Reproductive Physiology</span><span class="chip-pct" style="color:#C0396B;">9%</span></div>
+<div class="tos-chip"><span class="chip-icon" style="background:#6C348322;">🧠</span><span>Neurophysiology & Special Senses</span><span class="chip-pct" style="color:#6C3483;">17%</span></div>
+    </div>
+    <div class="cover-legend-strip">
+      <span class="lg-item"><span class="tag tag-D">D</span> Direct effect</span>
+      <span class="lg-item"><span class="tag tag-C">C</span> Compensatory effect</span>
+      <span class="lg-item"><span class="tag tag-PHI">Φ</span> Physiologic</span>
+      <span class="lg-item"><span class="tag tag-P">P</span> Pathologic</span>
+      <span class="lg-item"><span class="up">↑</span> Rises &nbsp; <span class="down">↓</span> Falls</span>
+    </div>
+  </div>
+</article>
+
+<article class="plate region-neutral" id="toc" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">📖</span></div>
+    <div class="titles"><div class="eyebrow">Navigation</div><h2>Table of Contents</h2></div>
+    <div class="tos">Nine plates · tap any system to jump straight there</div>
+  </div>
+  <ul class="toc-list">
+<li>
+  <span class="toc-num">I</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🔋</span>
+  <span class="toc-text"><div class="toc-title">General &amp; Cellular Physiology</div><div class="toc-desc">Equations, ion basics, action potential, feedback, hemostasis</div></span>
+  <span class="toc-pct">15%</span>
+</li>
+<li>
+  <span class="toc-num">II</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🫀</span>
+  <span class="toc-text"><div class="toc-title">Cardiovascular System</div><div class="toc-desc">CO/SV/EF, cardiac cycle, Frank–Starling, venous return, BP control</div></span>
+  <span class="toc-pct">17%</span>
+</li>
+<li>
+  <span class="toc-num">III</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🫁</span>
+  <span class="toc-text"><div class="toc-title">Respiratory System</div><div class="toc-desc">Mechanics, V/Q, O₂-Hb curve, respiratory control, altitude</div></span>
+  <span class="toc-pct">12%</span>
+</li>
+<li>
+  <span class="toc-num">IV</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🍽️</span>
+  <span class="toc-text"><div class="toc-title">Gastrointestinal System</div><div class="toc-desc">Receptors, enteric control, acid secretion, absorption</div></span>
+  <span class="toc-pct">9%</span>
+</li>
+<li>
+  <span class="toc-num">V</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🦋</span>
+  <span class="toc-text"><div class="toc-title">Endocrine System</div><div class="toc-desc">Receptor signaling, thyroid/PTH/HPA axes, localization rule</div></span>
+  <span class="toc-pct">12%</span>
+</li>
+<li>
+  <span class="toc-num">VI</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🫘</span>
+  <span class="toc-text"><div class="toc-title">Renal &amp; Acid–Base Physiology</div><div class="toc-desc">Clearance, GFR, nephron segments, acid–base chains</div></span>
+  <span class="toc-pct">9%</span>
+</li>
+<li>
+  <span class="toc-num">VII</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🌸</span>
+  <span class="toc-text"><div class="toc-title">Reproductive Physiology</div><div class="toc-desc">HPG axis, menstrual cycle, male axis, parturition/lactation</div></span>
+  <span class="toc-pct">9%</span>
+</li>
+<li>
+  <span class="toc-num">VIII</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🧠</span>
+  <span class="toc-text"><div class="toc-title">Neurophysiology &amp; Special Senses</div><div class="toc-desc">Conduction, reflexes, ANS, cerebral flow, vision/hearing/taste</div></span>
+  <span class="toc-pct">17%</span>
+</li>
+<li>
+  <span class="toc-num">✦</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🏁</span>
+  <span class="toc-text"><div class="toc-title">Final Sprint</div><div class="toc-desc">Master chains, direct vs compensatory, board traps, 30-second recall</div></span>
+  <span class="toc-pct"></span>
+</li>
+  </ul>
+  <footer class="plate-foot"><span>Contents</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-cell" id="p1" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🔋</span><span class="roman">I</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Equations, ion basics, action potential, feedback, hemostasis</div>
+      <h2>General &amp; Cellular Physiology <span class="pct-badge">15%</span></h2>
+    </div>
+    <div class="tos">TOS priority 15% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧮</span>Core Equations</h3>
+<div class="eq-grid"><div class="eq-card"><div class="eq-name">Fick diffusion principle</div><div class="eq-formula">Rate &prop; A &times; D &times; &Delta;C / T</div><div class="eq-note">A = area; D = diffusion coefficient; &Delta;C = gradient; T = thickness</div></div><div class="eq-card"><div class="eq-name">Nernst equation</div><div class="eq-formula">E<sub>ion</sub> &prop; log([ion]<sub>out</sub>/[ion]<sub>in</sub>)</div><div class="eq-note">Equilibrium potential for one ion <span class="supp-tag">SUPPLEMENTARY</span></div></div><div class="eq-card"><div class="eq-name">Osmotic pressure</div><div class="eq-formula">&pi; = iCRT</div><div class="eq-note">i = particles; C = concentration; R = gas constant; T = temperature <span class="supp-tag">SUPPLEMENTARY</span></div></div><div class="eq-card"><div class="eq-name">Feedback gain</div><div class="eq-formula">Gain = Correction / Error</div><div class="eq-note">Greater absolute gain = tighter control</div></div></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🔑</span>Normal Values</h3>
+<div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Normal</th></tr></thead><tbody>
+<tr><td class="strong">Plasma Na⁺</td><td>135–145 mmol/L</td></tr><tr><td class="strong">Plasma K⁺</td><td>3.5–5.3 mmol/L</td></tr><tr><td class="strong">Ionized Ca²⁺</td><td>1.0–1.4 mmol/L</td></tr><tr><td class="strong">HCO₃⁻</td><td>22–29 mmol/L</td></tr><tr><td class="strong">pH</td><td>~7.4</td></tr><tr><td class="strong">Neuron resting Vm</td><td>−60 to −70 mV</td></tr><tr><td class="strong">Skeletal muscle resting Vm</td><td>−85 to −95 mV</td></tr><tr><td class="strong">Cardiac muscle resting Vm</td><td>−80 to −90 mV</td></tr><tr><td class="strong">Smooth muscle resting Vm</td><td>−50 to −60 mV</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton lists representative extracellular Na⁺, K⁺, Ca²⁺, HCO₃⁻ and pH ranges and emphasizes tight homeostatic control.</span></li>
+<li><span>Guyton lists representative resting membrane potentials for neurons, skeletal muscle, smooth muscle, and cardiac muscle.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🔋</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 235" width="400" height="235" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<line x1="70" y1="20" x2="70" y2="230" stroke="#B7AD91" stroke-width="2"/>
+<text x="20" y="18" font-family="Inter,sans-serif" font-size="11" fill="#5A5142">mV</text>
+<text x="30" y="30" font-family="Inter,sans-serif" font-size="10.5" fill="#5A5142">-40</text>
+<text x="30" y="90" font-family="Inter,sans-serif" font-size="10.5" fill="#5A5142">-60</text>
+<text x="30" y="150" font-family="Inter,sans-serif" font-size="10.5" fill="#5A5142">-80</text>
+<text x="30" y="210" font-family="Inter,sans-serif" font-size="10.5" fill="#5A5142">-100</text>
+<g font-family="Inter,sans-serif" font-size="11.5" font-weight="700">
+<rect x="90" y="55" width="60" height="60" fill="#E0F5F2" stroke="#0E9488" stroke-width="2"/>
+<text x="120" y="90" text-anchor="middle" fill="#0E9488">-65</text>
+<text x="120" y="130" text-anchor="middle" font-size="10.5" font-weight="500" fill="#1B2A2E">Neuron</text>
+
+<rect x="165" y="140" width="60" height="75" fill="#F1E5F6" stroke="#8E44AD" stroke-width="2"/>
+<text x="195" y="182" text-anchor="middle" fill="#8E44AD">-90</text>
+<text x="195" y="228" text-anchor="middle" font-size="10.5" font-weight="500" fill="#1B2A2E">Skeletal</text>
+
+<rect x="240" y="18" width="60" height="42" fill="#FBEBD8" stroke="#D4720A" stroke-width="2"/>
+<text x="270" y="43" text-anchor="middle" fill="#D4720A">-55</text>
+<text x="270" y="75" text-anchor="middle" font-size="10.5" font-weight="500" fill="#1B2A2E">Smooth</text>
+
+<rect x="315" y="120" width="60" height="65" fill="#FBEAE7" stroke="#C0392B" stroke-width="2"/>
+<text x="345" y="157" text-anchor="middle" fill="#C0392B">-85</text>
+<text x="345" y="200" text-anchor="middle" font-size="10.5" font-weight="500" fill="#1B2A2E">Cardiac</text>
+</g>
+
+</svg>
+<div class="diagram-caption">Resting membrane potential compared across cell types.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚡</span>Membrane Transport — Rapid Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span><span class="up">↑</span> Na⁺/K⁺-ATPase activity → <span class="up">↑</span> Na⁺ extrusion + <span class="up">↑</span> K⁺ uptake → stronger transmembrane gradients.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>ATP depletion → <span class="down">↓</span> Na⁺/K⁺ pump → intracellular Na⁺ <span class="up">↑</span> → water enters cell → cell swelling.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span><span class="up">↑</span> extracellular K⁺ → K⁺ gradient <span class="down">↓</span> → resting Vm becomes less negative.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Severe sustained hyperkalemia → persistent depolarization → fast Na⁺ channel inactivation → conduction slows.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span><span class="down">↓</span> extracellular Ca²⁺ → membrane threshold effectively falls → excitability <span class="up">↑</span> → tetany.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span><span class="up">↑</span> membrane permeability to K⁺ → Vm moves toward EK → hyperpolarization.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span><span class="up">↑</span> membrane permeability to Na⁺ → Vm moves toward ENa → depolarization.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🔀</span>Neuronal Action Potential — Ionic Basis</h3>
+<div class="table-wrap"><table><thead><tr><th>Phase</th><th>Dominant ionic event</th><th>Result</th></tr></thead><tbody>
+<tr><td class="strong">Resting</td><td>High K⁺ leak conductance</td><td>Vm near EK</td></tr><tr><td class="strong">Threshold</td><td>Initial inward current reaches threshold</td><td>Regenerative activation begins</td></tr><tr><td class="strong">Upstroke</td><td>Fast voltage-gated Na⁺ channels open → Na⁺ influx</td><td>Rapid depolarization</td></tr><tr><td class="strong">Peak</td><td>Na⁺ channels inactivate</td><td>Na⁺ influx stops</td></tr><tr><td class="strong">Repolarization</td><td>Voltage-gated K⁺ channels open → K⁺ efflux</td><td>Vm becomes negative</td></tr><tr><td class="strong">Afterhyperpolarization</td><td>K⁺ conductance remains elevated</td><td>Vm transiently below resting</td></tr><tr><td class="strong">Recovery</td><td>K⁺ channels close; Na⁺ channels reset</td><td>Excitability restored</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Threshold reached → Na⁺ channels open → depolarization → more Na⁺ channels open = positive feedback.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Na⁺ channel inactivation → absolute refractory period.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Persistent K⁺ conductance → relative refractory period.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🎯</span>Control-System Template</h3>
+<div class="table-wrap"><table><thead><tr><th>Component</th><th>General form</th></tr></thead><tbody>
+<tr><td class="strong">Sensor</td><td>Detects variable</td></tr><tr><td class="strong">Integrator</td><td>Compares input with operating range/set point</td></tr><tr><td class="strong">Effector</td><td>Changes organ function</td></tr><tr><td class="strong">Feedback</td><td>Usually negative</td></tr><tr><td class="strong">Loss</td><td>Larger deviation + greater variability</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Variable <span class="up">↑</span> → sensor firing/output <span class="up">↑</span> → corrective effector activated → variable driven <span class="down">↓</span> = negative feedback.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Negative feedback lost → same disturbance produces larger deviation.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Positive feedback → initiating change amplifies itself until an external endpoint terminates it.</span></li>
+<li><span class="tagset"><span class="tag tag-PHI">Φ</span></span><span>Examples of positive feedback: action potential, coagulation, labor.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Severe hemorrhage → CO <span class="down">↓</span> → coronary flow <span class="down">↓</span> → myocardial function <span class="down">↓</span> → CO falls further = vicious positive feedback. Guyton explicitly describes this pattern.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🩸</span>Hemostasis — Directional Chain</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Vessel injury → vasoconstriction → platelet adhesion → platelet activation → aggregation → thrombin → fibrin.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Thrombin <span class="up">↑</span> → additional clotting-factor activation <span class="up">↑</span> = positive feedback.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Plasminogen → plasmin → fibrin degradation.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Platelet count/function <span class="down">↓</span> → mucocutaneous bleeding <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Coagulation factor deficiency → deep bleeding/hemarthrosis <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Fibrinolysis excessive → clot stability <span class="down">↓</span> → bleeding <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate I — General &amp; Cellular Physiology</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-cv" id="p2" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🫀</span><span class="roman">II</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · CO/SV/EF, cardiac cycle, Frank–Starling, venous return, BP control</div>
+      <h2>Cardiovascular System <span class="pct-badge">17%</span></h2>
+    </div>
+    <div class="tos">TOS priority 17% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧮</span>Master Equations</h3>
+<div class="eq-grid"><div class="eq-card"><div class="eq-name">Cardiac output</div><div class="eq-formula">CO = HR &times; SV</div><div class="eq-note">HR = beats/min; SV = mL/beat &middot; e.g. 70 &times; 70 = 4.9 L/min</div></div><div class="eq-card"><div class="eq-name">Stroke volume</div><div class="eq-formula">SV = EDV &minus; ESV</div><div class="eq-note">EDV, ESV in mL &middot; e.g. 120 &minus; 50 = 70 mL</div></div><div class="eq-card"><div class="eq-name">Ejection fraction</div><div class="eq-formula">EF = SV/EDV &times; 100</div><div class="eq-note">Fraction ejected &middot; e.g. 70/120 = 58%</div></div><div class="eq-card"><div class="eq-name">MAP</div><div class="eq-formula">MAP &asymp; DBP + &#8531;(SBP&minus;DBP)</div><div class="eq-note">Normal HR approximation &middot; e.g. 80 + &#8531;(40) = 93 mmHg</div></div><div class="eq-card"><div class="eq-name">Systemic flow</div><div class="eq-formula">Q = &Delta;P/R</div><div class="eq-note">Pressure gradient / resistance &middot; &uarr;R &rarr; &darr;Q if &Delta;P fixed</div></div><div class="eq-card"><div class="eq-name">Systemic pressure</div><div class="eq-formula">MAP &minus; RAP &asymp; CO &times; TPR</div><div class="eq-note">RAP usually small &middot; MAP &asymp; CO &times; TPR</div></div><div class="eq-card"><div class="eq-name">Venous return</div><div class="eq-formula">VR = (Pms &minus; RAP)/RVR</div><div class="eq-note">Pms = mean systemic filling pressure &middot; &uarr;RAP &rarr; &darr;VR</div></div><div class="eq-card"><div class="eq-name">Fick principle</div><div class="eq-formula">CO = V&#775;O&#8322;/(CaO&#8322;&minus;CvO&#8322;)</div><div class="eq-note">O₂ consumption / A-V O₂ difference &middot; e.g. 250/50 = 5 L/min</div></div><div class="eq-card"><div class="eq-name">Poiseuille relation</div><div class="eq-formula">R &prop; 1/r&#8308;</div><div class="eq-note">r = vessel radius &middot; &frac12; radius &rarr; resistance &times;16</div></div></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🔑</span>Normal Values</h3>
+<div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Normal</th></tr></thead><tbody>
+<tr><td class="strong">Resting cardiac output</td><td>~5 L/min</td></tr><tr><td class="strong">Young healthy male CO</td><td>~5.6 L/min</td></tr><tr><td class="strong">Young healthy female CO</td><td>~4.9 L/min</td></tr><tr><td class="strong">Cardiac index</td><td>~3 L/min/m²</td></tr><tr><td class="strong">Right atrial pressure</td><td>~0 mmHg</td></tr><tr><td class="strong">Coronary flow</td><td>~225 mL/min</td></tr><tr><td class="strong">Coronary flow fraction</td><td>~4–5% of CO</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton gives resting adult CO around 5 L/min and cardiac index around 3 L/min/m².</span></li>
+<li><span>Guyton describes normal RAP around 0 mmHg.</span></li>
+<li><span>Coronary blood flow averages about 225 mL/min, roughly 4–5% of cardiac output.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚡</span>Ventricular Action Potential — Ionic Basis</h3>
+<div class="table-wrap"><table><thead><tr><th>Phase</th><th>Channel/current</th><th>Ionic event</th></tr></thead><tbody>
+<tr><td class="strong">0</td><td>Fast Na⁺ channels</td><td>Rapid Na⁺ influx</td></tr><tr><td class="strong">1</td><td>Transient K⁺ current</td><td>Brief K⁺ efflux</td></tr><tr><td class="strong">2</td><td>L-type Ca²⁺ channels + K⁺ channels</td><td>Ca²⁺ influx balanced by K⁺ efflux</td></tr><tr><td class="strong">3</td><td>Delayed rectifier K⁺ channels</td><td>K⁺ efflux dominates</td></tr><tr><td class="strong">4</td><td>Inward-rectifier K⁺ conductance</td><td>Stable Vm near −90 mV</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton identifies fast Na⁺ entry during phase 0, prolonged L-type Ca²⁺ entry during the plateau, and K⁺ efflux during repolarization.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚡</span>SA Nodal Action Potential — Ionic Basis</h3>
+<div class="table-wrap"><table><thead><tr><th>Phase</th><th>Main event</th></tr></thead><tbody>
+<tr><td class="strong">Phase 4</td><td>Funny current (If) + Ca²⁺ currents → spontaneous diastolic depolarization</td></tr><tr><td class="strong">Threshold</td><td>≈ −40 mV</td></tr><tr><td class="strong">Phase 0</td><td>L-type Ca²⁺ influx</td></tr><tr><td class="strong">Phase 3</td><td>K⁺ efflux</td></tr><tr><td class="strong">Stable phase 4</td><td>Absent</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton describes nodal resting potential around −55 mV and threshold near −40 mV, with spontaneous inward Na⁺/Ca²⁺ current followed by L-type Ca²⁺ activation.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧬</span>Cardiac Receptor–Second Messenger Pairings</h3>
+<div class="table-wrap"><table><thead><tr><th>Receptor</th><th>G protein</th><th>Main effect</th></tr></thead><tbody>
+<tr><td class="strong">β₁</td><td>Gs → <span class="up">↑</span>cAMP</td><td><span class="up">↑</span> HR, <span class="up">↑</span> AV conduction, <span class="up">↑</span> contractility, <span class="up">↑</span> renin</td></tr><tr><td class="strong">M₂</td><td>Gi → <span class="down">↓</span>cAMP; <span class="up">↑</span>K⁺ conductance</td><td><span class="down">↓</span> HR, <span class="down">↓</span> AV conduction</td></tr><tr><td class="strong">α₁</td><td>Gq → IP₃/DAG</td><td>Vasoconstriction</td></tr><tr><td class="strong">β₂</td><td>Gs → <span class="up">↑</span>cAMP</td><td>Vascular/bronchial smooth-muscle relaxation</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🫀</span>Cardiac Cycle — One-Line Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Atrial pressure > ventricular pressure → AV valve opens → ventricular filling <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Ventricular pressure > atrial pressure → AV valve closes → S1.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Ventricular pressure > aortic pressure → aortic valve opens → ejection.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Aortic pressure > ventricular pressure → aortic valve closes → S2.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span><span class="up">↑</span> EDV → <span class="up">↑</span> fiber stretch → <span class="up">↑</span> contractile force → <span class="up">↑</span> SV = Frank–Starling.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span><span class="up">↑</span> afterload → ESV <span class="up">↑</span> → SV <span class="down">↓</span> → EF <span class="down">↓</span> acutely.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span><span class="up">↑</span> contractility → ESV <span class="down">↓</span> → SV <span class="up">↑</span> → EF <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span><span class="down">↓</span> ventricular compliance → filling pressure <span class="up">↑</span> at a given volume.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🫀</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 245" width="400" height="245" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<line x1="50" y1="220" x2="380" y2="220" stroke="#1B2A2E" stroke-width="1.6"/>
+<line x1="50" y1="220" x2="50" y2="20" stroke="#1B2A2E" stroke-width="1.6"/>
+<text x="215" y="240" font-family="Inter,sans-serif" font-size="12" fill="#1B2A2E" text-anchor="middle">EDV (preload)</text>
+<text x="20" y="120" font-family="Inter,sans-serif" font-size="12" fill="#1B2A2E" text-anchor="middle" transform="rotate(-90 20 120)">SV / CO</text>
+<path d="M55 205 C 150 160, 250 90, 360 55" stroke="#1E8449" stroke-width="3" fill="none"/>
+<path d="M55 215 C 150 195, 250 150, 360 110" stroke="#8E44AD" stroke-width="3" fill="none" stroke-dasharray="6 4"/>
+<path d="M55 215 C 150 205, 250 185, 360 165" stroke="#C0392B" stroke-width="3" fill="none"/>
+<text x="330" y="48" font-family="Inter,sans-serif" font-size="12" fill="#1E8449" font-weight="700">↑ Contractility</text>
+<text x="330" y="128" font-family="Inter,sans-serif" font-size="12" fill="#8E44AD" font-weight="700">Normal</text>
+<text x="255" y="180" font-family="Inter,sans-serif" font-size="12" fill="#C0392B" font-weight="700">Heart failure</text>
+
+</svg>
+<div class="diagram-caption">Frank-Starling family of curves: contractility shifts up/left, failure shifts down/right.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">📈</span>Frank–Starling / Cardiac Function Curve</h3>
+<div class="table-wrap"><table><thead><tr><th>Shift</th><th>Cause</th><th>Functional meaning</th></tr></thead><tbody>
+<tr><td class="strong">Up/left</td><td><span class="up">↑</span> contractility, sympathetic stimulation</td><td><span class="up">↑</span> CO/SV at same preload</td></tr><tr><td class="strong">Down/right</td><td>Systolic heart failure, severe hypoxia</td><td><span class="down">↓</span> CO/SV at same preload</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton emphasizes that venous return is normally a major controller of output and that increased filling stretches myocardium and increases pumping.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">📈</span>Venous Return Curve</h3>
+<div class="table-wrap"><table><thead><tr><th>Change</th><th>Curve effect</th><th>Mechanism</th></tr></thead><tbody>
+<tr><td class="strong"><span class="up">↑</span> Blood volume</td><td>Rightward</td><td><span class="up">↑</span> Pms</td></tr><tr><td class="strong">Venoconstriction</td><td>Rightward</td><td><span class="up">↑</span> stressed volume / <span class="up">↑</span> Pms</td></tr><tr><td class="strong">Hemorrhage</td><td>Leftward</td><td><span class="down">↓</span> Pms</td></tr><tr><td class="strong">Venodilation</td><td>Leftward</td><td><span class="down">↓</span> Pms</td></tr><tr><td class="strong"><span class="down">↓</span> RVR</td><td>Steeper/upward rotation</td><td>Easier flow</td></tr><tr><td class="strong"><span class="up">↑</span> RVR</td><td>Flatter/downward rotation</td><td>Reduced flow</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>RAP <span class="up">↑</span> → Pms−RAP gradient <span class="down">↓</span> → VR <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Pms <span class="up">↑</span> → venous-return driving pressure <span class="up">↑</span> → VR <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Hemorrhage → blood volume <span class="down">↓</span> → Pms <span class="down">↓</span> → VR <span class="down">↓</span> → CO <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Hemorrhage → baroreceptor firing <span class="down">↓</span> → sympathetic tone <span class="up">↑</span> → venoconstriction + tachycardia + arteriolar constriction.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Positive-pressure ventilation → intrathoracic pressure <span class="up">↑</span> → RAP/effective back-pressure <span class="up">↑</span> → VR <span class="down">↓</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">📈</span>Pressure–Volume Loop Shifts</h3>
+<div class="table-wrap"><table><thead><tr><th>Change</th><th>EDV</th><th>ESV</th><th>SV</th><th>Loop</th></tr></thead><tbody>
+<tr><td class="strong"><span class="up">↑</span> Preload</td><td><span class="up">↑</span></td><td>~same</td><td><span class="up">↑</span></td><td>Wider/right</td></tr><tr><td class="strong"><span class="up">↑</span> Afterload</td><td>~same</td><td><span class="up">↑</span></td><td><span class="down">↓</span></td><td>Taller/narrower</td></tr><tr><td class="strong"><span class="up">↑</span> Contractility</td><td>~same</td><td><span class="down">↓</span></td><td><span class="up">↑</span></td><td>Wider/left ESV border</td></tr><tr><td class="strong"><span class="down">↓</span> Compliance</td><td><span class="down">↓</span> or normal</td><td>variable</td><td><span class="down">↓</span> tendency</td><td>Filling-pressure curve shifts upward</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🩺</span>Blood Pressure Regulation</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>MAP <span class="up">↑</span> → carotid/aortic stretch <span class="up">↑</span> → baroreceptor firing <span class="up">↑</span> → medullary sympathetic output <span class="down">↓</span> + vagal output <span class="up">↑</span> → HR/contractility/TPR <span class="down">↓</span> → MAP falls.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>MAP <span class="down">↓</span> → baroreceptor firing <span class="down">↓</span> → sympathetic output <span class="up">↑</span> → HR/contractility/TPR/venous tone <span class="up">↑</span> → MAP rises.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Prolonged volume depletion → renin <span class="up">↑</span> → Ang II <span class="up">↑</span> → aldosterone <span class="up">↑</span> → Na⁺ retention <span class="up">↑</span> → ECF volume <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Renal Na⁺ excretion impaired → ECF volume <span class="up">↑</span> → arterial pressure chronically <span class="up">↑</span>.</span></li>
+<li><span>Guyton specifically identifies baroreceptors as a rapid pressure-control mechanism and kidneys as dominant long-term controllers.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🫀</span>Coronary Circulation</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>HR <span class="up">↑</span> → myocardial O₂ demand <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>HR <span class="up">↑</span> → diastolic duration <span class="down">↓</span> → LV coronary perfusion time <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Myocardial metabolism <span class="up">↑</span> → adenosine/metabolites <span class="up">↑</span> → coronary vasodilation → flow <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Coronary stenosis → maximal flow reserve <span class="down">↓</span> → exertional ischemia.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Aortic diastolic pressure <span class="down">↓</span> → coronary perfusion gradient <span class="down">↓</span> → ischemia risk <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>LVEDP <span class="up">↑</span> → subendocardial perfusion gradient <span class="down">↓</span> → ischemia risk <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">💧</span>Microcirculation / Starling Forces</h3>
+<div class="table-wrap"><table><thead><tr><th>Variable</th><th>Change causing filtration ↑</th></tr></thead><tbody>
+<tr><td class="strong">Capillary hydrostatic pressure</td><td>Pc <span class="up">↑</span></td></tr><tr><td class="strong">Interstitial hydrostatic pressure</td><td>Pi <span class="down">↓</span></td></tr><tr><td class="strong">Plasma oncotic pressure</td><td>πc <span class="down">↓</span></td></tr><tr><td class="strong">Interstitial oncotic pressure</td><td>πi <span class="up">↑</span></td></tr><tr><td class="strong">Capillary permeability</td><td>Kf <span class="up">↑</span></td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Starling <span class="supp-tag">SUPPLEMENTARY</span>: J&#7841; = K&#402;[(Pc &minus; Pi) &minus; &sigma;(&pi;c &minus; &pi;i)].</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Venous obstruction → Pc <span class="up">↑</span> → filtration <span class="up">↑</span> → edema.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Hypoalbuminemia → πc <span class="down">↓</span> → filtration <span class="up">↑</span> → edema.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Inflammation → permeability <span class="up">↑</span> → interstitial protein <span class="up">↑</span> → πi <span class="up">↑</span> → edema.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Lymphatic obstruction → interstitial protein/fluid removal <span class="down">↓</span> → lymphedema.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">👶</span>Fetal/Neonatal Circulation</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>First breath → alveolar PO₂ <span class="up">↑</span> → pulmonary vasodilation → PVR <span class="down">↓</span> → pulmonary blood flow <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Cord clamping → placental low-resistance circuit removed → SVR <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Pulmonary flow <span class="up">↑</span> → LA pressure <span class="up">↑</span>; RA pressure falls → foramen ovale functionally closes.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>O₂ <span class="up">↑</span> + prostaglandin effect <span class="down">↓</span> → ductus arteriosus constricts.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Persistent PVR <span class="up">↑</span> → right-to-left shunting <span class="up">↑</span> → neonatal hypoxemia.</span></li>
+<li><span>PGE₁ <span class="up">↑</span> → ductal patency maintained. <span class="supp-tag">SUPPLEMENTARY</span></span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate II — Cardiovascular System</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-resp" id="p3" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🫁</span><span class="roman">III</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Mechanics, V/Q, O₂-Hb curve, respiratory control, altitude</div>
+      <h2>Respiratory System <span class="pct-badge">12%</span></h2>
+    </div>
+    <div class="tos">TOS priority 12% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧮</span>Core Equations</h3>
+<div class="eq-grid"><div class="eq-card"><div class="eq-name">Minute ventilation</div><div class="eq-formula">V&#775;E = VT &times; f</div><div class="eq-note">e.g. 0.5 L &times; 12 = 6 L/min</div></div><div class="eq-card"><div class="eq-name">Alveolar ventilation</div><div class="eq-formula">V&#775;A = (VT&minus;VD) &times; f</div><div class="eq-note">e.g. (500&minus;150) &times; 12 = 4.2 L/min</div></div><div class="eq-card"><div class="eq-name">Compliance</div><div class="eq-formula">C = &Delta;V/&Delta;P</div><div class="eq-note">Higher C = easier inflation</div></div><div class="eq-card"><div class="eq-name">Airway flow</div><div class="eq-formula">Flow = &Delta;P/R</div><div class="eq-note">↑R → ↓flow</div></div><div class="eq-card"><div class="eq-name">Alveolar gas equation</div><div class="eq-formula">PAO&#8322; &asymp; FiO&#8322;(Patm&minus;PH&#8322;O) &minus; PaCO&#8322;/R</div><div class="eq-note"><span class="supp-tag">SUPPLEMENTARY</span></div></div><div class="eq-card"><div class="eq-name">O₂ content</div><div class="eq-formula">CaO&#8322; &asymp; 1.34(Hb)(SaO&#8322;)+0.003(PaO&#8322;)</div><div class="eq-note"><span class="supp-tag">SUPPLEMENTARY</span></div></div><div class="eq-card"><div class="eq-name">O₂ delivery</div><div class="eq-formula">DO&#8322; = CO &times; CaO&#8322;</div><div class="eq-note">Cardiopulmonary integration <span class="supp-tag">SUPPLEMENTARY</span></div></div></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🔑</span>Normal Values</h3>
+<div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Normal</th></tr></thead><tbody>
+<tr><td class="strong">PaO₂</td><td>80–100 mmHg</td></tr><tr><td class="strong">PaCO₂</td><td>35–45 mmHg</td></tr><tr><td class="strong">SaO₂</td><td>95–99%</td></tr><tr><td class="strong">Mixed venous PO₂</td><td>~40 mmHg</td></tr><tr><td class="strong">HCO₃⁻</td><td>22–29 mEq/L</td></tr><tr><td class="strong">pH</td><td>7.35–7.45</td></tr><tr><td class="strong">Tidal volume</td><td>~500 mL <span class="supp-tag">SUPPLEMENTARY</span></td></tr><tr><td class="strong">Anatomic dead space</td><td>~150 mL <span class="supp-tag">SUPPLEMENTARY</span></td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🌬️</span>Mechanics — Cause/Effect Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Diaphragm contracts → thoracic volume <span class="up">↑</span> → pleural pressure more negative → transpulmonary pressure <span class="up">↑</span> → alveoli expand → alveolar pressure <span class="down">↓</span> → inspiration.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Surfactant <span class="up">↑</span> → surface tension <span class="down">↓</span> → compliance <span class="up">↑</span> → alveolar collapse tendency <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Surfactant <span class="down">↓</span> → surface tension <span class="up">↑</span> → compliance <span class="down">↓</span> → atelectasis <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Fibrosis → compliance <span class="down">↓</span> → pressure required for same VT <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Emphysema → compliance <span class="up">↑</span> but elastic recoil <span class="down">↓</span> → expiratory collapse/air trapping <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Airway radius <span class="down">↓</span> → resistance <span class="up">↑</span> markedly → expiratory flow <span class="down">↓</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">📈</span>Compliance Curve</h3>
+<div class="table-wrap"><table><thead><tr><th>Shift/change</th><th>Cause</th><th>Meaning</th></tr></thead><tbody>
+<tr><td class="strong">Higher compliance / steeper</td><td>Emphysema</td><td>More volume per pressure</td></tr><tr><td class="strong">Lower compliance / flatter</td><td>Fibrosis, edema</td><td>Less volume per pressure</td></tr><tr><td class="strong">Surfactant loss</td><td>Down/low compliance</td><td><span class="up">↑</span> work of breathing</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🌬️</span>V/Q Relationships</h3>
+<div class="table-wrap"><table><thead><tr><th>State</th><th>V/Q</th><th>PAO₂</th><th>PACO₂</th><th>Example</th></tr></thead><tbody>
+<tr><td class="strong">Normal</td><td>~0.8</td><td>normal</td><td>normal</td><td>Healthy lung</td></tr><tr><td class="strong">Low V/Q</td><td><span class="down">↓</span></td><td><span class="down">↓</span></td><td><span class="up">↑</span></td><td>Airway obstruction</td></tr><tr><td class="strong">Shunt</td><td>0</td><td>approaches venous</td><td>approaches venous</td><td>Complete nonventilation</td></tr><tr><td class="strong">High V/Q</td><td><span class="up">↑</span></td><td><span class="up">↑</span></td><td><span class="down">↓</span></td><td>Reduced perfusion</td></tr><tr><td class="strong">Dead space</td><td>→∞</td><td>approaches inspired</td><td><span class="down">↓</span></td><td>Pulmonary embolic territory</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Alveolar PO₂ <span class="down">↓</span> → local pulmonary vasoconstriction → perfusion diverted away from hypoxic alveolus.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Pulmonary embolism → perfusion <span class="down">↓</span> with ventilation preserved → dead space <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Pneumonia/alveolar filling → ventilation <span class="down">↓</span> with perfusion preserved → shunt/low VQ <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Diffusion barrier thickness <span class="up">↑</span> → O₂ equilibration slows → exercise desaturation risk <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🫁</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 245" width="400" height="245" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<line x1="50" y1="220" x2="380" y2="220" stroke="#1B2A2E" stroke-width="1.6"/>
+<line x1="50" y1="220" x2="50" y2="20" stroke="#1B2A2E" stroke-width="1.6"/>
+<text x="215" y="240" font-family="Inter,sans-serif" font-size="12" fill="#1B2A2E" text-anchor="middle">PO&#8322; (mmHg)</text>
+<text x="18" y="120" font-family="Inter,sans-serif" font-size="12" fill="#1B2A2E" text-anchor="middle" transform="rotate(-90 18 120)">% Sat</text>
+<path d="M55 215 C 120 210, 150 160, 190 90 C 220 50, 280 30, 360 25" stroke="#1F6FB2" stroke-width="3" fill="none"/>
+<path d="M55 218 C 140 214, 180 190, 230 120 C 260 75, 310 45, 375 35" stroke="#C0392B" stroke-width="3" fill="none"/>
+<text x="80" y="55" font-family="Inter,sans-serif" font-size="12" fill="#1F6FB2" font-weight="700">Left shift</text>
+<text x="60" y="200" font-family="Inter,sans-serif" font-size="10.5" fill="#1F6FB2">↓H⁺ ↓CO₂ ↓temp fetal Hb, CO</text>
+<text x="255" y="130" font-family="Inter,sans-serif" font-size="12" fill="#C0392B" font-weight="700">Right shift</text>
+<text x="230" y="185" font-family="Inter,sans-serif" font-size="10.5" fill="#C0392B">↑H⁺ ↑CO₂ ↑temp ↑2,3-BPG</text>
+
+</svg>
+<div class="diagram-caption">O₂-hemoglobin dissociation curve: right shift unloads more O₂ to tissue.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🩸</span>O₂–Hb Dissociation Curve</h3>
+<div class="table-wrap"><table><thead><tr><th>Shift</th><th>Causes</th><th>P50</th><th>Functional effect</th></tr></thead><tbody>
+<tr><td class="strong">Right</td><td><span class="up">↑</span> H⁺, <span class="up">↑</span> PCO₂, <span class="up">↑</span> temperature, <span class="up">↑</span> 2,3-BPG</td><td><span class="up">↑</span></td><td>O₂ unloading <span class="up">↑</span></td></tr><tr><td class="strong">Left</td><td><span class="down">↓</span> H⁺, <span class="down">↓</span> PCO₂, <span class="down">↓</span> temperature, <span class="down">↓</span> 2,3-BPG, fetal Hb, CO</td><td><span class="down">↓</span></td><td>O₂ affinity <span class="up">↑</span> / unloading <span class="down">↓</span></td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Exercise → CO₂/H⁺/temperature <span class="up">↑</span> → curve shifts right → active-tissue unloading <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Altitude chronic → 2,3-BPG <span class="up">↑</span> → right shift → unloading <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Anemia → Hb <span class="down">↓</span> → CaO₂ <span class="down">↓</span> despite normal PaO₂.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>CO poisoning → functional Hb availability <span class="down">↓</span> + curve shifts left → tissue delivery <span class="down">↓</span> despite potentially normal PaO₂.</span></li>
+<li><span>Board trap: PaO₂ = dissolved O₂ tension, not total O₂ content.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🎯</span>Respiratory Control</h3>
+<div class="table-wrap"><table><thead><tr><th>Control element</th><th>Component</th></tr></thead><tbody>
+<tr><td class="strong">Controlled variable</td><td>Mainly PaCO₂/pH; severe hypoxemia also important</td></tr><tr><td class="strong">Central sensor</td><td>Central chemoreceptor response to CSF H⁺ generated from CO₂</td></tr><tr><td class="strong">Peripheral sensors</td><td>Carotid + aortic bodies</td></tr><tr><td class="strong">Integrator</td><td>Medulla/pons</td></tr><tr><td class="strong">Effector</td><td>Respiratory muscles</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>PaCO₂ <span class="up">↑</span> → brain/CSF H⁺ <span class="up">↑</span> → ventilation <span class="up">↑</span> → PaCO₂ falls.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>CNS respiratory drive <span class="down">↓</span> → ventilation <span class="down">↓</span> → PaCO₂ <span class="up">↑</span> → pH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>PaO₂ falls substantially → carotid-body firing <span class="up">↑</span> → ventilation <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Metabolic acidosis → peripheral chemoreceptor stimulation <span class="up">↑</span> → ventilation <span class="up">↑</span> → PaCO₂ <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Chronic respiratory acidosis → renal HCO₃⁻ retention <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⛰️</span>Altitude / Exercise / Diving</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Exercise → O₂ consumption <span class="up">↑</span> + CO₂ production <span class="up">↑</span> → ventilation <span class="up">↑</span> + CO <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Acute altitude → inspired PO₂ <span class="down">↓</span> → PaO₂ <span class="down">↓</span> → ventilation <span class="up">↑</span> → PaCO₂ <span class="down">↓</span> → respiratory alkalosis.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Altitude acclimatization → renal HCO₃⁻ excretion <span class="up">↑</span> → pH moves toward normal → sustained hyperventilation becomes easier.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Chronic hypoxia → EPO <span class="up">↑</span> → RBC mass <span class="up">↑</span> → O₂-carrying capacity <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Rapid ascent from depth → dissolved inert gas comes out of solution → decompression sickness.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Hyperbaric O₂ excessive → CNS/pulmonary O₂ toxicity.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate III — Respiratory System</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-gi" id="p4" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🍽️</span><span class="roman">IV</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Receptors, enteric control, acid secretion, absorption</div>
+      <h2>Gastrointestinal System <span class="pct-badge">9%</span></h2>
+    </div>
+    <div class="tos">TOS priority 9% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧬</span>GI Receptor / Mediator Table</h3>
+<div class="table-wrap"><table><thead><tr><th>Mediator</th><th>Receptor/signaling</th><th>Main effect</th></tr></thead><tbody>
+<tr><td class="strong">Histamine</td><td>H₂ → Gs → <span class="up">↑</span>cAMP</td><td><span class="up">↑</span> gastric H⁺ secretion</td></tr><tr><td class="strong">ACh</td><td>M₃ → Gq → IP₃/Ca²⁺</td><td><span class="up">↑</span> acid, secretion, motility</td></tr><tr><td class="strong">Gastrin</td><td>CCK-B → Gq</td><td><span class="up">↑</span> acid; trophic effect</td></tr><tr><td class="strong">Secretin</td><td>Gs/cAMP</td><td><span class="up">↑</span> pancreatic/biliary HCO₃⁻</td></tr><tr><td class="strong">CCK</td><td>Gq-dominant signaling <span class="supp-tag">SUPPLEMENTARY</span></td><td><span class="up">↑</span> pancreatic enzymes; gallbladder contraction</td></tr><tr><td class="strong">Somatostatin</td><td>Gi <span class="supp-tag">SUPPLEMENTARY</span></td><td><span class="down">↓</span> gastrin/acid</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🌀</span>Enteric Control</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Gut distension → enteric sensory neurons activate → contraction behind bolus + relaxation ahead → peristalsis.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Myenteric plexus activity <span class="up">↑</span> → tone <span class="up">↑</span> + contraction intensity <span class="up">↑</span> + propagation <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Parasympathetic activity <span class="up">↑</span> → GI motility/secretion generally <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Sympathetic activity <span class="up">↑</span> → motility/secretion <span class="down">↓</span> + sphincter tone <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Distal enteric ganglia absent → relaxation fails → functional obstruction = Hirschsprung disease <span class="supp-tag">SUPPLEMENTARY</span>.</span></li>
+<li><span>Guyton states that the myenteric plexus mainly controls movements whereas the submucosal plexus mainly controls secretion/local blood flow.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🍽️</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 210" width="400" height="210" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<rect x="140" y="20" width="120" height="90" rx="8" fill="#FBEBD8" stroke="#D4720A" stroke-width="2"/>
+<text x="200" y="45" font-family="Inter,sans-serif" font-size="12" fill="#7A4632" font-weight="700" text-anchor="middle">Parietal cell</text>
+<text x="200" y="65" font-family="Inter,sans-serif" font-size="10.5" fill="#1B2A2E" text-anchor="middle">CO₂+H₂O → H₂CO₃</text>
+<text x="200" y="82" font-family="Inter,sans-serif" font-size="10.5" fill="#1B2A2E" text-anchor="middle">→ H⁺ + HCO₃⁻</text>
+<line x1="200" y1="110" x2="150" y2="160" stroke="#B7AD91" stroke-width="2"/>
+<text x="90" y="180" font-family="Inter,sans-serif" font-size="11.5" fill="#C0392B" font-weight="700" text-anchor="middle">H⁺ → lumen</text>
+<text x="90" y="196" font-family="Inter,sans-serif" font-size="10.5" fill="#1B2A2E" text-anchor="middle">(H⁺/K⁺-ATPase)</text>
+<line x1="200" y1="110" x2="250" y2="160" stroke="#B7AD91" stroke-width="2"/>
+<text x="310" y="180" font-family="Inter,sans-serif" font-size="11.5" fill="#1F6FB2" font-weight="700" text-anchor="middle">HCO₃⁻ → blood</text>
+<text x="310" y="196" font-family="Inter,sans-serif" font-size="10.5" fill="#1B2A2E" text-anchor="middle">(alkaline tide)</text>
+
+</svg>
+<div class="diagram-caption">Parietal cell acid secretion and the postprandial alkaline tide.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧪</span>Gastric Acid / Alkaline Tide</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Parietal-cell CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>H⁺ → lumen via H⁺/K⁺-ATPase.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Cl⁻ enters lumen → HCl forms.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>HCO₃⁻ exits basolaterally into blood → postprandial alkaline tide.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Histamine/ACh/gastrin <span class="up">↑</span> → acid secretion <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Gastric pH <span class="down">↓</span> → somatostatin <span class="up">↑</span> → gastrin/acid <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Mucus/HCO₃⁻ barrier <span class="down">↓</span> → mucosal H⁺ injury <span class="up">↑</span> → ulcer risk <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>H. pylori-associated regulatory disruption → ulcer risk <span class="up">↑</span> depending on gastritis pattern <span class="supp-tag">SUPPLEMENTARY</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🥑</span>Nutrient Absorption</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Luminal glucose/galactose + Na⁺ → SGLT1 uptake → intracellular glucose <span class="up">↑</span> → basolateral glucose exit.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Fructose → GLUT5 uptake <span class="supp-tag">SUPPLEMENTARY</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Bile salts <span class="up">↑</span> → micelle formation <span class="up">↑</span> → fat absorption <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Chylomicrons → lymphatics rather than portal blood.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Bile salts <span class="down">↓</span> → micelle formation <span class="down">↓</span> → steatorrhea <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Pancreatic enzymes <span class="down">↓</span> → digestion <span class="down">↓</span> → malabsorption <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Lactase <span class="down">↓</span> → luminal osmoles <span class="up">↑</span> → water retention <span class="up">↑</span> → osmotic diarrhea.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate IV — Gastrointestinal System</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-endo" id="p5" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🦋</span><span class="roman">V</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Receptor signaling, thyroid/PTH/HPA axes, localization rule</div>
+      <h2>Endocrine System <span class="pct-badge">12%</span></h2>
+    </div>
+    <div class="tos">TOS priority 12% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧬</span>Receptor–Second Messenger Master Table</h3>
+<div class="table-wrap"><table><thead><tr><th>Hormone/receptor</th><th>Signaling</th></tr></thead><tbody>
+<tr><td class="strong">TSH receptor</td><td>Gs → cAMP</td></tr><tr><td class="strong">ACTH receptor (MC2R)</td><td>Gs → cAMP</td></tr><tr><td class="strong">PTH receptor</td><td>Gs/Gq</td></tr><tr><td class="strong">ADH V₂</td><td>Gs → cAMP → AQP2</td></tr><tr><td class="strong">ADH V₁</td><td>Gq → IP₃/DAG</td></tr><tr><td class="strong">Angiotensin II AT₁</td><td>Gq</td></tr><tr><td class="strong">GnRH receptor</td><td>Gq</td></tr><tr><td class="strong">TRH receptor</td><td>Gq</td></tr><tr><td class="strong">Oxytocin receptor</td><td>Gq</td></tr><tr><td class="strong">Insulin receptor</td><td>Receptor tyrosine kinase</td></tr><tr><td class="strong">Steroid receptors</td><td>Intracellular/nuclear transcription</td></tr><tr><td class="strong">Thyroid-hormone receptor</td><td>Nuclear transcription</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🎯</span>Endocrine Localization Rule</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Target-gland hormone <span class="down">↓</span> + trophic hormone <span class="up">↑</span> → primary gland failure.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Target-gland hormone <span class="down">↓</span> + trophic hormone <span class="down">↓</span>/inappropriately normal → pituitary/hypothalamic failure.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Target-gland hormone <span class="up">↑</span> + trophic hormone <span class="down">↓</span> → autonomous target-gland excess.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Hormone concentration <span class="up">↑</span> + target response <span class="down">↓</span> → receptor resistance.</span></li>
+<li><span class="tagset"><span class="tag tag-PHI">Φ</span></span><span>Binding protein <span class="up">↑</span> → total hormone <span class="up">↑</span> while free hormone may remain near normal.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🦋</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 145" width="400" height="145" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<g font-family="Inter,sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+<rect x="20" y="90" width="80" height="40" rx="8" fill="#F0E4F5" stroke="#7D3C98" stroke-width="2"/>
+<text x="60" y="114" fill="#7D3C98">CRH</text>
+<rect x="160" y="90" width="80" height="40" rx="8" fill="#F0E4F5" stroke="#7D3C98" stroke-width="2"/>
+<text x="200" y="114" fill="#7D3C98">ACTH</text>
+<rect x="300" y="90" width="80" height="40" rx="8" fill="#F0E4F5" stroke="#7D3C98" stroke-width="2"/>
+<text x="340" y="114" fill="#7D3C98">Cortisol</text>
+</g>
+<path d="M100 110 h60" stroke="#1B2A2E" stroke-width="2" marker-end="url(#arrowP)"/>
+<path d="M240 110 h60" stroke="#1B2A2E" stroke-width="2" marker-end="url(#arrowP)"/>
+<path d="M340 90 C 340 20, 60 20, 60 88" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrowN)"/>
+<text x="200" y="25" font-family="Inter,sans-serif" font-size="11.5" fill="#C0392B" font-weight="700" text-anchor="middle">negative feedback</text>
+<defs>
+<marker id="arrowP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1B2A2E"/></marker>
+<marker id="arrowN" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#C0392B"/></marker>
+</defs>
+
+</svg>
+<div class="diagram-caption">HPA axis: CRH → ACTH → cortisol, with cortisol negative feedback.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🦋</span>Thyroid Axis</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>TRH <span class="up">↑</span> → TSH <span class="up">↑</span> → T₄/T₃ <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>T₃/T₄ <span class="up">↑</span> → TRH/TSH <span class="down">↓</span> = negative feedback.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Primary hypothyroidism → free T₄ <span class="down">↓</span> → TSH <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Secondary hypothyroidism → free T₄ <span class="down">↓</span> → TSH low/inappropriately normal.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Primary hyperthyroidism → T₄/T₃ <span class="up">↑</span> → TSH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Thyroid hormone <span class="up">↑</span> → metabolic rate <span class="up">↑</span> + β-adrenergic responsiveness <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🦴</span>PTH–Calcium Axis</h3>
+<ul class="facts">
+<li><span>Normal ionized Ca²⁺: ~1.0–1.4 mmol/L.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Ionized Ca²⁺ <span class="down">↓</span> → CaSR activity <span class="down">↓</span> → PTH <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>PTH <span class="up">↑</span> → renal Ca²⁺ reabsorption <span class="up">↑</span> + phosphate reabsorption <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>PTH <span class="up">↑</span> → renal calcitriol formation <span class="up">↑</span> → intestinal Ca²⁺ absorption <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Ca²⁺ restored <span class="up">↑</span> → PTH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>CKD → phosphate retention <span class="up">↑</span> + calcitriol <span class="down">↓</span> → Ca²⁺ stimulus toward <span class="down">↓</span> → secondary PTH <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Alkalosis → albumin binding of Ca²⁺ <span class="up">↑</span> → ionized Ca²⁺ <span class="down">↓</span> → paresthesias/tetany.</span></li>
+<li><span>Guyton emphasizes renal calcitriol production and its importance in calcium/phosphate regulation.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧂</span>HPA / Aldosterone</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Stress/circadian input → CRH <span class="up">↑</span> → ACTH <span class="up">↑</span> → cortisol <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Cortisol <span class="up">↑</span> → CRH/ACTH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Renal perfusion <span class="down">↓</span> → renin <span class="up">↑</span> → Ang II <span class="up">↑</span> → aldosterone <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>K⁺ <span class="up">↑</span> → aldosterone <span class="up">↑</span> directly.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Aldosterone <span class="up">↑</span> → Na⁺ reabsorption <span class="up">↑</span> + K⁺ secretion <span class="up">↑</span> + H⁺ secretion <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Aldosterone excess → BP <span class="up">↑</span> + K⁺ <span class="down">↓</span> + HCO₃⁻ <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Aldosterone deficiency → BP <span class="down">↓</span> + K⁺ <span class="up">↑</span> + metabolic acidosis tendency.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate V — Endocrine System</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-renal" id="p6" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🫘</span><span class="roman">VI</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Clearance, GFR, nephron segments, acid–base chains</div>
+      <h2>Renal &amp; Acid–Base Physiology <span class="pct-badge">9%</span></h2>
+    </div>
+    <div class="tos">TOS priority 9% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧮</span>Core Equations</h3>
+<div class="eq-grid"><div class="eq-card"><div class="eq-name">Clearance</div><div class="eq-formula">Cx = UxV/Px</div><div class="eq-note">U=125, V=1, P=1 → 125 mL/min</div></div><div class="eq-card"><div class="eq-name">Filtered load</div><div class="eq-formula">GFR &times; Px</div><div class="eq-note">GFR 100 &times; PNa 140 &mu;Eq/mL = 14,000 &mu;Eq/min</div></div><div class="eq-card"><div class="eq-name">Excretion rate</div><div class="eq-formula">Ux &times; V</div><div class="eq-note">UNa 70 &times; 1 = 70 &mu;Eq/min</div></div><div class="eq-card"><div class="eq-name">Net reabsorption</div><div class="eq-formula">Filtered load &minus; excretion</div><div class="eq-note">14,000&minus;70 = 13,930 &mu;Eq/min</div></div><div class="eq-card"><div class="eq-name">GFR</div><div class="eq-formula">Kf &times; NFP</div><div class="eq-note">Pressure-dependent</div></div><div class="eq-card"><div class="eq-name">Filtration fraction</div><div class="eq-formula">FF = GFR/RPF</div><div class="eq-note">125/650 = 0.19</div></div><div class="eq-card"><div class="eq-name">RPF from PAH</div><div class="eq-formula">CPAH / extraction ratio</div><div class="eq-note">585/0.9 = 650 mL/min</div></div><div class="eq-card"><div class="eq-name">RBF</div><div class="eq-formula">RPF/(1&minus;Hct)</div><div class="eq-note">650/0.55 = 1182 mL/min</div></div><div class="eq-card"><div class="eq-name">Henderson–Hasselbalch</div><div class="eq-formula">pH = 6.1 + log[HCO&#8323;&#8315;/(0.03&times;PaCO&#8322;)]</div><div class="eq-note">24/(0.03&times;40)=20 → 7.40</div></div></div><ul class="facts">
+<li><span>Guyton demonstrates inulin clearance of 125 mL/min, PAH-based RPF around 650 mL/min, and FF around 0.19.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🔑</span>Normal Values</h3>
+<div class="table-wrap"><table><thead><tr><th>Parameter</th><th>Normal</th></tr></thead><tbody>
+<tr><td class="strong">GFR</td><td>~125 mL/min</td></tr><tr><td class="strong">RPF</td><td>~625–650 mL/min</td></tr><tr><td class="strong">RBF</td><td>~1.1–1.2 L/min</td></tr><tr><td class="strong">Filtration fraction</td><td>~0.20</td></tr><tr><td class="strong">Urine flow</td><td>~1 mL/min representative</td></tr><tr><td class="strong">Plasma creatinine</td><td>~1 mg/dL representative <span class="supp-tag">SUPPLEMENTARY</span></td></tr><tr><td class="strong">Plasma HCO₃⁻</td><td>22–29 mEq/L</td></tr><tr><td class="strong">PaCO₂</td><td>35–45 mmHg</td></tr><tr><td class="strong">pH</td><td>7.35–7.45</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🎯</span>GFR Directional Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Glomerular capillary hydrostatic pressure <span class="up">↑</span> → NFP <span class="up">↑</span> → GFR <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Bowman-space pressure <span class="up">↑</span> → NFP <span class="down">↓</span> → GFR <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Plasma oncotic pressure <span class="up">↑</span> → filtration opposition <span class="up">↑</span> → GFR <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Kf <span class="down">↓</span> from glomerular disease → GFR <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Mild/moderate efferent constriction → glomerular pressure <span class="up">↑</span> → GFR maintained/<span class="up">↑</span> initially.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Severe renal vasoconstriction → RBF <span class="down">↓</span> markedly → GFR ultimately <span class="down">↓</span>.</span></li>
+<li><span>Guyton defines GFR as Kf × net filtration pressure.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🎯</span>Creatinine Relationship</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>GFR <span class="down">↓</span> 50% → creatinine clearance <span class="down">↓</span> → plasma creatinine rises toward ~2× baseline at steady state.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>GFR <span class="down">↓</span> to ¼ normal → plasma creatinine tends toward ~4× normal.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>GFR <span class="down">↓</span> to ⅛ normal → plasma creatinine tends toward ~8× normal.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Plasma creatinine rises until filtered/excreted creatinine again equals production.</span></li>
+<li><span>Guyton explicitly describes this inverse steady-state GFR–creatinine relation.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🫘</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 260" width="400" height="260" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<rect x="30" y="14" width="150" height="52" rx="6" fill="#E0F5F2" stroke="#0E9488" stroke-width="2"/>
+<text x="105" y="34" font-family="Inter,sans-serif" font-size="12" fill="#0E9488" font-weight="700" text-anchor="middle">Proximal tubule</text>
+<text x="105" y="52" font-family="Inter,sans-serif" font-size="10" fill="#1B2A2E" text-anchor="middle">bulk Na⁺, HCO₃⁻, glucose</text>
+
+<path d="M180 40 C 250 40, 250 150, 180 150" fill="none" stroke="#C8BF9F" stroke-width="14" stroke-linecap="round"/>
+<text x="255" y="95" font-family="Inter,sans-serif" font-size="10" fill="#7A4632" text-anchor="middle">loop of</text>
+<text x="255" y="108" font-family="Inter,sans-serif" font-size="10" fill="#7A4632" text-anchor="middle">Henle</text>
+
+<rect x="30" y="124" width="150" height="52" rx="6" fill="#E3F0FA" stroke="#1F6FB2" stroke-width="2"/>
+<text x="105" y="144" font-family="Inter,sans-serif" font-size="12" fill="#1F6FB2" font-weight="700" text-anchor="middle">Thick ascending limb</text>
+<text x="105" y="162" font-family="Inter,sans-serif" font-size="10" fill="#1B2A2E" text-anchor="middle">NKCC2 · low H₂O perm.</text>
+
+<path d="M105 176 v20" fill="none" stroke="#B7AD91" stroke-width="2"/>
+<rect x="30" y="198" width="150" height="46" rx="6" fill="#F1E5F6" stroke="#8E44AD" stroke-width="2"/>
+<text x="105" y="220" font-family="Inter,sans-serif" font-size="12" fill="#8E44AD" font-weight="700" text-anchor="middle">Early distal tubule</text>
+<text x="105" y="237" font-family="Inter,sans-serif" font-size="10" fill="#1B2A2E" text-anchor="middle">NCC: Na⁺–Cl⁻</text>
+
+<path d="M180 220 h20" fill="none" stroke="#B7AD91" stroke-width="2"/>
+<rect x="200" y="198" width="170" height="46" rx="6" fill="#FBEBD8" stroke="#D4720A" stroke-width="2"/>
+<text x="285" y="220" font-family="Inter,sans-serif" font-size="12" fill="#D4720A" font-weight="700" text-anchor="middle">CD principal cell</text>
+<text x="285" y="237" font-family="Inter,sans-serif" font-size="10" fill="#1B2A2E" text-anchor="middle">ENaC Na⁺ entry · K⁺ secretion</text>
+
+<path d="M285 176 v22 M180 150 C 190 195, 260 176, 285 198" fill="none" stroke="#B7AD91" stroke-width="2"/>
+<rect x="200" y="124" width="170" height="52" rx="6" fill="#FBEAE7" stroke="#C0392B" stroke-width="2"/>
+<text x="285" y="144" font-family="Inter,sans-serif" font-size="12" fill="#C0392B" font-weight="700" text-anchor="middle">Collecting duct</text>
+<text x="285" y="162" font-family="Inter,sans-serif" font-size="10" fill="#1B2A2E" text-anchor="middle">AQP2 inserted by ADH</text>
+
+</svg>
+<div class="diagram-caption">Nephron segment transporters, proximal tubule to collecting duct.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🫘</span>Nephron Segment Transport</h3>
+<div class="table-wrap"><table><thead><tr><th>Segment</th><th>Major transport</th><th>Water permeability</th></tr></thead><tbody>
+<tr><td class="strong">Proximal tubule</td><td>Bulk Na⁺, HCO₃⁻, glucose, amino acids</td><td>High</td></tr><tr><td class="strong">Thick ascending limb</td><td>NKCC2: Na⁺-K⁺-2Cl⁻</td><td>Very low</td></tr><tr><td class="strong">Early distal tubule</td><td>NCC: Na⁺-Cl⁻</td><td>Low</td></tr><tr><td class="strong">Collecting duct principal cell</td><td>ENaC Na⁺ entry; K⁺ secretion</td><td>ADH-dependent</td></tr><tr><td class="strong">Collecting duct</td><td>AQP2 inserted by ADH</td><td><span class="up">↑</span> with ADH</td></tr><tr><td class="strong">Intercalated cell</td><td>H⁺ / HCO₃⁻ handling</td><td>Acid–base regulation</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>ADH V₂ stimulation <span class="up">↑</span> → cAMP <span class="up">↑</span> → AQP2 insertion <span class="up">↑</span> → water reabsorption <span class="up">↑</span> → urine volume <span class="down">↓</span> + urine osmolality <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>ADH absent/resistant → water reabsorption <span class="down">↓</span> → polyuria <span class="up">↑</span> + dilute urine.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Aldosterone <span class="up">↑</span> → ENaC/Na⁺-K⁺ pump activity <span class="up">↑</span> → Na⁺ retention <span class="up">↑</span> + K⁺ secretion <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Glucose filtered load > tubular transport maximum → glucosuria begins.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Loop thick ascending solute reabsorption <span class="up">↑</span> → medullary gradient <span class="up">↑</span> → concentrating capacity <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚖️</span>Acid–Base Primary vs Compensation</h3>
+<div class="table-wrap"><table><thead><tr><th>Disorder</th><th>Primary/direct change</th><th>Compensation</th></tr></thead><tbody>
+<tr><td class="strong">Respiratory acidosis</td><td>PaCO₂ <span class="up">↑</span></td><td>HCO₃⁻ <span class="up">↑</span> via kidney</td></tr><tr><td class="strong">Respiratory alkalosis</td><td>PaCO₂ <span class="down">↓</span></td><td>HCO₃⁻ <span class="down">↓</span> via kidney</td></tr><tr><td class="strong">Metabolic acidosis</td><td>HCO₃⁻ <span class="down">↓</span></td><td>PaCO₂ <span class="down">↓</span> via hyperventilation</td></tr><tr><td class="strong">Metabolic alkalosis</td><td>HCO₃⁻ <span class="up">↑</span></td><td>PaCO₂ <span class="up">↑</span> via hypoventilation</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton explicitly distinguishes respiratory disorders by primary PCO₂ change and metabolic disorders by primary HCO₃⁻ change.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚖️</span>Acid–Base Direction Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Hypoventilation → PaCO₂ <span class="up">↑</span> → H⁺ <span class="up">↑</span> → pH <span class="down">↓</span> = respiratory acidosis.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Respiratory acidosis → renal H⁺ secretion <span class="up">↑</span> + HCO₃⁻ reabsorption/generation <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Hyperventilation → PaCO₂ <span class="down">↓</span> → H⁺ <span class="down">↓</span> → pH <span class="up">↑</span> = respiratory alkalosis.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Respiratory alkalosis → renal HCO₃⁻ excretion <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Diarrhea → GI HCO₃⁻ loss <span class="up">↑</span> → metabolic acidosis.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Metabolic acidosis → ventilation <span class="up">↑</span> → PaCO₂ <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>Vomiting → H⁺ loss <span class="up">↑</span> → HCO₃⁻ relatively <span class="up">↑</span> → metabolic alkalosis.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Metabolic alkalosis → ventilation <span class="down">↓</span> modestly → PaCO₂ <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">📊</span>Davenport Diagram — Rapid Interpretation</h3>
+<ul class="facts">
+<li><span>x-axis = [HCO₃⁻].</span></li>
+<li><span>y-axis = pH.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span></span><span>Respiratory acidosis : pH <span class="down">↓</span>, PCO₂ <span class="up">↑</span>, HCO₃⁻ modestly <span class="up">↑</span> acutely.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span></span><span>Respiratory acidosis : kidney raises HCO₃⁻ further → pH moves toward normal.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span></span><span>Respiratory alkalosis : pH <span class="up">↑</span>, PCO₂ <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span></span><span>Metabolic acidosis : HCO₃⁻ <span class="down">↓</span>, pH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span></span><span>Metabolic acidosis : PaCO₂ <span class="down">↓</span> through hyperventilation.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate VI — Renal &amp; Acid–Base Physiology</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-repro" id="p7" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🌸</span><span class="roman">VII</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · HPG axis, menstrual cycle, male axis, parturition/lactation</div>
+      <h2>Reproductive Physiology <span class="pct-badge">9%</span></h2>
+    </div>
+    <div class="tos">TOS priority 9% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🧬</span>HPG Axis</h3>
+<div class="table-wrap"><table><thead><tr><th>Hormone</th><th>Source</th><th>Main target</th></tr></thead><tbody>
+<tr><td class="strong">GnRH</td><td>Hypothalamus</td><td>Pituitary</td></tr><tr><td class="strong">LH</td><td>Anterior pituitary</td><td>Leydig cells / ovarian theca &amp; ovulatory machinery</td></tr><tr><td class="strong">FSH</td><td>Anterior pituitary</td><td>Sertoli cells / ovarian granulosa cells</td></tr><tr><td class="strong">Estradiol</td><td>Ovary</td><td>Reproductive tissues + feedback</td></tr><tr><td class="strong">Progesterone</td><td>Corpus luteum/placenta</td><td>Endometrium</td></tr><tr><td class="strong">Inhibin</td><td>Sertoli/granulosa cells</td><td><span class="down">↓</span> FSH</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🌸</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 220" width="400" height="220" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<g font-family="Inter,sans-serif" font-size="11" font-weight="700" text-anchor="middle">
+<rect x="10" y="70" width="80" height="36" rx="7" fill="#FBE7EF" stroke="#C0396B" stroke-width="2"/>
+<text x="50" y="92" fill="#C0396B">FSH ↑</text>
+<rect x="120" y="70" width="90" height="36" rx="7" fill="#FBE7EF" stroke="#C0396B" stroke-width="2"/>
+<text x="165" y="92" fill="#C0396B">Follicle growth</text>
+<rect x="240" y="70" width="90" height="36" rx="7" fill="#FBE7EF" stroke="#C0396B" stroke-width="2"/>
+<text x="285" y="92" fill="#C0396B">Estradiol ↑↑</text>
+<rect x="240" y="10" width="90" height="36" rx="7" fill="#F0E4F5" stroke="#8E44AD" stroke-width="2"/>
+<text x="285" y="32" fill="#8E44AD">LH surge</text>
+<rect x="120" y="140" width="90" height="36" rx="7" fill="#E3F5EA" stroke="#1E8449" stroke-width="2"/>
+<text x="165" y="162" fill="#1E8449">Ovulation</text>
+<rect x="10" y="140" width="90" height="36" rx="7" fill="#FBEBD8" stroke="#D4720A" stroke-width="2"/>
+<text x="55" y="162" fill="#D4720A">Corpus luteum</text>
+</g>
+<g stroke="#B7AD91" stroke-width="1.8" fill="none" marker-end="url(#arrowG)">
+<path d="M90 88 h28"/>
+<path d="M210 88 h28"/>
+<path d="M285 68 v-12"/>
+<path d="M240 28 h-140 a10 10 0 0 0 -10 10 v90 a10 10 0 0 0 10 10 h20"/>
+<path d="M210 158 h-10"/>
+</g>
+<defs><marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#B7AD91"/></marker></defs>
+<text x="285" y="200" font-family="Inter,sans-serif" font-size="10.5" fill="#8E44AD" font-style="italic" text-anchor="middle">sustained high E₂ flips feedback positive</text>
+
+</svg>
+<div class="diagram-caption">Follicular-phase feedback flips positive at peak estradiol, triggering the LH surge.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🌸</span>Menstrual Cycle Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Early follicular E₂/P₄ low → negative feedback <span class="down">↓</span> → FSH rises.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>FSH <span class="up">↑</span> → follicular growth <span class="up">↑</span> → estradiol <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Sustained high estradiol → feedback switches positive → LH surge.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>LH surge → ovulation.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Corpus luteum → progesterone + estrogen <span class="up">↑</span> → FSH/LH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Corpus luteum regresses → progesterone/estrogen <span class="down">↓</span> → endometrial support <span class="down">↓</span> → menstruation.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Estrogen/progesterone fall → inhibition removed → FSH begins rising for next cycle.</span></li>
+<li><span>The TOS explicitly includes menstrual-cycle physiology, parturition, lactation, male hormones, and spermatogenesis.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">♂️</span>Male Axis</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>GnRH pulses <span class="up">↑</span> → LH + FSH <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>LH <span class="up">↑</span> → Leydig testosterone <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>FSH + intratesticular testosterone <span class="up">↑</span> → Sertoli support of spermatogenesis <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Testosterone <span class="up">↑</span> → GnRH/LH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Inhibin <span class="up">↑</span> → FSH <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Exogenous androgen <span class="up">↑</span> → GnRH/LH/FSH <span class="down">↓</span> → intratesticular testosterone <span class="down">↓</span> → spermatogenesis <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Primary testicular failure → testosterone <span class="down">↓</span> → LH/FSH <span class="up">↑</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🤱</span>Parturition / Lactation</h3>
+<div class="table-wrap"><table><thead><tr><th>Hormone</th><th>Signaling</th><th>Function</th></tr></thead><tbody>
+<tr><td class="strong">Oxytocin</td><td>Gq → IP₃/Ca²⁺</td><td>Uterine contraction; milk ejection</td></tr><tr><td class="strong">Prolactin</td><td>JAK/STAT-type receptor <span class="supp-tag">SUPPLEMENTARY</span></td><td>Milk synthesis</td></tr><tr><td class="strong">Dopamine</td><td>D₂/Gi <span class="supp-tag">SUPPLEMENTARY</span></td><td>Inhibits prolactin</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Cervical stretch <span class="up">↑</span> → oxytocin <span class="up">↑</span> → uterine contraction <span class="up">↑</span> → cervical stretch <span class="up">↑</span> = positive feedback.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Suckling <span class="up">↑</span> → prolactin <span class="up">↑</span> → milk synthesis <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Suckling <span class="up">↑</span> → oxytocin <span class="up">↑</span> → myoepithelial contraction <span class="up">↑</span> → milk ejection.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Prolactin <span class="down">↓</span> → milk production <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Oxytocin <span class="down">↓</span> → milk let-down <span class="down">↓</span> while milk synthesis may remain relatively preserved.</span></li>
+<li><span>Board trap: prolactin produces; oxytocin ejects.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate VII — Reproductive Physiology</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-neuro" id="p8" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🧠</span><span class="roman">VIII</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Conduction, reflexes, ANS, cerebral flow, vision/hearing/taste</div>
+      <h2>Neurophysiology &amp; Special Senses <span class="pct-badge">17%</span></h2>
+    </div>
+    <div class="tos">TOS priority 17% of total exam weight</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">🔑</span>Neural Resting Potentials</h3>
+<div class="table-wrap"><table><thead><tr><th>Cell</th><th>Vm</th></tr></thead><tbody>
+<tr><td class="strong">Neuron</td><td>−60 to −70 mV</td></tr><tr><td class="strong">Skeletal muscle</td><td>−85 to −95 mV</td></tr><tr><td class="strong">Smooth muscle</td><td>−50 to −60 mV</td></tr><tr><td class="strong">Cardiac muscle</td><td>−80 to −90 mV</td></tr><tr><td class="strong">Photoreceptor</td><td>~−40 mV dark → ~−70 mV light</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span>Guyton directly lists these approximate resting potentials.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚡</span>Nerve Conduction Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Axon diameter <span class="up">↑</span> → internal resistance <span class="down">↓</span> → conduction velocity <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Myelination <span class="up">↑</span> → membrane resistance <span class="up">↑</span> + capacitance <span class="down">↓</span> → conduction velocity <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Node depolarizes → local current reaches next node → saltatory conduction.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Demyelination → current leak <span class="up">↑</span> → conduction velocity <span class="down">↓</span> / block <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Hyperkalemia severe → membrane depolarization → Na⁺ channel inactivation → impulse conduction <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Hypocalcemia → excitability <span class="up">↑</span> → spontaneous discharges/tetany.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧠</span>Visual Map</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 400 210" width="400" height="210" style="max-width:100%;width:100%;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+
+<ellipse cx="70" cy="130" rx="34" ry="60" fill="#F0E4F5" stroke="#6C3483" stroke-width="2"/>
+<text x="70" y="128" font-family="Inter,sans-serif" font-size="10.5" fill="#6C3483" font-weight="700" text-anchor="middle">Muscle</text>
+<text x="70" y="142" font-family="Inter,sans-serif" font-size="10.5" fill="#6C3483" font-weight="700" text-anchor="middle">spindle</text>
+<path d="M104 120 C 160 80, 200 60, 230 40" stroke="#1F6FB2" stroke-width="2.4" fill="none" marker-end="url(#arrowR)"/>
+<text x="175" y="65" font-family="Inter,sans-serif" font-size="11" fill="#1F6FB2" font-weight="700">Ia afferent ↑</text>
+<circle cx="260" cy="30" r="22" fill="#E3F0FA" stroke="#1F6FB2" stroke-width="2"/>
+<text x="260" y="34" font-family="Inter,sans-serif" font-size="9.5" fill="#1F6FB2" font-weight="700" text-anchor="middle">Cord</text>
+<path d="M260 52 C 220 100, 150 150, 104 150" stroke="#C0392B" stroke-width="2.4" fill="none" marker-end="url(#arrowR2)"/>
+<text x="185" y="175" font-family="Inter,sans-serif" font-size="11" fill="#C0392B" font-weight="700">α-motor → contract</text>
+<path d="M282 35 C 340 60, 340 140, 290 165" stroke="#1E8449" stroke-width="2.2" fill="none" stroke-dasharray="4 3" marker-end="url(#arrowR3)"/>
+<text x="365" y="110" font-family="Inter,sans-serif" font-size="10.5" fill="#1E8449" font-weight="700" text-anchor="middle">reciprocal</text>
+<text x="365" y="124" font-family="Inter,sans-serif" font-size="10.5" fill="#1E8449" font-weight="700" text-anchor="middle">inhibition</text>
+<ellipse cx="300" cy="180" rx="28" ry="18" fill="#E3F5EA" stroke="#1E8449" stroke-width="2"/>
+<text x="300" y="184" font-family="Inter,sans-serif" font-size="9.5" fill="#1E8449" font-weight="700" text-anchor="middle">Antagonist</text>
+<defs>
+<marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1F6FB2"/></marker>
+<marker id="arrowR2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#C0392B"/></marker>
+<marker id="arrowR3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1E8449"/></marker>
+</defs>
+
+</svg>
+<div class="diagram-caption">Monosynaptic stretch reflex with reciprocal inhibition of the antagonist.</div>
+</div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🦵</span>Stretch Reflex</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Muscle length <span class="up">↑</span> → muscle spindle stretch <span class="up">↑</span> → Ia firing <span class="up">↑</span> → α-motor neuron activity <span class="up">↑</span> → same muscle contracts.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Ia firing <span class="up">↑</span> → inhibitory interneuron activates → antagonist activity <span class="down">↓</span> = reciprocal inhibition.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>γ-motor neuron activity <span class="up">↑</span> → spindle sensitivity maintained during contraction.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>UMN lesion → descending inhibition <span class="down">↓</span> → reflex gain <span class="up">↑</span> → hyperreflexia/spasticity.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>LMN/reflex-arc lesion → efferent response <span class="down">↓</span> → hyporeflexia/flaccidity.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧠</span>Basal Ganglia vs Cerebellum</h3>
+<div class="table-wrap"><table><thead><tr><th>System</th><th>Principal function</th><th>Classic derangement</th></tr></thead><tbody>
+<tr><td class="strong">Basal ganglia</td><td>Movement selection/scaling/initiation</td><td>Parkinsonism</td></tr><tr><td class="strong">Cerebellum</td><td>Timing, error correction, coordination</td><td>Ataxia, dysmetria, intention tremor</td></tr><tr><td class="strong">Motor cortex/corticospinal</td><td>Voluntary skilled movement</td><td>UMN weakness</td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Nigrostriatal dopamine <span class="down">↓</span> → movement initiation <span class="down">↓</span> → bradykinesia.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Cerebellar output abnormal → motor strength relatively preserved but trajectory/timing inaccurate.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Corticospinal damage → weakness + UMN signs.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧬</span>Autonomic Receptors</h3>
+<div class="table-wrap"><table><thead><tr><th>Receptor</th><th>G protein</th><th>Major effects</th></tr></thead><tbody>
+<tr><td class="strong">α₁</td><td>Gq</td><td>Vasoconstriction, mydriasis</td></tr><tr><td class="strong">α₂</td><td>Gi</td><td><span class="down">↓</span> transmitter release</td></tr><tr><td class="strong">β₁</td><td>Gs</td><td><span class="up">↑</span> HR, contractility, renin</td></tr><tr><td class="strong">β₂</td><td>Gs</td><td>Bronchodilation, selected vasodilation</td></tr><tr><td class="strong">β₃</td><td>Gs <span class="supp-tag">SUPPLEMENTARY</span></td><td>Detrusor relaxation</td></tr><tr><td class="strong">M₂</td><td>Gi</td><td><span class="down">↓</span> HR, AV conduction</td></tr><tr><td class="strong">M₃</td><td>Gq</td><td>Gland secretion, bronchoconstriction, GI activity</td></tr><tr><td class="strong">Nicotinic Nn</td><td>Ligand-gated cation channel</td><td>Autonomic ganglia</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🩺</span>ANS Directional Chains</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Standing → venous pooling <span class="up">↑</span> → VR <span class="down">↓</span> → CO <span class="down">↓</span> → MAP <span class="down">↓</span> → baroreceptor firing <span class="down">↓</span> → sympathetic activity <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span><span class="tag tag-PHI">Φ</span></span><span>Sympathetic activity <span class="up">↑</span> → α₁ vasoconstriction + β₁ HR/contractility <span class="up">↑</span> → MAP restored.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Vagal activity <span class="up">↑</span> → M₂ activation <span class="up">↑</span> → SA-node phase-4 slope <span class="down">↓</span> → HR <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>β₁ stimulation <span class="up">↑</span> → phase-4 slope <span class="up">↑</span> → HR <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>β₂ stimulation <span class="up">↑</span> → bronchial smooth-muscle relaxation <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Sympathetic cholinergic stimulation → sweat secretion <span class="up">↑</span>; sweat glands are sympathetic but use ACh.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🧠</span>Cerebral Blood Flow / CPP</h3>
+<div class="table-wrap"><table><thead><tr><th>Relationship</th><th>Equation</th></tr></thead><tbody>
+<tr><td class="strong">CPP</td><td>CPP ≈ MAP − ICP <span class="supp-tag">SUPPLEMENTARY</span></td></tr>
+</tbody></table></div><ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>PaCO₂ <span class="up">↑</span> → cerebral H⁺ <span class="up">↑</span> → cerebral vasodilation → CBF <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>PaCO₂ <span class="down">↓</span> → cerebral vasoconstriction → CBF <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-P">P</span></span><span>ICP <span class="up">↑</span> → CPP <span class="down">↓</span> if MAP unchanged.</span></li>
+<li><span class="tagset"><span class="tag tag-C">C</span></span><span>[Φ/P] MAP may rise in severe ICP elevation to preserve CPP, but this is pathologic compensation.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Excessive hyperventilation → PaCO₂ <span class="down">↓</span> → cerebral vasoconstriction <span class="up">↑</span> → cerebral perfusion <span class="down">↓</span>.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🖐️</span>Somatosensory Pathways</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Dorsal columns → vibration/proprioception/fine touch; spinal lesion → ipsilateral deficit below lesion.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Spinothalamic tract → pain/temperature; spinal lesion → contralateral deficit after segmental crossing.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Peripheral neuropathy → distal sensory input <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Dorsal-root lesion → afferent limb of reflex <span class="down">↓</span> → reflex <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Thalamic/cortical lesion → higher-order perception disrupted.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">👁️</span>Vision — Ionic / Signaling Chain</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Darkness → cGMP high → cGMP-gated Na⁺/Ca²⁺ channels open → photoreceptor relatively depolarized.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Light → photopigment activates transducin → PDE <span class="up">↑</span> → cGMP <span class="down">↓</span> → cation channels close → photoreceptor hyperpolarizes.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Light <span class="up">↑</span> → glutamate release from photoreceptor <span class="down">↓</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Optic nerve lesion → ipsilateral monocular visual loss.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Chiasm lesion → bitemporal field loss.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Postchiasmal lesion → contralateral homonymous field deficit.</span></li>
+<li><span>Board trap: light hyperpolarizes, not depolarizes, rods/cones.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">👂</span>Hearing — Ionic Basis</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Sound → tympanic membrane vibration → ossicles move → oval window displacement → cochlear wave.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Stereocilia bend toward tallest cilia → mechanically gated channels open → K⁺ enters hair cell from endolymph → depolarization.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Hair-cell depolarization → voltage-gated Ca²⁺ channels open → neurotransmitter release <span class="up">↑</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Basal cochlea → high frequencies; apical cochlea → low frequencies.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Ossicular/middle-ear failure → conductive hearing loss.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Hair-cell/CN VIII damage → sensorineural hearing loss.</span></li>
+<li><span>Board trap: cochlear hair-cell depolarization is driven largely by K⁺ influx, not Na⁺ influx.</span></li>
+</ul>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">👃</span>Taste / Smell</h3>
+<ul class="facts">
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Odorant → olfactory GPCR → Golf → adenylyl cyclase → cAMP <span class="up">↑</span> → cyclic nucleotide-gated channels open → depolarization.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Sweet/bitter/umami → GPCR pathways <span class="supp-tag">SUPPLEMENTARY</span>.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Salty taste → cation entry depolarizes receptor cells.</span></li>
+<li><span class="tagset"><span class="tag tag-D">D</span><span class="tag tag-PHI">Φ</span></span><span>Sour taste → H⁺-dependent signaling.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>CN I/olfactory epithelium injury → anosmia.</span></li>
+<li><span class="tagset"><span class="tag tag-P">P</span></span><span>Smell <span class="down">↓</span> → perceived flavor <span class="down">↓</span> despite preserved basic taste.</span></li>
+</ul>
+</section>
+  <footer class="plate-foot"><span>Plate VIII — Neurophysiology &amp; Special Senses</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+
+<article class="plate region-sprint" id="p9" style="display:none;">
+  <div class="plate-header">
+    <div class="plate-badge"><span class="icon-ring">🏁</span><span class="roman">✦</span></div>
+    <div class="titles">
+      <div class="eyebrow">Regional block · Master chains, direct vs compensatory, board traps, 30-second recall</div>
+      <h2>Final Sprint </h2>
+    </div>
+    <div class="tos">TOS priority closing sequence</div>
+  </div>
+  <section class="block">
+<h3 class="block-title"><span class="emoji">📈</span>Master “If X Rises→Then Y” Chains</h3>
+<div class="table-wrap"><table><thead><tr><th>If X rises…</th><th>Direct effect</th><th>Compensation / final tendency</th></tr></thead><tbody>
+<tr><td class="strong">Extracellular K⁺ <span class="up">↑</span></td><td>Vm less negative</td><td>Severe sustained rise → conduction <span class="down">↓</span></td></tr><tr><td class="strong">Extracellular Ca²⁺ <span class="down">↓</span></td><td>Neuronal excitability <span class="up">↑</span></td><td>Tetany risk <span class="up">↑</span></td></tr><tr><td class="strong">Venous return <span class="up">↑</span></td><td>EDV <span class="up">↑</span> → SV <span class="up">↑</span></td><td>CO rises via Frank–Starling</td></tr><tr><td class="strong">Afterload <span class="up">↑</span></td><td>ESV <span class="up">↑</span> → SV <span class="down">↓</span></td><td>Sympathetic drive may <span class="up">↑</span></td></tr><tr><td class="strong">Contractility <span class="up">↑</span></td><td>ESV <span class="down">↓</span> → SV/EF <span class="up">↑</span></td><td>CO <span class="up">↑</span></td></tr><tr><td class="strong">RAP <span class="up">↑</span></td><td>Venous-return gradient <span class="down">↓</span></td><td>VR <span class="down">↓</span></td></tr><tr><td class="strong">Blood volume <span class="up">↑</span></td><td>Pms <span class="up">↑</span></td><td>VR and CO <span class="up">↑</span></td></tr><tr><td class="strong">TPR <span class="up">↑</span> at fixed MAP</td><td>Flow/CO <span class="down">↓</span></td><td>Long-term adjustment depends on renal/vascular control</td></tr><tr><td class="strong">MAP <span class="down">↓</span></td><td>Baroreceptor firing <span class="down">↓</span></td><td>Sympathetic tone <span class="up">↑</span></td></tr><tr><td class="strong">HR <span class="up">↑</span></td><td>O₂ demand <span class="up">↑</span> + diastolic time <span class="down">↓</span></td><td>Ischemia risk <span class="up">↑</span></td></tr><tr><td class="strong">Alveolar PO₂ <span class="down">↓</span></td><td>Pulmonary vasoconstriction <span class="up">↑</span></td><td>Flow redirected</td></tr><tr><td class="strong">PaCO₂ <span class="up">↑</span></td><td>Cerebral blood flow <span class="up">↑</span></td><td>Ventilation <span class="up">↑</span> if control intact</td></tr><tr><td class="strong">PaCO₂ <span class="up">↑</span></td><td>pH <span class="down">↓</span></td><td>Kidney retains/generates HCO₃⁻</td></tr><tr><td class="strong">HCO₃⁻ <span class="down">↓</span></td><td>pH <span class="down">↓</span></td><td>Ventilation <span class="up">↑</span> → PaCO₂ <span class="down">↓</span></td></tr><tr><td class="strong">2,3-BPG <span class="up">↑</span></td><td>Hb affinity <span class="down">↓</span></td><td>Tissue O₂ unloading <span class="up">↑</span></td></tr><tr><td class="strong">ADH <span class="up">↑</span></td><td>Collecting-duct water permeability <span class="up">↑</span></td><td>Urine volume <span class="down">↓</span></td></tr><tr><td class="strong">Aldosterone <span class="up">↑</span></td><td>Na⁺ reabsorption <span class="up">↑</span></td><td>K⁺/H⁺ secretion <span class="up">↑</span></td></tr><tr><td class="strong">GFR <span class="down">↓</span></td><td>Creatinine clearance <span class="down">↓</span></td><td>Plasma creatinine <span class="up">↑</span></td></tr><tr><td class="strong">Ionized Ca²⁺ <span class="down">↓</span></td><td>PTH <span class="up">↑</span></td><td>Ca²⁺ restored toward normal</td></tr><tr><td class="strong">T₄/T₃ <span class="up">↑</span></td><td>TSH suppressed</td><td>Thyroid output restrained</td></tr><tr><td class="strong">Cortisol <span class="up">↑</span></td><td>CRH/ACTH suppressed</td><td>HPA output restrained</td></tr><tr><td class="strong">Estradiol sustained high preovulation</td><td>LH positive feedback <span class="up">↑</span></td><td>Ovulation</td></tr><tr><td class="strong">Progesterone/estrogen fall late luteal</td><td>Endometrial support <span class="down">↓</span></td><td>FSH begins rising</td></tr><tr><td class="strong">Suckling <span class="up">↑</span></td><td>Prolactin + oxytocin <span class="up">↑</span></td><td>Milk production + ejection <span class="up">↑</span></td></tr><tr><td class="strong">Cervical stretch <span class="up">↑</span></td><td>Oxytocin <span class="up">↑</span></td><td>Contractions <span class="up">↑</span> → more stretch</td></tr><tr><td class="strong">Myelination <span class="up">↑</span></td><td>Axonal current leak <span class="down">↓</span></td><td>Conduction velocity <span class="up">↑</span></td></tr><tr><td class="strong">ICP <span class="up">↑</span></td><td>CPP <span class="down">↓</span></td><td>Cerebral perfusion threatened</td></tr><tr><td class="strong">Light intensity <span class="up">↑</span></td><td>Photoreceptor cGMP <span class="down">↓</span></td><td>Hyperpolarization <span class="up">↑</span></td></tr><tr><td class="strong">Stereocilia deflection <span class="up">↑</span></td><td>Hair-cell K⁺ influx <span class="up">↑</span></td><td>Auditory firing <span class="up">↑</span></td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚖️</span>Direct vs Compensatory — Ultra-High-Yield Distinctions</h3>
+<div class="table-wrap"><table><thead><tr><th>Scenario</th><th>Direct / primary effect</th><th>Compensatory effect</th></tr></thead><tbody>
+<tr><td class="strong">Hemorrhage</td><td>Blood volume <span class="down">↓</span> → VR/CO/MAP <span class="down">↓</span></td><td>SNS + RAAS + ADH <span class="up">↑</span></td></tr><tr><td class="strong">Standing</td><td>Venous pooling <span class="up">↑</span> → VR <span class="down">↓</span></td><td>Baroreflex sympathetic activity <span class="up">↑</span></td></tr><tr><td class="strong">Respiratory acidosis</td><td>PaCO₂ <span class="up">↑</span> → pH <span class="down">↓</span></td><td>Renal HCO₃⁻ <span class="up">↑</span></td></tr><tr><td class="strong">Respiratory alkalosis</td><td>PaCO₂ <span class="down">↓</span> → pH <span class="up">↑</span></td><td>Renal HCO₃⁻ <span class="down">↓</span></td></tr><tr><td class="strong">Metabolic acidosis</td><td>HCO₃⁻ <span class="down">↓</span> → pH <span class="down">↓</span></td><td>Hyperventilation → PaCO₂ <span class="down">↓</span></td></tr><tr><td class="strong">Metabolic alkalosis</td><td>HCO₃⁻ <span class="up">↑</span> → pH <span class="up">↑</span></td><td>Hypoventilation → PaCO₂ <span class="up">↑</span></td></tr><tr><td class="strong">Acute altitude</td><td>PaO₂ <span class="down">↓</span> → hyperventilation</td><td>Renal HCO₃⁻ loss + EPO <span class="up">↑</span> later</td></tr><tr><td class="strong">Low Ca²⁺</td><td>Neuromuscular excitability <span class="up">↑</span></td><td>PTH <span class="up">↑</span></td></tr><tr><td class="strong">Low thyroid hormone</td><td>Metabolic action <span class="down">↓</span></td><td>TSH <span class="up">↑</span> if pituitary intact</td></tr><tr><td class="strong">Low cortisol</td><td>Cortisol action <span class="down">↓</span></td><td>ACTH <span class="up">↑</span> if primary adrenal failure</td></tr><tr><td class="strong">Low renal perfusion</td><td>Renin secretion <span class="up">↑</span></td><td>Ang II/aldosterone/Na⁺ retention <span class="up">↑</span></td></tr><tr><td class="strong">Low GFR</td><td>Creatinine excretion falls initially</td><td>Plasma creatinine rises until excretion matches production</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">⚠️</span>Physiologic vs Pathologic — Board Traps</h3>
+<div class="table-wrap"><table><thead><tr><th>Change</th><th>Physiologic</th><th>Pathologic</th></tr></thead><tbody>
+<tr><td class="strong">Cardiac output <span class="up">↑</span></td><td>Exercise, pregnancy</td><td>High-output failure states <span class="supp-tag">SUPPLEMENTARY</span></td></tr><tr><td class="strong">HR <span class="up">↑</span></td><td>Exercise, standing</td><td>Tachyarrhythmia</td></tr><tr><td class="strong">Venous pressure <span class="up">↑</span></td><td>Brief volume loading</td><td>Heart failure</td></tr><tr><td class="strong">Pulmonary vasoconstriction</td><td>Regional alveolar hypoxia</td><td>Diffuse hypoxia → pulmonary hypertension</td></tr><tr><td class="strong">Hyperventilation</td><td>Exercise, altitude</td><td>Panic/CNS disorder</td></tr><tr><td class="strong">PTH <span class="up">↑</span></td><td>Appropriate response to low Ca²⁺</td><td>Hyperparathyroidism</td></tr><tr><td class="strong">ADH <span class="up">↑</span></td><td>Osmotic/volume stimulus</td><td>SIADH</td></tr><tr><td class="strong">Aldosterone <span class="up">↑</span></td><td>Volume depletion</td><td>Primary aldosteronism</td></tr><tr><td class="strong">Sympathetic tone <span class="up">↑</span></td><td>Exercise/standing</td><td>Autonomic overactivity or chronic HF compensation</td></tr><tr><td class="strong">Positive feedback</td><td>Labor, clotting, AP upstroke</td><td>Uncontrolled hemorrhagic deterioration</td></tr><tr><td class="strong">Creatinine <span class="up">↑</span></td><td>—</td><td>Reduced GFR unless production/assay factors intervene</td></tr><tr><td class="strong">Cortisol <span class="up">↑</span></td><td>Circadian peak/stress</td><td>Cushing syndrome</td></tr><tr><td class="strong">Prolactin <span class="up">↑</span></td><td>Lactation</td><td>Hyperprolactinemia</td></tr><tr><td class="strong">Right O₂-Hb shift</td><td>Exercise</td><td>Severe acidosis/fever</td></tr><tr><td class="strong">Cerebral vasodilation</td><td>Appropriate hypercapnia response</td><td>Worsens raised ICP</td></tr>
+</tbody></table></div>
+</section>
+<section class="block">
+<h3 class="block-title"><span class="emoji">🏁</span>Final 30-Second PLE Recall</h3>
+<ul class="distractor-list"><li>CO = HR × SV.</li><li>SV = EDV − ESV.</li><li>EF = SV/EDV.</li><li>MAP ≈ DBP + ⅓ pulse pressure.</li><li>Flow = ΔP/R.</li><li>Resistance ∝ 1/r⁴.</li><li>VR = (Pms−RAP)/RVR.</li><li><span class="up">↑</span> RAP → <span class="down">↓</span> VR.</li><li><span class="up">↑</span> preload → <span class="up">↑</span> SV.</li><li><span class="up">↑</span> afterload → <span class="up">↑</span> ESV, <span class="down">↓</span> SV.</li><li><span class="up">↑</span> contractility → <span class="down">↓</span> ESV, <span class="up">↑</span> EF.</li><li>β₁ = Gs; M₂ = Gi; α₁ = Gq; β₂ = Gs.</li><li>Ventricular phase 0 = Na⁺ in; phase 2 = Ca²⁺ in; phase 3 = K⁺ out.</li><li>SA-node phase 0 = Ca²⁺ in; phase 4 slope determines HR.</li><li>Right O₂-Hb shift = <span class="up">↑</span>H⁺, <span class="up">↑</span>CO₂, <span class="up">↑</span>temperature, <span class="up">↑</span>2,3-BPG.</li><li>Hypoxic lung vasoconstricts.</li><li>PaO₂ does not equal O₂ content.</li><li>GFR ≈125 mL/min; RPF ≈625–650 mL/min; FF≈20%.</li><li>50% GFR loss → creatinine ~2× at steady state.</li><li>ADH = water; aldosterone = Na⁺ retention/K⁺ secretion.</li><li>Respiratory disorder starts with CO₂; metabolic disorder starts with HCO₃⁻.</li><li>PTH <span class="up">↑</span> Ca²⁺, <span class="down">↓</span> phosphate.</li><li>High sustained estradiol → LH surge.</li><li>Prolactin makes milk; oxytocin ejects it.</li><li>UMN lesion → hyperreflexia; LMN lesion → hyporeflexia.</li><li>Cerebellum = coordination/error correction; basal ganglia = movement selection.</li><li>PaCO₂ <span class="up">↑</span> → cerebral blood flow <span class="up">↑</span>.</li><li>Light → photoreceptor hyperpolarization.</li><li>Cochlear hair cell → K⁺ influx causes depolarization.</li><li>Best PLE sequence: identify primary change → predict direct effect → identify sensor/integrator → predict compensation → decide whether compensation restores or worsens the clinical state.</li></ul>
+</section>
+  <footer class="plate-foot"><span>Plate ✦ — Final Sprint</span><span>Physiology Rapid Review · PLE Board</span></footer>
+</article>
+  </main>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.plate-btn');
+  const plates = document.querySelectorAll('.plate');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      plates.forEach(p => p.style.display = (p.id === target) ? '' : 'none');
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('mainContent').scrollTo({top:0, behavior:'instant'});
+      window.scrollTo({top:0, behavior:'instant'});
+    });
+  });
+</script>
+</body>
+</html>
