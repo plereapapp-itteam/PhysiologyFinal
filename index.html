@@ -212,6 +212,154 @@ footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:60
 .region-sprint { --region:#A5761F; --region-bg:#F5ECD8; --region-bg2:#E9D4A2; }
 .region-neutral{ --region:#3E4F52; --region-bg:#EDEAE0; --region-bg2:#DAD2BE; }
 
+
+  /* ============================================================
+     QUIZ MODE (scoped: qz-)
+     ============================================================ */
+  .region-quiz { --region:#2A5C77; --region-bg:#E4EDF0; --region-bg2:#C3D9E1; }
+  .qz-intro{font-size:14.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 6px;}
+  .qz-card{ background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:22px 24px; margin-bottom:18px; }
+  .qz-card h3.block-title{ margin-bottom:12px; }
+  .qz-hidden{ display:none !important; }
+
+  /* topic tabs */
+  .qz-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 18px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+  .qz-tab{
+    display:inline-flex; align-items:center; gap:6px; padding:7px 12px; border:1px solid var(--line); border-radius:3px;
+    background:var(--paper); color:var(--ink); font-size:13px; font-family:var(--sans); cursor:pointer; line-height:1.2;
+  }
+  .qz-tab .qz-tab-num{ font-family:var(--serif); font-weight:600; color:var(--region, var(--ink-soft)); font-size:12.5px; }
+  .qz-tab .qz-tab-score{ font-size:11.5px; color:var(--ink-soft); }
+  .qz-tab:hover{ border-color:var(--region, var(--ink-soft)); }
+  .qz-tab.on{ background:var(--region, var(--ink)); border-color:var(--region, var(--ink)); color:#fff; }
+  .qz-tab.on .qz-tab-num, .qz-tab.on .qz-tab-score{ color:#fff; }
+
+  .qz-panel-head{ display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
+  .qz-panel-head .qz-roman{ font-family:var(--serif); font-size:34px; font-weight:600; line-height:1; color:var(--region, var(--ink)); min-width:44px; }
+  .qz-panel-head h3{ font-family:var(--serif); font-size:22px; margin:0 0 4px; color:var(--region, var(--ink)); }
+  .qz-scope{ font-size:12.5px; color:var(--ink-soft); line-height:1.55; }
+
+  /* chips */
+  .qz-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:8px; }
+  .qz-chip{
+    display:flex; align-items:center; gap:8px; padding:9px 12px; border:1px solid var(--line); border-radius:3px;
+    cursor:pointer; font-size:13.5px; background:var(--paper); user-select:none; transition:background .12s, border-color .12s;
+  }
+  .qz-chip.on{ background:var(--gold-bg); border-color:var(--gold); }
+  .qz-chip .qz-box{
+    width:14px; height:14px; border:1.5px solid var(--ink-soft); border-radius:2px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--gold);
+  }
+  .qz-chip.on .qz-box{ border-color:var(--gold); }
+  .qz-chip .qz-num{ font-family:var(--serif); color:#8CA6A1; font-size:13px; min-width:22px; }
+  .qz-chip.on .qz-num{ color:var(--gold); }
+  .qz-chip .qz-cnt{ margin-left:auto; font-size:11.5px; color:var(--ink-soft); white-space:nowrap; }
+  .qz-actions{ margin-top:12px; display:flex; gap:14px; font-size:12.5px; }
+  .qz-link-btn{ background:none; border:none; color:var(--down); text-decoration:underline; cursor:pointer; padding:0; font-size:12.5px; font-family:var(--sans); }
+
+  /* blueprint table */
+  .qz-blueprint{ width:100%; border-collapse:collapse; font-size:13px; }
+  .qz-blueprint th, .qz-blueprint td{ border:1px solid var(--line); padding:7px 10px; text-align:center; }
+  .qz-blueprint th{ background:var(--region-bg, #EFE9D9); font-weight:600; }
+  .qz-blueprint td:first-child, .qz-blueprint th:first-child{ text-align:left; }
+
+  /* level cards inside a topic tab */
+  .qz-level-list{ display:flex; flex-direction:column; gap:8px; }
+  .qz-level-row{
+    display:flex; align-items:center; gap:12px; padding:11px 14px; border:1px solid var(--line); border-radius:3px;
+    background:var(--paper); cursor:pointer; user-select:none;
+  }
+  .qz-level-row.on{ background:var(--gold-bg); border-color:var(--gold); }
+  .qz-level-row .qz-box{ width:14px; height:14px; border:1.5px solid var(--ink-soft); border-radius:2px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--gold); }
+  .qz-level-row.on .qz-box{ border-color:var(--gold); }
+  .qz-level-name{ font-weight:600; font-size:14px; min-width:120px; }
+  .qz-level-desc{ font-size:12.5px; color:var(--ink-soft); flex:1; }
+  .qz-level-count{ font-family:var(--serif); font-size:13px; color:var(--ink-soft); white-space:nowrap; }
+
+  .qz-lv-badge{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:2px 7px; border-radius:10px; border:1px solid; }
+  
+  .qz-lv-und{ color:#1E8449; border-color:#1E8449; background:#E3F5EA; }
+  .qz-lv-app{ color:#A5761F; border-color:#A5761F; background:#F5ECD8; }
+  .qz-lv-ana{ color:#8E44AD; border-color:#8E44AD; background:#F1E5F6; }
+  .qz-lv-eva{ color:#A8342E; border-color:#A8342E; background:#F7E7E4; }
+
+  .qz-count-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .qz-count-btn{ padding:9px 16px; border:1px solid var(--line); border-radius:3px; background:var(--paper); cursor:pointer; font-size:13.5px; color:var(--ink); font-family:var(--sans); }
+  .qz-count-btn.on{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .qz-start-btn{
+    margin-top:20px; width:100%; padding:14px; background:var(--ink); color:var(--paper); border:none; border-radius:3px;
+    font-size:15px; font-family:var(--serif); font-weight:600; letter-spacing:.01em; cursor:pointer;
+  }
+  .qz-start-btn.qz-alt{ background:var(--panel); color:var(--ink); border:1px solid var(--ink); margin-top:10px; }
+  .qz-start-btn:disabled{ background:#B7AD91; cursor:not-allowed; }
+  .qz-warn{ color:var(--P); font-size:12.5px; margin-top:8px; }
+  .qz-pool-note{ font-size:12.5px; color:var(--ink-soft); margin-top:12px; }
+
+  /* quiz screen */
+  .qz-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:12.5px; color:var(--ink-soft); gap:10px; }
+  .qz-quit{ background:none; border:none; color:var(--down); text-decoration:underline; cursor:pointer; font-size:12.5px; font-family:var(--sans); padding:0; }
+  .qz-progress-track{ height:6px; background:var(--line); border-radius:3px; overflow:hidden; margin-bottom:22px; }
+  .qz-progress-fill{ height:100%; background:var(--gold); transition:width .25s ease; }
+  .qz-tag-row{ display:flex; align-items:center; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .qz-region-tag{ font-size:11px; letter-spacing:.04em; color:#fff; background:var(--region, var(--ink-soft)); padding:3px 10px; border-radius:12px; }
+  .qz-text{ font-family:var(--serif); font-size:19px; font-weight:600; line-height:1.45; margin:0 0 22px; }
+  .qz-options{ display:flex; flex-direction:column; gap:10px; }
+  .qz-option{
+    text-align:left; padding:13px 16px; border:1px solid var(--line); border-radius:3px; background:var(--panel);
+    font-size:14.5px; font-family:var(--sans); color:var(--ink); cursor:pointer; display:flex; gap:10px; align-items:flex-start; line-height:1.5; width:100%;
+  }
+  .qz-option:hover:not(.qz-locked){ background:var(--paper); }
+  .qz-option .qz-letter{ font-family:var(--serif); font-weight:600; color:var(--down); flex-shrink:0; width:16px; }
+  .qz-option.qz-correct{ background:var(--gold-bg); border-color:var(--gold); }
+  .qz-option.qz-correct .qz-letter{ color:var(--gold); }
+  .qz-option.qz-incorrect{ background:var(--P-bg); border-color:var(--P); }
+  .qz-option.qz-incorrect .qz-letter{ color:var(--P); }
+  .qz-option.qz-locked{ cursor:default; }
+  .qz-option.qz-dim{ opacity:.55; }
+  .qz-explain{ margin-top:18px; padding:14px 16px; border-left:3px solid var(--gold); background:var(--gold-bg); font-size:13.5px; line-height:1.6; border-radius:2px; }
+  .qz-explain.qz-wrong{ border-left-color:var(--P); background:var(--P-bg); }
+  .qz-explain .qz-verdict{ font-family:var(--serif); font-weight:600; display:block; margin-bottom:4px; }
+  .qz-next-btn{
+    margin-top:20px; width:100%; padding:13px; background:var(--ink); color:var(--paper); border:none; border-radius:3px;
+    font-size:14.5px; font-family:var(--serif); font-weight:600; cursor:pointer;
+  }
+
+  /* results */
+  .qz-score-hero{ text-align:center; padding:8px 0 10px; }
+  .qz-score-num{ font-family:var(--serif); font-size:56px; font-weight:600; line-height:1; color:var(--ink); }
+  .qz-score-sub{ font-size:13.5px; color:var(--ink-soft); margin-top:6px; }
+  .qz-bars{ display:flex; flex-direction:column; gap:10px; }
+  .qz-bar-row{ display:flex; align-items:center; gap:10px; font-size:13px; }
+  .qz-bar-row .qz-bar-name{ width:190px; flex-shrink:0; color:var(--ink-soft); }
+  .qz-bar-track{ flex:1; height:8px; background:var(--line); border-radius:4px; overflow:hidden; }
+  .qz-bar-fill{ display:block; height:100%; background:var(--region, var(--down)); }
+  .qz-bar-row .qz-bar-score{ width:48px; text-align:right; color:var(--ink-soft); flex-shrink:0; }
+  .qz-lv-section{ margin-bottom:22px; }
+  .qz-lv-section:last-child{ margin-bottom:0; }
+  .qz-lv-head{ display:flex; align-items:center; gap:10px; padding-bottom:8px; margin-bottom:4px; border-bottom:1px solid var(--region-bg2, var(--line)); }
+  .qz-lv-head .qz-lv-score{ margin-left:auto; font-size:12.5px; color:var(--ink-soft); }
+  .qz-item{ padding:13px 0; border-bottom:1px dashed var(--line); }
+  .qz-item:last-child{ border-bottom:none; }
+  .qz-item-q{ font-weight:600; font-size:14px; margin-bottom:6px; line-height:1.5; }
+  .qz-item-q .qz-mark{ display:inline-block; width:18px; font-weight:700; }
+  .qz-item.ok .qz-mark{ color:var(--gold); }
+  .qz-item.bad .qz-mark{ color:var(--P); }
+  .qz-item-you{ color:var(--P); font-size:13px; margin-bottom:3px; }
+  .qz-item-correct{ color:var(--gold); font-size:13px; margin-bottom:6px; font-weight:600; }
+  .qz-item-exp{ font-size:13px; color:var(--ink-soft); line-height:1.55; }
+  .qz-result-actions{ display:flex; gap:10px; margin-top:6px; flex-wrap:wrap; }
+  .qz-result-actions button{ flex:1; min-width:160px; padding:12px; border-radius:3px; font-size:13.5px; font-family:var(--sans); cursor:pointer; }
+  .qz-btn-primary{ background:var(--ink); color:var(--paper); border:none; }
+  .qz-btn-secondary{ background:var(--paper); color:var(--ink); border:1px solid var(--line); }
+  .qz-filter-row{ display:flex; gap:14px; font-size:12.5px; margin:-4px 0 14px; color:var(--ink-soft); align-items:center; flex-wrap:wrap; }
+  .qz-filter-row label{ display:inline-flex; gap:6px; align-items:center; cursor:pointer; }
+  @media (max-width:620px){
+    .qz-score-num{ font-size:44px; }
+    .qz-bar-row .qz-bar-name{ width:120px; font-size:12px; }
+    .qz-level-desc{ display:none; }
+    .qz-card{ padding:18px 16px; }
+  }
+  @media print{ #quiz{ display:none !important; } }
 </style>
 </head>
 <body>
@@ -234,6 +382,7 @@ footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:60
       <button class="plate-btn" data-target="p7"><span class="num">🌸</span><span>VII · Reproductive Physiology</span><span class="pct">9%</span></button>
       <button class="plate-btn" data-target="p8"><span class="num">🧠</span><span>VIII · Neurophysiology &amp; Special Senses</span><span class="pct">17%</span></button>
       <button class="plate-btn" data-target="p9"><span class="num">🏁</span><span>✦ · Final Sprint</span></button>
+      <button class="plate-btn" data-target="quiz"><span class="num">📝</span><span>? · Quiz Mode</span><span class="pct">100</span></button>
     </nav>
     <div class="rail-legend">
       <div class="lg-title">TAG LEGEND</div>
@@ -274,7 +423,7 @@ footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:60
   <div class="plate-header">
     <div class="plate-badge"><span class="icon-ring">📖</span></div>
     <div class="titles"><div class="eyebrow">Navigation</div><h2>Table of Contents</h2></div>
-    <div class="tos">Nine plates · tap any system to jump straight there</div>
+    <div class="tos">Nine plates + Quiz Mode · tap any system to jump straight there</div>
   </div>
   <ul class="toc-list">
 <li>
@@ -330,6 +479,12 @@ footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:60
   <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">🏁</span>
   <span class="toc-text"><div class="toc-title">Final Sprint</div><div class="toc-desc">Master chains, direct vs compensatory, board traps, 30-second recall</div></span>
   <span class="toc-pct"></span>
+</li>
+<li>
+  <span class="toc-num">?</span>
+  <span class="toc-icon" style="background:var(--gold-bg,#F5ECD8);">📝</span>
+  <span class="toc-text"><div class="toc-title">Quiz Mode</div><div class="toc-desc">100 TOS-weighted MCQs by system and Bloom's level, with explanations</div></span>
+  <span class="toc-pct">100</span>
 </li>
   </ul>
   <footer class="plate-foot"><span>Contents</span><span>Physiology Rapid Review · PLE Board</span></footer>
@@ -1261,6 +1416,96 @@ footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:60
 </section>
   <footer class="plate-foot"><span>Plate ✦ — Final Sprint</span><span>Physiology Rapid Review · PLE Board</span></footer>
 </article>
+
+    <!-- ================= QUIZ MODE ================= -->
+    <article class="plate region-quiz" id="quiz" style="display:none;">
+      <div class="plate-header">
+        <div class="plate-badge"><span class="icon-ring"><svg viewBox="0 0 32 32" width="30" height="30" class="ricon"><rect x="7" y="4" width="18" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 11l2 2 4-4M11 19l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 12h3M19 20h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="roman">?</span></div>
+        <div class="titles">
+          <div class="eyebrow">Self-test · 100 items built to the PLE Physiology TOS</div>
+          <h2>📝 Quiz Mode</h2>
+        </div>
+        <div class="tos">8 systems weighted 9–17% · Bloom's totals: 30 Understand · 50 Apply · 16 Analyze · 4 Evaluate</div>
+      </div>
+
+      <!-- ---- SETUP ---- -->
+      <section class="block" id="qz-setup-screen">
+        <p class="qz-intro">The bank has 100 board-style questions that follow the Board of Medicine Physiology Table of Specifications: each system gets its TOS weight (e.g., Cardiovascular 17 items, GI 9 items), split by Revised Bloom's level exactly as the TOS lists it. The TOS has no Remember or Create items, so neither does this bank. Use <strong>All systems</strong> to build a mixed quiz, or open a system tab to drill it level by level.</p>
+
+        <div class="qz-tabs" id="qz-setup-tabs"></div>
+
+        <!-- All-topics panel -->
+        <div id="qz-panel-all">
+          <div class="qz-card">
+            <h3 class="block-title">Systems</h3>
+            <div class="qz-grid" id="qz-topic-grid"></div>
+            <div class="qz-actions">
+              <button class="qz-link-btn" id="qz-topic-all">Select all</button>
+              <button class="qz-link-btn" id="qz-topic-none">Clear all</button>
+            </div>
+          </div>
+          <div class="qz-card">
+            <h3 class="block-title">Cognitive level (Revised Bloom's)</h3>
+            <div class="qz-grid" id="qz-level-grid"></div>
+            <div class="qz-actions">
+              <button class="qz-link-btn" id="qz-level-all">Select all</button>
+              <button class="qz-link-btn" id="qz-level-none">Clear all</button>
+            </div>
+          </div>
+          <div class="qz-card">
+            <h3 class="block-title">Quiz length</h3>
+            <div class="qz-count-row" id="qz-count-row"></div>
+            <div class="qz-pool-note" id="qz-pool-note"></div>
+            <div class="qz-warn qz-hidden" id="qz-setup-warn">Pick at least one system and one level.</div>
+            <button class="qz-start-btn" id="qz-start-btn">Start quiz</button>
+            <button class="qz-start-btn qz-alt" id="qz-full-btn">Take the full 100-item TOS exam</button>
+          </div>
+        </div>
+
+        <!-- Single-topic panel (filled by script) -->
+        <div id="qz-panel-topic" class="qz-hidden"></div>
+      </section>
+
+      <!-- ---- QUIZ ---- -->
+      <section class="block qz-hidden" id="qz-quiz-screen">
+        <div class="qz-top">
+          <span id="qz-q-counter">Question 1 of 10</span>
+          <span><span id="qz-q-score">Score: 0</span> &nbsp;·&nbsp; <button class="qz-quit" id="qz-quit-btn">End quiz</button></span>
+        </div>
+        <div class="qz-progress-track"><div class="qz-progress-fill" id="qz-progress-fill" style="width:0%;"></div></div>
+        <div class="qz-card" id="qz-q-card">
+          <div class="qz-tag-row"><span class="qz-region-tag" id="qz-q-topic">Thorax</span><span class="qz-lv-badge" id="qz-q-level">Apply</span></div>
+          <p class="qz-text" id="qz-q-text">Question text</p>
+          <div class="qz-options" id="qz-q-options"></div>
+          <div class="qz-explain qz-hidden" id="qz-q-explain">
+            <span class="qz-verdict" id="qz-q-verdict"></span>
+            <span id="qz-q-explain-text"></span>
+          </div>
+          <button class="qz-next-btn qz-hidden" id="qz-next-btn">Next question</button>
+        </div>
+      </section>
+
+      <!-- ---- RESULTS ---- -->
+      <section class="block qz-hidden" id="qz-results-screen">
+        <div class="qz-card">
+          <div class="qz-score-hero">
+            <div class="qz-score-num" id="qz-final-score">0/0</div>
+            <div class="qz-score-sub" id="qz-final-pct">0% correct</div>
+          </div>
+        </div>
+
+        <div class="qz-tabs" id="qz-result-tabs"></div>
+        <div id="qz-result-panel"></div>
+
+        <div class="qz-result-actions">
+          <button class="qz-btn-primary" id="qz-retry-missed-btn">Retry missed only</button>
+          <button class="qz-btn-secondary" id="qz-restart-btn">Start over</button>
+        </div>
+      </section>
+
+      <footer class="plate-foot"><span>📝 Quiz Mode</span><span>Physiology Rapid Review · PLE Board</span></footer>
+    </article>
+
   </main>
 </div>
 
@@ -1278,5 +1523,374 @@ footer.plate-foot span:first-child{ color:var(--region, #A79A79); font-weight:60
     });
   });
 </script>
+<script>
+/* ============================================================
+   QUIZ MODE: topics (Physiology TOS rows) and Revised Bloom's levels
+   ============================================================ */
+const QZ_TOPICS = [
+  {id:'cell',  num:'I',    label:'General & Cellular Physiology', weight:'15%', scope:'Levels of biologic organization; cellular structures and functional systems of the cell; control systems and homeostatic mechanisms; genetic control of protein synthesis; cell function and reproduction; blood cells and immunologic function; blood clotting and fibrinolysis; blood flow and distribution.'},
+  {id:'cv',    num:'II',   label:'Cardiovascular System', weight:'17%', scope:'Cardiac electrophysiology; cardiac cycle; the heart as a pump; venous return; coronary circulation; systemic resistance and blood pressure regulation; microcirculation and lymphatics; fetal and neonatal circulation.'},
+  {id:'resp',  num:'III',  label:'Respiratory System', weight:'12%', scope:'Mechanics of breathing; pulmonary gas exchange and disorders; blood gas transport; control of respiration; acid–base balance; effects of exercise and extreme environments (flying, altitude, diving).'},
+  {id:'gi',    num:'IV',   label:'Gastrointestinal System', weight:'9%', scope:'Intake, digestion, absorption, metabolism, and excretion of carbohydrates, fats, and protein; gut–brain axis; main enzymes; regulation of motility; gastric acidity and the alkaline tide; H. pylori and the mucosal barrier; GI fluid exchange.'},
+  {id:'endo',  num:'V',    label:'Endocrine System', weight:'12%', scope:'Endocrine–nervous interactions; hormone synthesis, transport, action, and regulation; anterior pituitary, thyroid, parathyroid, adrenal cortex, hypothalamus; measuring hormones in blood; hydrophilic vs hydrophobic hormones and their transport.'},
+  {id:'renal', num:'VI',   label:'Renal & Acid–Base', weight:'9%', scope:'Body fluid compartments and volumes; intake and losses; renal cortex and medulla structure and function; determinants of renal blood flow and GFR; nephron transport; erythropoietin; blood pH regulation.'},
+  {id:'repro', num:'VII',  label:'Reproductive System', weight:'9%', scope:'Sexual differentiation; main and accessory sex organs and their functions; menstrual cycle; parturition and lactation; male hormones and spermatogenesis.'},
+  {id:'neuro', num:'VIII', label:'Neurophysiology & Special Senses', weight:'17%', scope:'Action potential and conduction; spinal cord reflexes and muscle receptors; cortical, brainstem, cerebellar, and basal ganglia motor control; cerebral cortex, learning and memory, states of brain activity; autonomic nervous system; cerebral blood flow, CSF, and brain metabolism; somatic sensation; vision, hearing, taste, and smell.'}
+];
+/* The Physiology TOS allots 0 items to REM and CRE, so only four levels are used. */
+const QZ_LEVELS = [
+  {id:'und', short:'UND', label:'Understand', desc:'Explain the mechanism behind a physiologic process or sign.'},
+  {id:'app', short:'APP', label:'Apply',      desc:'Use equations, normal values, and directional chains on a patient or data set.'},
+  {id:'ana', short:'ANA', label:'Analyze',    desc:'Combine several findings to localize the derangement or tell look-alikes apart.'},
+  {id:'eva', short:'EVA', label:'Evaluate',   desc:'Judge the most appropriate management based on the physiology.'}
+];
+
+/* ============================================================
+   QUIZ MODE: question bank (100 items, distributed per the Physiology TOS)
+   ============================================================ */
+const QZ_QUESTIONS = [
+{"t":"cell","l":"und","q":"Why do cells swell during severe ischemia when ATP is depleted?","o":["The Na⁺/K⁺-ATPase fails, so Na⁺ accumulates inside the cell and water follows by osmosis","Aquaporins close as ATP falls, trapping water inside the cell and blocking its exit","The membrane becomes impermeable to K⁺, and the trapped K⁺ osmotically pulls water in","Extracellular protein concentration rises and its oncotic pressure pushes water into the cell"],"a":0,"e":"The Na⁺/K⁺ pump uses ATP to push 3 Na⁺ out for every 2 K⁺ in, which keeps intracellular osmoles low. Without ATP the pump stops, Na⁺ (and Cl⁻) leak in, intracellular osmolarity rises, and water enters, so the cell swells."},
+{"t":"cell","l":"und","q":"Why can a neuron not fire a second action potential during the absolute refractory period, no matter how strong the stimulus?","o":["Most voltage-gated Na⁺ channels are inactivated and cannot reopen until the membrane repolarizes","All K⁺ channels are closed, so the membrane cannot depolarize again until enough of them reopen","The Na⁺/K⁺ pump has stopped working and must first restore the ion gradients","All the Na⁺ has left the extracellular fluid, leaving no inward current available"],"a":0,"e":"At the peak of the action potential, the inactivation gates of voltage-gated Na⁺ channels close. These channels must return to the resting (closed but ready) state, which needs repolarization, before they can open again. The relative refractory period that follows reflects the lingering high K⁺ conductance."},
+{"t":"cell","l":"und","q":"Why does a low ionized Ca²⁺ level make nerves and muscles hyperexcitable (tetany)?","o":["Less extracellular Ca²⁺ lets Na⁺ channels open more easily, so threshold is reached sooner","Low Ca²⁺ hyperpolarizes the membrane, which speeds recovery of Na⁺ channels from inactivation","Low Ca²⁺ blocks acetylcholinesterase, so acetylcholine persists at the motor end plate","Low Ca²⁺ increases K⁺ efflux from nerve and muscle cells, which triggers repetitive firing"],"a":0,"e":"Extracellular Ca²⁺ stabilizes voltage-gated Na⁺ channels. When ionized Ca²⁺ falls, these channels open at a less negative voltage, so neurons fire spontaneously. This causes paresthesias, carpopedal spasm, and Chvostek and Trousseau signs."},
+{"t":"cell","l":"und","q":"Why do plasma cells, which secrete large amounts of antibody, have an unusually extensive rough endoplasmic reticulum?","o":["Rough ER ribosomes make secretory and membrane proteins and feed them into the ER lumen","The rough ER stores finished antibodies in its lumen until the plasma cell dies","The rough ER makes the lipid components that form the core of each antibody molecule","Free cytoplasmic ribosomes cannot make any proteins, so all protein synthesis shifts to the ER"],"a":0,"e":"Secreted and membrane proteins are made on ribosomes attached to the rough ER. The new chain is threaded into the ER lumen for folding and glycosylation, then sent to the Golgi for packaging. Free ribosomes make proteins that stay in the cytosol."},
+{"t":"cell","l":"und","q":"Why does a low platelet count typically cause petechiae and mucosal bleeding, while a clotting-factor deficiency (e.g., hemophilia) causes bleeding into joints and deep muscles?","o":["Platelets plug small skin and mucosal vessels; clotting factors make fibrin that stabilizes deeper clots","Platelets act only within joint spaces, and clotting factors act only in the skin and mucosa","Clotting factors are made in the skin, so their loss exposes superficial vessels rather than deep ones","Hemophilia also lowers the platelet count, so both disorders bleed by the same mechanism in different sites"],"a":0,"e":"Primary hemostasis (platelet adhesion and aggregation) is critical for sealing capillaries and small vessels, so its failure causes petechiae, epistaxis, and gum bleeding. Secondary hemostasis (the coagulation cascade producing fibrin) stabilizes the plug. Its failure allows delayed, deep bleeding such as hemarthrosis."},
+{"t":"cell","l":"app","q":"After a rapid blood transfusion, arterial pressure would rise from 100 to 175 mmHg if the baroreceptors were cut. With the baroreceptors intact, it rises only to 125 mmHg. What is the gain of the baroreceptor system?","o":["−2","−0.5","−3","−50"],"a":0,"e":"Gain = correction ÷ error. Correction = 125 − 175 = −50 mmHg. Remaining error = 125 − 100 = +25 mmHg. Gain = −50 ÷ 25 = −2. The negative sign shows negative feedback. The bigger the absolute gain, the tighter the control."},
+{"t":"cell","l":"app","q":"A patient with renal failure has a serum K⁺ of 7.0 mmol/L. What is the immediate effect on the resting membrane potential of his cardiac myocytes?","o":["It becomes less negative (depolarized) because the K⁺ gradient across the membrane shrinks","It becomes more negative (hyperpolarized) because more K⁺ is driven out of the cell","It does not change, because the cardiac resting potential is set mainly by the Na⁺ gradient","It reverses to become positive as K⁺ floods into the cell down its new gradient"],"a":0,"e":"The resting potential sits close to the K⁺ equilibrium potential. Raising extracellular K⁺ shrinks the gradient, so EK and the resting potential become less negative. Sustained depolarization then inactivates fast Na⁺ channels, slowing conduction and risking arrhythmias."},
+{"t":"cell","l":"app","q":"A drug opens K⁺ channels in a neuron's membrane without affecting other channels. What happens to the membrane potential?","o":["It moves toward the K⁺ equilibrium potential and becomes more negative (hyperpolarization)","It moves toward the Na⁺ equilibrium potential and becomes less negative (a depolarization)","It moves toward 0 mV as the membrane loses its selectivity for any single ion","It becomes positive, and an action potential fires once threshold is crossed"],"a":0,"e":"Membrane potential moves toward the equilibrium potential of whichever ion has the highest permeability. More K⁺ conductance pulls it toward EK (about −90 mV), hyperpolarizing the cell and making it less excitable."},
+{"t":"cell","l":"app","q":"A man eats improperly prepared puffer fish and develops perioral numbness and rapidly progressing paralysis. Tetrodotoxin blocks voltage-gated Na⁺ channels. Which part of the nerve action potential is abolished?","o":["The rapid depolarizing upstroke","Repolarization driven by K⁺ efflux","The afterhyperpolarization","The resting potential set by K⁺ leak"],"a":0,"e":"The upstroke depends on voltage-gated Na⁺ channels opening in a positive feedback loop. Tetrodotoxin blocks them, so no action potential can be generated or conducted. This causes paralysis, including of the respiratory muscles."},
+{"t":"cell","l":"app","q":"A boy has recurrent hemarthrosis. Platelet count and PT are normal, but the aPTT is prolonged and corrects when mixed with normal plasma. Which clotting factor is most likely deficient?","o":["Factor VIII","Factor VII","Factor I (fibrinogen)","Factor XIII"],"a":0,"e":"A prolonged aPTT with a normal PT points to the intrinsic pathway. Correction on mixing indicates a factor deficiency rather than an inhibitor. Hemophilia A (X-linked factor VIII deficiency) is the most common cause and presents with deep bleeding such as hemarthrosis. Factor VII deficiency prolongs the PT."},
+{"t":"cell","l":"app","q":"Alteplase (recombinant tissue plasminogen activator) is given for acute ischemic stroke. By what mechanism does it dissolve the clot?","o":["It converts plasminogen to plasmin, which breaks down fibrin","It inhibits thrombin directly, so fibrinogen is no longer cleaved","It blocks platelet ADP receptors and prevents further aggregation","It inhibits vitamin K–dependent synthesis of clotting factors"],"a":0,"e":"tPA activates fibrin-bound plasminogen to plasmin. Plasmin breaks fibrin into fibrin degradation products (including D-dimer), dissolving the clot. Anticoagulants and antiplatelet drugs prevent new clot formation but do not lyse existing fibrin."},
+{"t":"cell","l":"app","q":"A child with an intestinal helminth infection has a raised white cell count. Which leukocyte is most characteristically increased, and what is its key role?","o":["Eosinophils, which release cytotoxic granule proteins against large parasites","Neutrophils, which phagocytose and kill bacteria using a respiratory oxidative burst","Basophils, which make antibodies that coat the parasite's outer surface","Lymphocytes, which release heparin granules to prevent local clotting"],"a":0,"e":"Eosinophils are recruited by Th2 cytokines (IL-5) and attack helminths by releasing major basic protein and other toxic granule contents. They also take part in allergic reactions. Neutrophils dominate acute bacterial infection."},
+{"t":"cell","l":"app","q":"Rapidly dividing tumor cells are treated with vincristine, which prevents microtubules from forming the mitotic spindle. In which phase of the cell cycle will the cells arrest?","o":["M phase (metaphase), because chromosomes cannot attach and separate","G1 phase, because cells cannot pass the restriction point into DNA synthesis","S phase, because DNA replication cannot be completed in time","G0, the resting phase that cells enter after exiting the cycle"],"a":0,"e":"The mitotic spindle is built from microtubules that attach to chromosomes at the kinetochores and pull the chromatids apart. Without it, cells stall in metaphase. S-phase drugs such as methotrexate instead block DNA synthesis."},
+{"t":"cell","l":"ana","q":"A woman has heavy menstrual periods and easy gum bleeding. Platelet count and PT are normal, bleeding time is prolonged, and aPTT is mildly prolonged. Her father has similar symptoms. What is the most likely diagnosis?","o":["Von Willebrand disease, since vWF anchors platelets and carries factor VIII","Hemophilia A, an X-linked recessive deficiency of factor VIII","Immune thrombocytopenia from antiplatelet IgG autoantibodies","Vitamin K deficiency lowering factors II, VII, IX, and X"],"a":0,"e":"Von Willebrand factor links platelets to exposed collagen (platelet adhesion) and protects factor VIII from breakdown. A deficiency causes mucocutaneous bleeding with a prolonged bleeding time and a mildly prolonged aPTT, despite a normal platelet count. Inheritance is usually autosomal dominant, so both sexes are affected. Hemophilia A does not prolong bleeding time. ITP lowers the platelet count. Vitamin K deficiency prolongs the PT."},
+{"t":"cell","l":"ana","q":"After a major hemorrhage, a patient's blood pressure keeps falling even though bleeding has stopped. Which mechanism best explains this downward spiral?","o":["Positive feedback: low cardiac output lowers coronary perfusion, weakening the heart further","Negative feedback from the baroreceptors actively drives the arterial pressure down further","Aldosterone release worsens the fall in blood volume by increasing sodium loss","Excess oxytocin release causes widespread vasodilation and venous pooling"],"a":0,"e":"Normally, negative feedback (baroreceptors, RAAS, ADH) compensates for blood loss. Past a critical point, low aortic pressure reduces coronary flow, the myocardium weakens, and output falls further. This harmful positive feedback, which Guyton describes as progressive shock, can become irreversible unless volume is restored."},
+{"t":"cv","l":"und","q":"Why does the SA node normally control the heart rate, even though other conduction tissues can also fire spontaneously?","o":["Its phase-4 (funny current) depolarization is fastest, so it reaches threshold first","It has the most negative resting potential, so it sits closest to its firing threshold","It is the only cardiac tissue with gap junctions to spread its impulse","Vagal tone affects only the SA node, holding the other pacemakers silent"],"a":0,"e":"SA nodal cells have the steepest spontaneous diastolic depolarization, driven by the funny current and Ca²⁺ currents. Each SA impulse depolarizes the AV node and Purkinje fibers before they reach their own threshold (overdrive suppression). That is why the SA node sets the rhythm."},
+{"t":"cv","l":"und","q":"Why can a sustained tachycardia cause myocardial ischemia in a patient with coronary artery disease?","o":["It raises myocardial O₂ demand and shortens diastole, when most LV coronary flow occurs","It raises aortic diastolic pressure, which compresses the coronary arteries","It dilates the coronary arteries too much, so coronary perfusion pressure falls sharply","It lowers myocardial O₂ demand, but coronary flow falls even faster"],"a":0,"e":"The left ventricular subendocardium is perfused mainly during diastole, when the contracting muscle is not compressing the coronaries. Tachycardia shortens diastole (less supply) while raising the O₂ cost of contraction (more demand). A stenotic artery cannot increase flow enough to cover the gap."},
+{"t":"cv","l":"und","q":"According to the venous return equation, VR = (Pms − RAP) / RVR, why does a rise in right atrial pressure reduce venous return?","o":["It narrows the pressure gradient driving blood from the systemic veins to the right atrium","It increases mean systemic filling pressure, which opposes flow back to the heart","It lowers resistance to venous return, so blood pools in the peripheral veins","It raises cardiac contractility, so the ventricle empties before the right atrium can fill"],"a":0,"e":"Venous return depends on the difference between mean systemic filling pressure (Pms) and RAP. When RAP rises, for example in right heart failure or with positive-pressure ventilation, that gradient shrinks and less blood returns, unless Pms rises too (e.g., through volume retention or venoconstriction)."},
+{"t":"cv","l":"und","q":"Why does severe hypoalbuminemia (e.g., nephrotic syndrome) cause generalized edema?","o":["Plasma oncotic pressure falls, so less fluid is drawn back into capillaries","Capillary hydrostatic pressure falls, so fluid leaks out of the capillaries","Interstitial oncotic pressure falls, pulling fluid out of the capillaries","Capillary permeability to protein falls, trapping protein in the interstitium"],"a":0,"e":"Plasma oncotic pressure, mostly from albumin, is the main force holding fluid in capillaries. When it falls, the Starling balance shifts toward filtration. Once filtration exceeds what lymphatics can return, interstitial fluid builds up as edema."},
+{"t":"cv","l":"und","q":"Why does the foramen ovale close functionally within minutes to hours after birth?","o":["Pulmonary flow raises left atrial pressure and placental loss lowers right atrial pressure","Prostaglandin levels rise after birth and constrict the foramen ovale flap","The ductus venosus dilates after birth, diverting blood away from the right atrium","Pulmonary vascular resistance rises at the first breath, raising right atrial pressure further"],"a":0,"e":"The first breath expands the lungs and dilates the pulmonary vessels, so pulmonary blood flow and left atrial return increase. Clamping the cord removes placental return to the right atrium. Left atrial pressure then exceeds right, pushing the septum primum against the septum secundum."},
+{"t":"cv","l":"app","q":"A patient has a heart rate of 80 beats/min, an end-diastolic volume of 120 mL, and an end-systolic volume of 50 mL. What is his cardiac output?","o":["5.6 L/min","4.0 L/min","9.6 L/min","6.4 L/min"],"a":0,"e":"SV = EDV − ESV = 120 − 50 = 70 mL. CO = HR × SV = 80 × 70 mL = 5,600 mL/min = 5.6 L/min, which is in the normal range."},
+{"t":"cv","l":"app","q":"An echocardiogram shows an end-diastolic volume of 150 mL and an end-systolic volume of 90 mL. What is the ejection fraction?","o":["40%","60%","67%","25%"],"a":0,"e":"SV = 150 − 90 = 60 mL. EF = SV/EDV = 60/150 = 0.40, or 40%, which is below the normal of about 55–70% and consistent with systolic dysfunction."},
+{"t":"cv","l":"app","q":"A patient's blood pressure is 120/80 mmHg at a normal heart rate. What is the approximate mean arterial pressure?","o":["93 mmHg","100 mmHg","87 mmHg","110 mmHg"],"a":0,"e":"MAP ≈ DBP + ⅓(SBP − DBP) = 80 + ⅓(40) ≈ 93 mmHg. MAP sits closer to diastolic pressure because the heart spends about two-thirds of the cycle in diastole at normal rates."},
+{"t":"cv","l":"app","q":"A patient's O₂ consumption is 250 mL/min, arterial O₂ content is 200 mL O₂/L, and mixed venous O₂ content is 150 mL O₂/L. What is the cardiac output by the Fick principle?","o":["5 L/min","2.5 L/min","1.25 L/min","12.5 L/min"],"a":0,"e":"CO = V̇O₂ ÷ (CaO₂ − CvO₂) = 250 ÷ (200 − 150) = 250 ÷ 50 = 5 L/min."},
+{"t":"cv","l":"app","q":"Sympathetic stimulation halves the radius of an arteriole. With the pressure gradient unchanged, how does blood flow through that vessel change?","o":["It falls to 1/16 of its original value","It falls to 1/2 of its original value","It falls to 1/4 of its original value","It falls to 1/8 of its original value"],"a":0,"e":"By Poiseuille, resistance ∝ 1/r⁴. Halving the radius raises resistance 2⁴ = 16-fold. Since Q = ΔP/R, flow falls to 1/16. That is why small changes in arteriolar tone control regional blood flow and TPR so powerfully."},
+{"t":"cv","l":"app","q":"A patient with paroxysmal supraventricular tachycardia gets carotid sinus massage, and the rhythm stops. What is the physiologic basis?","o":["Stretching the baroreceptors increases their firing, raising vagal tone and slowing AV conduction","It lowers baroreceptor firing, which raises sympathetic tone and shortens AV nodal refractoriness","It directly compresses the SA node through the neck and halts its pacemaker firing","It activates the carotid body chemoreceptors, reducing ventilation and heart rate"],"a":0,"e":"Carotid massage mimics a rise in pressure: baroreceptor firing increases, the medulla raises vagal (M₂) output and lowers sympathetic output. Slower AV nodal conduction can break a reentrant circuit that runs through the AV node."},
+{"t":"cv","l":"app","q":"A patient is started on a β₁-selective blocker. What is the main mechanism by which his heart rate falls?","o":["Less Gs/cAMP signaling in SA nodal cells flattens the phase-4 depolarization slope","Increased Gq signaling in SA nodal cells raises their threshold potential for firing","Blockade of fast Na⁺ channels in the SA node slows its phase-0 upstroke","Increased acetylcholine release from the vagus opens more K⁺ channels"],"a":0,"e":"β₁ receptors act through Gs to raise cAMP, which increases the funny current and L-type Ca²⁺ current and steepens phase 4. Blocking them lowers cAMP, so phase 4 is slower, threshold is reached later, and heart rate falls. AV conduction and contractility also fall."},
+{"t":"cv","l":"app","q":"A patient has a sudden, severe rise in afterload (e.g., a hypertensive crisis). Before any compensation, how do end-systolic volume and stroke volume change?","o":["ESV rises and SV falls","ESV falls and SV rises","Both ESV and SV rise","Neither changes (preload is fixed)"],"a":0,"e":"With higher aortic pressure, the ventricle stops ejecting earlier, so more blood is left behind (ESV ↑), and SV and EF fall. On the pressure–volume loop, the loop becomes taller and narrower."},
+{"t":"cv","l":"app","q":"A patient with a deep vein thrombosis of the left femoral vein develops swelling of the left leg. Which Starling force change mainly explains the edema?","o":["Raised capillary hydrostatic pressure from the venous obstruction","Lower plasma oncotic pressure from protein lost into the swollen leg","Lower capillary permeability that traps fluid in the tissues","Higher interstitial hydrostatic pressure opposing filtration"],"a":0,"e":"Venous obstruction transmits back pressure to the capillaries, raising capillary hydrostatic pressure (Pc). Net filtration rises in that limb and, once it exceeds lymphatic return, the limb swells on one side only."},
+{"t":"cv","l":"ana","q":"A 25-year-old loses about 1 L of blood from a stab wound. She has a heart rate of 125, cool pale skin, BP 100/70, and low urine output. Which finding is a compensatory response rather than a direct effect of the blood loss?","o":["Tachycardia and cool skin from baroreflex-driven sympathetic activation","Reduced venous return from the loss of circulating volume","Reduced mean systemic filling pressure from the hypovolemia","Reduced stroke volume from the lower ventricular preload after blood loss"],"a":0,"e":"The direct chain is: blood volume ↓, Pms ↓, venous return ↓, SV and CO ↓, MAP ↓. Lower baroreceptor firing then raises sympathetic outflow, causing tachycardia, arteriolar and venous constriction (cool, pale skin), and RAAS/ADH activation (low urine output). These compensations defend pressure."},
+{"t":"cv","l":"ana","q":"A term neonate with meconium aspiration stays cyanotic. Pre-ductal (right hand) O₂ saturation is 95%, but post-ductal (foot) saturation is 80%. Echocardiography shows a structurally normal heart. What best explains these findings?","o":["High pulmonary vascular resistance drives right-to-left shunting across the patent ductus","Left-to-right shunting through the foramen ovale into the pulmonary circuit","Premature closure of the ductus arteriosus, cutting off flow to the lower body","Low systemic vascular resistance after cord clamping, pulling blood away from the aorta"],"a":0,"e":"Normally PVR falls at the first breath. In persistent pulmonary hypertension of the newborn, PVR stays above SVR, so deoxygenated blood from the pulmonary trunk crosses the ductus into the descending aorta. The lower limbs are therefore less saturated than the right arm, which receives pre-ductal blood."},
+{"t":"cv","l":"eva","q":"A 2-day-old with a ductal-dependent congenital heart lesion becomes increasingly cyanotic as the ductus arteriosus starts to close. What is the most appropriate immediate management?","o":["Start an intravenous prostaglandin E₁ infusion to keep the ductus open","Give indomethacin to speed ductal closure and improve systemic oxygenation","Give 100% oxygen alone and observe for improvement in saturation","Start a β-blocker to slow the heart rate and lengthen filling"],"a":0,"e":"After birth, higher PO₂ and falling prostaglandin levels constrict the ductus. When systemic or pulmonary flow depends on the ductus, PGE₁ keeps it open until definitive repair. Indomethacin (a prostaglandin synthesis inhibitor) does the opposite and is used to close a PDA. High oxygen can speed ductal closure."},
+{"t":"resp","l":"und","q":"Why do premature infants who lack surfactant develop widespread alveolar collapse (atelectasis)?","o":["Surface tension stays high, so small alveoli collapse (Laplace's law) and compliance falls","Surfactant normally raises surface tension, so its absence causes over-inflation","Without surfactant, airway resistance falls and small airways empty completely","Surfactant is the main driver of O₂ diffusion, so poorly oxygenated alveoli gradually collapse"],"a":0,"e":"Laplace's law: collapsing pressure = 2T/r. Surfactant from type II pneumocytes lowers surface tension, especially in small alveoli, keeping alveoli stable and the lungs compliant. Without it, alveoli collapse, compliance falls, and the work of breathing rises (neonatal respiratory distress syndrome)."},
+{"t":"resp","l":"und","q":"Central chemoreceptors respond strongly to a rise in arterial PCO₂, but only weakly to a rise in blood H⁺ alone. Why?","o":["CO₂ crosses the blood–brain barrier easily and forms H⁺ in CSF; blood H⁺ crosses poorly","The central chemoreceptors carry specific CO₂ receptors but have no H⁺ sensors at all","H⁺ is buffered completely by hemoglobin before it can reach the brain","CSF has more buffering capacity than blood, so added H⁺ is neutralized there"],"a":0,"e":"The medullary chemoreceptors actually sense H⁺ in the brain interstitial fluid and CSF. CO₂ diffuses into the CSF freely and is hydrated to H⁺ + HCO₃⁻, stimulating breathing. Blood H⁺ crosses the blood–brain barrier poorly, so metabolic acidosis drives breathing mainly through the peripheral (carotid) chemoreceptors."},
+{"t":"resp","l":"und","q":"A patient with severe anemia (Hb 6 g/dL) has a PaO₂ of 95 mmHg and SaO₂ of 98%. Why is her tissue O₂ delivery still low?","o":["O₂ content depends mainly on hemoglobin amount; PaO₂ reflects only dissolved O₂","Anemia shifts the O₂–Hb curve so far left that almost no O₂ is released to tissues","Low Hb lowers PaO₂, but the blood gas analyzer fails to detect it","Anemia lowers cardiac output, so less blood reaches the tissues"],"a":0,"e":"CaO₂ ≈ 1.34 × Hb × SaO₂ + 0.003 × PaO₂. With Hb halved, content is roughly halved even though PaO₂ and saturation are normal. DO₂ = CO × CaO₂, so delivery falls (cardiac output usually rises to compensate). Remember: PaO₂ is O₂ tension, not O₂ content."},
+{"t":"resp","l":"app","q":"Two patients each have a minute ventilation of 6 L/min, with an anatomic dead space of 150 mL. Patient A breathes 500 mL × 12/min; Patient B breathes 250 mL × 24/min. What is Patient B's alveolar ventilation?","o":["2.4 L/min","4.2 L/min","6.0 L/min","3.6 L/min"],"a":0,"e":"V̇A = (VT − VD) × f. Patient A: (500 − 150) × 12 = 4.2 L/min. Patient B: (250 − 150) × 24 = 2.4 L/min. Rapid, shallow breathing wastes a larger fraction of each breath on dead space, so PaCO₂ rises even though minute ventilation is the same."},
+{"t":"resp","l":"app","q":"A healthy person breathes room air (FiO₂ 0.21) at sea level (760 mmHg). PaCO₂ is 40 mmHg and the respiratory quotient is 0.8. What is the approximate alveolar PO₂?","o":["~100 mmHg","~150 mmHg","~50 mmHg","~160 mmHg"],"a":0,"e":"PAO₂ = FiO₂(Patm − PH₂O) − PaCO₂/R = 0.21 × (760 − 47) − 40/0.8 ≈ 150 − 50 ≈ 100 mmHg. A normal A–a gradient is only a few mmHg in young adults (widening with age), so PaO₂ is normally about 90–100 mmHg."},
+{"t":"resp","l":"app","q":"During strenuous exercise, working skeletal muscle extracts much more O₂ from each unit of blood. Which change in the O₂–hemoglobin dissociation curve helps this happen?","o":["A rightward shift from raised CO₂, H⁺, and temperature, lowering Hb's O₂ affinity","A leftward shift from falling 2,3-BPG levels in exercising red cells","A leftward shift from falling temperature in the working muscle bed","No shift; extraction rises only because arterial PO₂ rises steeply during exercise"],"a":0,"e":"Active muscle produces CO₂, H⁺ (Bohr effect), and heat, all of which raise the P50 (right shift). Hemoglobin then releases more O₂ at the capillary PO₂ of working tissue, increasing extraction exactly where it is needed."},
+{"t":"resp","l":"app","q":"A family is found drowsy with headaches in a closed room with a charcoal heater. Pulse oximetry reads 99%, and PaO₂ is 95 mmHg. Which statement about their oxygenation is correct?","o":["O₂ content falls as carboxyhemoglobin occupies binding sites and shifts the curve left","PaO₂ is normal, so tissue oxygenation must also be normal despite the exposure","The O₂–Hb curve shifts right, improving O₂ unloading to the hypoxic tissues","Pulse oximetry reliably shows the true O₂ saturation, so oxygenation is still adequate"],"a":0,"e":"CO binds hemoglobin about 200–250 times more avidly than O₂. That lowers functional Hb and O₂ content, and shifts the curve left so the remaining O₂ is released poorly. PaO₂ (dissolved O₂) stays normal, and standard pulse oximetry misreads COHb as oxyhemoglobin. Co-oximetry is needed, and treatment is 100% (or hyperbaric) O₂."},
+{"t":"resp","l":"app","q":"A lowland resident arrives at 4,000 m. On the first day, which arterial blood gas pattern is expected?","o":["PaO₂ low, PaCO₂ low, pH high (acute respiratory alkalosis)","PaO₂ low, PaCO₂ high, pH low (acute respiratory acidosis)","PaO₂ normal, PaCO₂ low, pH normal (compensated respiratory alkalosis)","PaO₂ low, PaCO₂ normal, HCO₃⁻ high (metabolic alkalosis)"],"a":0,"e":"Lower barometric pressure lowers inspired and arterial PO₂. The carotid bodies drive hyperventilation, which lowers PaCO₂ and raises pH. Over days, the kidneys excrete HCO₃⁻ (acclimatization, which acetazolamide speeds up), and erythropoietin raises red cell mass."},
+{"t":"resp","l":"app","q":"A scuba diver ascends rapidly from 30 m and develops joint pain, itching, and confusion within an hour of surfacing. What is the underlying mechanism?","o":["Nitrogen dissolved under high pressure forms tissue bubbles as pressure falls quickly","O₂ toxicity from the high inspired PO₂ breathed at depth, affecting brain and joints","CO₂ retention from breath-holding during the rapid ascent, causing acidosis and confusion","Hypoxia from a low ambient PO₂ as the diver reaches the surface too quickly"],"a":0,"e":"At depth, higher pressure dissolves more nitrogen into the blood and tissues (Henry's law). A rapid ascent lets it come out of solution as bubbles, causing decompression sickness (\"the bends\"): joint pain, skin, and neurologic symptoms. Treatment is 100% O₂ and hyperbaric recompression."},
+{"t":"resp","l":"ana","q":"A patient develops sudden pleuritic chest pain and dyspnea after a long flight. CT shows a large embolus blocking the right lower lobe artery. What happens to the ventilation/perfusion ratio in the affected lung region?","o":["It rises toward infinity (dead space): the region is ventilated but not perfused","It falls to zero (shunt), since the region is perfused but not ventilated","It stays normal at about 0.8, because ventilation and perfusion both fall together","It falls, because the region's ventilation stops while perfusion continues"],"a":0,"e":"The embolized region still receives air but no blood, so it acts as alveolar dead space (V/Q → ∞; alveolar PO₂ and PCO₂ approach inspired values). Blood is diverted to other regions, creating relative low-V/Q areas and hypoxemia. Hyperventilation usually lowers PaCO₂."},
+{"t":"resp","l":"ana","q":"A patient with lobar pneumonia remains severely hypoxemic (PaO₂ 55 mmHg) despite breathing 100% O₂. What best explains the poor response?","o":["Intrapulmonary shunt: blood flows past fluid-filled alveoli and never meets the added O₂","Hypoventilation from a depressed respiratory drive, raising alveolar PCO₂ and lowering PAO₂","High V/Q mismatch, from reduced blood flow to the consolidated lobe","Low inspired PO₂, as if the patient were breathing air at high altitude"],"a":0,"e":"In a true shunt (V/Q = 0), the extra O₂ never reaches the blood flowing past the consolidated alveoli, so PaO₂ barely rises with 100% O₂. Hypoxemia from low V/Q, hypoventilation, or diffusion limitation corrects well with supplemental O₂."},
+{"t":"resp","l":"ana","q":"A long-term smoker has FEV₁/FVC of 0.55, increased total lung capacity and residual volume, and a reduced DLCO. Which mechanical change best fits?","o":["Higher compliance with lost elastic recoil, so airways collapse on expiration (emphysema)","Decreased compliance with a stiff, fibrotic lung that limits expansion (pulmonary fibrosis)","Excess surfactant lowering surface tension and over-distending alveoli","Isolated diaphragm weakness limiting inspiration and forced expiration"],"a":0,"e":"Emphysema destroys alveolar walls and elastic tissue. Compliance rises, but recoil falls, so small airways lose their radial traction and collapse during expiration. This produces obstruction (low FEV₁/FVC), hyperinflation, and a low DLCO from loss of surface area. Fibrosis gives a restrictive pattern with reduced compliance and TLC."},
+{"t":"gi","l":"und","q":"Why does venous blood leaving the stomach become more alkaline after a meal (the \"alkaline tide\")?","o":["Parietal cells release one HCO₃⁻ into blood, in exchange for Cl⁻, per H⁺ they secrete","Pancreatic HCO₃⁻ is absorbed directly across the gastric mucosa into the gastric venous blood","Gastric mucus releases its stored HCO₃⁻ into the portal venous blood after meals","Parietal cells take up H⁺ from the blood to supply the acid they secrete"],"a":0,"e":"Inside parietal cells, carbonic anhydrase converts CO₂ + H₂O to H⁺ + HCO₃⁻. H⁺ is pumped into the lumen by H⁺/K⁺-ATPase, and HCO₃⁻ leaves across the basolateral membrane through a Cl⁻/HCO₃⁻ exchanger. This briefly raises blood pH and urine pH after eating."},
+{"t":"gi","l":"und","q":"Why are dietary long-chain fats carried from the intestine in lymph rather than portal venous blood?","o":["They are packed into chylomicrons, which are too large for capillaries and enter lacteals","Fats are absorbed only in the colon, which drains mainly into lymphatics","The portal vein carries only water-soluble vitamins and nutrients, and it cannot accept lipids","Bile salts carry fats directly across the mucosa into the thoracic duct"],"a":0,"e":"Enterocytes re-form triglycerides and package them with apolipoproteins into chylomicrons. These large particles pass through the wide gaps of lacteals into intestinal lymph and enter the blood via the thoracic duct, bypassing the liver on first pass. Short- and medium-chain fatty acids can enter portal blood directly."},
+{"t":"gi","l":"und","q":"Why does drinking milk cause bloating and watery diarrhea in a person with lactase deficiency?","o":["Undigested lactose holds water in the lumen osmotically and is fermented by colonic bacteria","Lactose stimulates chloride secretion by intestinal crypt cells through a cAMP-dependent pathway","Lactose directly damages the intestinal villi and flattens the absorptive mucosa","Lactose blocks bile salt absorption, so unabsorbed bile acids irritate the colon"],"a":0,"e":"Without brush-border lactase, lactose cannot be split into glucose and galactose for SGLT1 uptake. It stays in the lumen as an osmole, drawing water in (osmotic diarrhea). Colonic bacteria ferment it to gas and short-chain fatty acids. The diarrhea stops with fasting, and stool has an osmotic gap."},
+{"t":"gi","l":"app","q":"A patient with peptic ulcer disease is prescribed omeprazole. Why does it suppress acid more completely than an H₂-receptor blocker?","o":["It irreversibly inhibits the H⁺/K⁺-ATPase, the final step of acid secretion for all stimuli","It blocks only histamine-stimulated acid secretion at the parietal H₂ receptor","It neutralizes the acid already in the gastric lumen, like a potent antacid","It blocks gastrin release from antral G cells, removing the main stimulus for acid secretion"],"a":0,"e":"Histamine (H₂, Gs/cAMP), acetylcholine (M₃, Gq), and gastrin (CCK-B, Gq) all converge on the parietal-cell proton pump. H₂ blockers remove only one stimulus. Proton pump inhibitors block the pump itself."},
+{"t":"gi","l":"app","q":"Acidic chyme (pH < 4.5) enters the duodenum. Which hormone is released, and what is its main action?","o":["Secretin, which stimulates bicarbonate-rich pancreatic and biliary secretion","CCK, which stimulates gastric acid secretion from parietal cells","Gastrin, which stimulates pancreatic HCO₃⁻ release and neutralizes the duodenal acid","Motilin, which stimulates gallbladder contraction and bile flow"],"a":0,"e":"S cells in the duodenum release secretin in response to luminal acid. Acting through Gs/cAMP, it stimulates pancreatic ductal cells to secrete HCO₃⁻, which neutralizes the acid and protects the mucosa while providing the pH that pancreatic enzymes need."},
+{"t":"gi","l":"app","q":"A woman with gallstones gets colicky right upper quadrant pain about 30 minutes after a fatty meal. Which hormone triggers the gallbladder contraction that provokes the pain?","o":["Cholecystokinin (CCK), released by I cells in response to fats and amino acids","Secretin, released by duodenal S cells in response to luminal acid","Gastrin, released by antral G cells in response to gastric distension and peptides","Somatostatin, released by D cells in response to low luminal pH"],"a":0,"e":"I cells in the duodenum and jejunum release CCK in response to fatty acids and amino acids. CCK contracts the gallbladder, relaxes the sphincter of Oddi, and stimulates pancreatic enzyme secretion. A stone blocking the cystic duct during contraction causes biliary colic."},
+{"t":"gi","l":"app","q":"A child with cholera has severe secretory diarrhea. Oral rehydration solution containing both glucose and sodium works well. Why?","o":["The SGLT1 Na⁺–glucose cotransporter still works, so Na⁺ absorption pulls water back in","Glucose directly binds and blocks the cholera toxin in the intestinal lumen","Glucose stops chloride secretion by the crypt cells by lowering their cAMP","Sodium alone is absorbed better than sodium with glucose, so the glucose only adds energy"],"a":0,"e":"Cholera toxin permanently activates Gs, raising cAMP and driving CFTR Cl⁻ secretion, but it leaves SGLT1 on the villus cells intact. Glucose-coupled Na⁺ absorption creates an osmotic gradient that pulls water back across the mucosa, which is why ORS is life-saving."},
+{"t":"gi","l":"ana","q":"A newborn fails to pass meconium within 48 hours and has abdominal distension and bilious vomiting. A rectal biopsy shows no ganglion cells in the submucosal and myenteric plexuses. What is the mechanism of the obstruction?","o":["The aganglionic segment cannot relax, so it stays contracted as a functional obstruction","The segment without ganglia is flaccid and dilated, so it cannot propel stool","There is a mechanical blockage from thick, inspissated meconium in the ileum","Excess parasympathetic input causes spasm of the proximal colon above the affected segment"],"a":0,"e":"In Hirschsprung disease, neural crest cells fail to migrate into the distal bowel. Without enteric inhibitory neurons (NO, VIP), the aganglionic segment cannot relax for peristalsis. It is narrow and tonically contracted, and the normal bowel above it dilates (megacolon)."},
+{"t":"gi","l":"ana","q":"A patient with a duodenal ulcer has H. pylori gastritis limited to the antrum, with high gastrin and high acid output. What is the most likely mechanism?","o":["Antral infection cuts somatostatin from D cells, releasing the brake on gastrin and acid","Infection of the gastric body destroys parietal cells and lowers acid secretion","H. pylori directly stimulates parietal H⁺/K⁺-ATPase activity through the ammonia made by its urease","H. pylori increases duodenal secretin release, which in turn increases acid output"],"a":0,"e":"Antrum-predominant gastritis impairs the D cells that normally release somatostatin when pH falls. With less somatostatin, G cells secrete more gastrin, driving acid hypersecretion that overwhelms the duodenal mucosa. Body-predominant gastritis instead causes atrophy, low acid, and a higher risk of gastric ulcers and cancer."},
+{"t":"endo","l":"und","q":"Why do steroid and thyroid hormones generally act more slowly and last longer than peptide hormones?","o":["They are protein-bound and act on intracellular receptors that alter gene transcription","They bind membrane receptors that use cAMP, a second messenger that acts slowly","They are stored in large amounts in secretory granules and released gradually","They are broken down quickly by the liver, so their effects must build up slowly over days"],"a":0,"e":"Lipophilic hormones (steroids, T₃/T₄) circulate mostly protein-bound, which prolongs their half-life. They enter cells, bind cytosolic or nuclear receptors, and change transcription, so their effects take hours to days. Hydrophilic peptides and catecholamines circulate free, bind surface receptors, and act within seconds to minutes through second messengers."},
+{"t":"endo","l":"und","q":"Why can long-term high-dose prednisone therapy cause adrenal crisis if it is stopped suddenly?","o":["Exogenous steroid suppresses CRH and ACTH, so the atrophied adrenal cortex cannot make cortisol","Prednisone directly damages the adrenal medulla, so catecholamine output fails when it is stopped","Prednisone triggers autoantibodies that destroy the adrenal cortex over time","Prednisone increases ACTH secretion, which overstimulates and exhausts the adrenal cortex"],"a":0,"e":"ACTH is trophic for the zona fasciculata. Prolonged negative feedback from exogenous steroids suppresses the HPA axis, the adrenals atrophy, and it can take months to recover. Sudden withdrawal leaves the patient cortisol-deficient, so doses must be tapered."},
+{"t":"endo","l":"und","q":"A pregnant woman has a high total T₄ but a normal free T₄ and TSH, and she feels well. Why?","o":["Estrogen raises thyroxine-binding globulin, so bound T₄ rises while free T₄ stays normal","She has subclinical hyperthyroidism, with excess thyroid output causing no symptoms","TSH is falsely normal in pregnancy, masking true underlying hyperthyroidism","The placenta secretes its own T₄, adding to the mother's thyroid output"],"a":0,"e":"Only free hormone enters cells and feeds back on the pituitary. When binding proteins rise, total hormone rises until free hormone and TSH settle back to normal. Changes in binding proteins alter total levels but not thyroid status."},
+{"t":"endo","l":"app","q":"A 40-year-old woman has fatigue, cold intolerance, weight gain, and a firm goiter. Anti-TPO antibodies are positive. Which lab pattern is expected?","o":["High TSH, low free T₄","Low TSH, low free T₄","Low TSH, high free T₄","High TSH, high free T₄"],"a":0,"e":"Hashimoto thyroiditis is primary hypothyroidism. Falling T₄ removes negative feedback, so TRH and TSH rise. The general rule: target-gland hormone ↓ with trophic hormone ↑ means primary gland failure."},
+{"t":"endo","l":"app","q":"A 30-year-old woman has weight loss, tremor, exophthalmos, and a diffuse goiter with a bruit. Which lab pattern and mechanism are expected?","o":["Low TSH and high free T₄, from TSH receptor–stimulating antibodies","High TSH and high free T₄, from a TSH-secreting pituitary adenoma","High TSH and low free T₄, from TSH receptor–blocking antibodies","Normal TSH and normal free T₄, from a nontoxic multinodular goiter"],"a":0,"e":"In Graves disease, IgG antibodies activate the TSH receptor, driving follicular growth and hormone synthesis independent of TSH. High T₃/T₄ then suppresses TRH and TSH by negative feedback. This is autonomous target-gland excess."},
+{"t":"endo","l":"app","q":"A day after total thyroidectomy, a patient has perioral tingling and carpopedal spasm. Serum Ca²⁺ is low and phosphate is high. What is the most likely cause?","o":["Hypoparathyroidism from removal of, or damage to, the parathyroid glands","Excess calcitonin released from leftover thyroid C cells, lowering serum Ca²⁺","Vitamin D toxicity from high-dose postoperative supplementation","Primary hyperparathyroidism unmasked by the thyroid surgery"],"a":0,"e":"PTH raises Ca²⁺ (more renal Ca²⁺ reabsorption, more calcitriol, more bone resorption) and lowers phosphate (less proximal PO₄ reabsorption). Without PTH, Ca²⁺ falls and phosphate rises, and low ionized Ca²⁺ causes neuromuscular irritability (Chvostek and Trousseau signs)."},
+{"t":"endo","l":"app","q":"During a panic attack, a patient hyperventilates and develops tingling around the mouth and in the fingertips. Total serum calcium is normal. What is the mechanism?","o":["Respiratory alkalosis increases albumin binding of Ca²⁺, lowering ionized Ca²⁺","Hyperventilation causes the kidneys to lose calcium and phosphate into the urine","Hyperventilation directly suppresses PTH secretion from the parathyroids","Acidosis releases Ca²⁺ from albumin, raising ionized Ca²⁺ levels"],"a":0,"e":"Alkalosis frees negative binding sites on albumin (H⁺ leaves them), so more Ca²⁺ binds. Total calcium is unchanged, but the physiologically active ionized fraction falls, increasing nerve excitability. Slowing breathing corrects it."},
+{"t":"endo","l":"app","q":"A 45-year-old has resistant hypertension, K⁺ 2.9 mmol/L, HCO₃⁻ 32 mmol/L, a high plasma aldosterone, and suppressed renin. What is the most likely diagnosis?","o":["Primary hyperaldosteronism (Conn syndrome)","Renal artery stenosis (renovascular hypertension)","Addison disease (primary adrenal insufficiency)","Cushing disease from a pituitary adenoma"],"a":0,"e":"Aldosterone increases Na⁺ reabsorption through ENaC and drives K⁺ and H⁺ secretion in the collecting duct, causing hypertension, hypokalemia, and metabolic alkalosis. Autonomous aldosterone with low renin localizes the problem to the adrenal. Renovascular hypertension would have high renin."},
+{"t":"endo","l":"app","q":"A patient has fatigue, weight loss, darkening of skin creases and gums, hypotension, Na⁺ 128, and K⁺ 5.8. Which hormone profile is expected?","o":["Low cortisol, high ACTH, low aldosterone (primary adrenal insufficiency)","Low cortisol, low ACTH, normal aldosterone (secondary adrenal insufficiency)","High cortisol, low ACTH, normal aldosterone (adrenal Cushing syndrome)","High aldosterone, low renin, normal cortisol (primary hyperaldosteronism)"],"a":0,"e":"In Addison disease, destruction of the adrenal cortex removes cortisol and aldosterone. Loss of feedback raises ACTH (from POMC, alongside MSH), which causes hyperpigmentation. Aldosterone deficiency causes hyponatremia, hyperkalemia, and hypotension. Secondary (pituitary) failure spares aldosterone and causes no hyperpigmentation."},
+{"t":"endo","l":"ana","q":"A woman who had a major postpartum hemorrhage cannot breastfeed and has not had a period since. She now has cold intolerance and fatigue. Free T₄ is low, and TSH is low-normal. Where is the lesion?","o":["Anterior pituitary (Sheehan syndrome): secondary hypothyroidism","Thyroid gland (primary hypothyroidism) from Hashimoto thyroiditis","Hypothalamic excess of TRH suppressing the pituitary","Peripheral tissue resistance to thyroid hormone action"],"a":0,"e":"Low target hormone with a low or inappropriately normal trophic hormone means pituitary or hypothalamic failure. Ischemic necrosis of the enlarged pregnant pituitary after hemorrhage causes panhypopituitarism: loss of prolactin (no lactation), gonadotropins (amenorrhea), TSH, and ACTH. In primary hypothyroidism, TSH would be high."},
+{"t":"endo","l":"ana","q":"A patient with chronic kidney disease has a high PTH, low-normal serum Ca²⁺, high phosphate, and low calcitriol. How do these findings differ from primary hyperparathyroidism?","o":["Secondary hyperparathyroidism from phosphate retention and low calcitriol; primary gives high Ca²⁺","Primary hyperparathyroidism, because an elevated PTH always indicates an autonomous, hyperfunctioning gland","Hypoparathyroidism, because a low-normal Ca²⁺ shows the glands are failing to respond","Vitamin D toxicity, in which excess calcitriol drives both calcium and phosphate levels upward"],"a":0,"e":"Failing kidneys retain phosphate and make less 1α-hydroxylated calcitriol, so Ca²⁺ falls and PTH rises in response. In primary hyperparathyroidism an autonomous gland drives Ca²⁺ up and phosphate down."},
+{"t":"endo","l":"ana","q":"A patient has central obesity, purple striae, and hypertension. Cortisol is high and does not suppress with dexamethasone, and plasma ACTH is very low. What is the most likely source?","o":["A cortisol-secreting adrenal adenoma (ACTH-independent)","A pituitary corticotroph adenoma (Cushing disease)","Ectopic ACTH secretion from a small-cell lung cancer","Exogenous ACTH injections given for another medical condition"],"a":0,"e":"High cortisol with suppressed ACTH means autonomous adrenal excess: the tumor's cortisol feeds back to shut down CRH and ACTH. Pituitary and ectopic sources are ACTH-dependent, so ACTH would be normal-to-high or very high. Measuring the trophic hormone along with the target hormone localizes the lesion."},
+{"t":"renal","l":"und","q":"In a patient with bilateral renal artery stenosis, starting an ACE inhibitor causes GFR to fall sharply. Why?","o":["Angiotensin II was constricting efferent arterioles to hold glomerular pressure; removing it drops GFR","ACE inhibitors constrict the afferent arteriole and cut renal plasma flow to the glomerular capillaries","ACE inhibitors increase plasma oncotic pressure, which opposes glomerular filtration","ACE inhibitors raise Bowman capsule pressure by blocking fluid outflow from the tubule"],"a":0,"e":"GFR = Kf × net filtration pressure. When renal perfusion is low, Ang II preferentially constricts the efferent arteriole, which maintains glomerular capillary pressure and GFR even though RBF falls. Blocking Ang II removes this support and GFR drops."},
+{"t":"renal","l":"und","q":"Why does plasma creatinine roughly double when GFR falls by half, assuming steady production?","o":["Creatinine is filtered but barely reabsorbed, so it rises until GFR × P equals production","Creatinine production by skeletal muscle doubles as a reflex response when GFR falls","Tubular secretion of creatinine stops completely once GFR falls by half","Creatinine is reabsorbed more by the proximal tubule when GFR falls, so it accumulates"],"a":0,"e":"At steady state, excretion equals production. If GFR halves, less creatinine is excreted at first, so plasma creatinine rises until GFR × Pcr is back to the production rate, at about twice baseline. The GFR–creatinine curve is hyperbolic."},
+{"t":"renal","l":"und","q":"Why do loop diuretics such as furosemide reduce the kidney's ability to make concentrated urine?","o":["Blocking NKCC2 in the thick ascending limb stops medullary solute loading, collapsing the gradient","They block aquaporin-2 insertion in the collecting duct, like a lack of ADH","They increase ADH secretion, which paradoxically dilutes the final urine further","They block the proximal tubule Na⁺–glucose cotransporter, causing glucosuria and osmotic diuresis"],"a":0,"e":"The thick ascending limb reabsorbs Na⁺, K⁺, and 2Cl⁻ without water, building the hyperosmotic medullary interstitium needed for water reabsorption in the collecting duct. When NKCC2 is blocked, the gradient washes out, so even with ADH the urine cannot be concentrated much."},
+{"t":"renal","l":"app","q":"In a clearance study, urine inulin is 100 mg/mL, urine flow is 1.5 mL/min, and plasma inulin is 1.2 mg/mL. What is the GFR?","o":["125 mL/min","80 mL/min","150 mL/min","180 mL/min"],"a":0,"e":"Inulin is freely filtered and neither reabsorbed nor secreted, so its clearance equals GFR. C = (U × V)/P = (100 × 1.5)/1.2 = 125 mL/min."},
+{"t":"renal","l":"app","q":"PAH clearance is 585 mL/min, the PAH extraction ratio is 0.9, and hematocrit is 45%. What is the renal blood flow?","o":["About 1,180 mL/min","About 650 mL/min","About 585 mL/min","About 1,300 mL/min"],"a":0,"e":"True RPF = CPAH ÷ extraction ratio = 585/0.9 = 650 mL/min. RBF = RPF ÷ (1 − Hct) = 650/0.55 ≈ 1,182 mL/min. With a GFR of 125, the filtration fraction is about 125/650 ≈ 0.19."},
+{"t":"renal","l":"app","q":"After head trauma, a patient passes 8 L/day of dilute urine (osmolality 90 mOsm/kg) and has a serum Na⁺ of 149. Urine osmolality rises markedly after desmopressin. What is the mechanism?","o":["Central diabetes insipidus: low ADH, so no V₂-driven aquaporin-2 insertion","Nephrogenic diabetes insipidus from collecting duct resistance to circulating ADH","Syndrome of inappropriate ADH secretion (SIADH) with excess circulating ADH","Osmotic diuresis from glucosuria caused by stress hyperglycemia"],"a":0,"e":"ADH acting on V₂ receptors (Gs → cAMP) inserts aquaporin-2 into the apical membrane of the collecting duct, allowing water reabsorption. With no ADH, dilute urine flows freely. A strong response to desmopressin shows the kidney works and the defect is central. Nephrogenic DI would not respond."},
+{"t":"renal","l":"app","q":"In a healthy 70-kg man, total body water is about 60% of body weight. What is his approximate intracellular fluid volume?","o":["28 L","14 L","42 L","3 L"],"a":0,"e":"TBW ≈ 0.6 × 70 = 42 L. ICF ≈ ⅔ of TBW ≈ 28 L. ECF ≈ ⅓ ≈ 14 L, of which interstitial fluid is about ¾ (~10.5 L) and plasma about ¼ (~3.5 L)."},
+{"t":"renal","l":"ana","q":"A patient with severe diarrhea has pH 7.25, PaCO₂ 28 mmHg, and HCO₃⁻ 12 mEq/L. How should this be interpreted?","o":["Metabolic acidosis with appropriate respiratory compensation","Respiratory acidosis with appropriate renal compensation","Metabolic alkalosis with appropriate respiratory compensation","Mixed metabolic acidosis and primary respiratory acidosis"],"a":0,"e":"Low pH with low HCO₃⁻ is a primary metabolic acidosis (HCO₃⁻ lost in stool). Compensation is hyperventilation. Winter's formula predicts PaCO₂ = 1.5 × 12 + 8 = 26 ± 2 mmHg; the measured 28 fits, so compensation is appropriate. A PaCO₂ well above 28 would suggest a coexisting respiratory acidosis."},
+{"t":"renal","l":"eva","q":"A patient with stage 4 chronic kidney disease has fatigue and a normocytic, normochromic anemia (Hb 8.5 g/dL). Iron studies show low transferrin saturation. What is the most appropriate management?","o":["Replete iron, then give an erythropoiesis-stimulating agent to replace deficient renal EPO","Vitamin B₁₂ injections to correct an underlying megaloblastic process","Splenectomy to reduce splenic red cell destruction and prolong the survival of red cells","Hydroxyurea to raise fetal hemoglobin levels, as in sickle cell disease"],"a":0,"e":"Peritubular interstitial fibroblasts in the renal cortex make erythropoietin in response to hypoxia. CKD reduces EPO, causing hypoproliferative anemia. ESAs replace it, but iron stores must be adequate first, or the marrow cannot respond."},
+{"t":"repro","l":"und","q":"Why does a surge of LH occur in mid-cycle, when estrogen usually suppresses gonadotropins?","o":["Sustained high estradiol switches its feedback on the pituitary and hypothalamus to positive","Progesterone from the corpus luteum stimulates the LH surge before ovulation","Inhibin rises late in the follicular phase and stimulates LH release from pituitary gonadotrophs","FSH acts directly on pituitary gonadotrophs to trigger a burst of LH release"],"a":0,"e":"In the early follicular phase, estrogen exerts negative feedback. When the dominant follicle keeps estradiol high (about 200 pg/mL or more for about 2 days), feedback flips to positive, triggering the LH surge that causes ovulation about 36 hours later."},
+{"t":"repro","l":"und","q":"Why do men who abuse anabolic androgens develop small testes and low sperm counts?","o":["Exogenous androgen suppresses LH and FSH, so intratesticular testosterone and spermatogenesis fall","Androgens directly kill Sertoli cells and destroy the blood–testis barrier they form","Androgens raise FSH secretion, which overstimulates and exhausts spermatogenesis","Androgens are converted into anti-sperm antibodies that attack and destroy the developing germ cells"],"a":0,"e":"Spermatogenesis needs FSH plus very high intratesticular testosterone produced by LH-stimulated Leydig cells. Exogenous androgen raises blood levels but, through negative feedback, lowers LH and FSH. Intratesticular testosterone falls and the seminiferous tubules shrink."},
+{"t":"repro","l":"und","q":"In a normal XY fetus, what causes the paramesonephric (Müllerian) ducts to regress?","o":["Anti-Müllerian hormone from fetal Sertoli cells","Testosterone from fetal Leydig cells of the testis","Dihydrotestosterone from 5α-reductase activity","Estrogen from the placenta and maternal circulation"],"a":0,"e":"SRY directs testis formation. Sertoli cells secrete AMH, which causes Müllerian regression, and Leydig cells secrete testosterone, which maintains the Wolffian ducts. DHT, made by 5α-reductase, masculinizes the external genitalia and prostate. Without AMH, a uterus and tubes develop even in an XY individual."},
+{"t":"repro","l":"app","q":"In a woman with a regular 28-day cycle, no pregnancy occurs. Which hormonal event on days 24–28 directly triggers menstruation?","o":["The corpus luteum regresses, so progesterone and estrogen fall and the endometrium sheds","A second LH surge late in the cycle triggers shedding of the secretory endometrium","A rise in FSH directly causes shedding of the endometrial functional layer","A late-luteal rise in prolactin causes endometrial breakdown and spasm of the spiral arteries"],"a":0,"e":"Without hCG, the corpus luteum involutes about 12–14 days after ovulation. The fall in progesterone and estrogen causes spiral artery spasm, endometrial ischemia, and shedding. Removing the negative feedback also lets FSH start rising for the next cycle."},
+{"t":"repro","l":"app","q":"A pregnancy test detects hCG about 8–10 days after conception. What is the key physiologic role of hCG in early pregnancy?","o":["It stimulates LH receptors so the corpus luteum keeps secreting progesterone","It triggers ovulation of a second follicle to support a possible twin pregnancy","It suppresses progesterone so the endometrium can accept the implanting embryo","It stimulates prolactin secretion to prepare the breasts for milk production"],"a":0,"e":"hCG from the syncytiotrophoblast is structurally similar to LH and \"rescues\" the corpus luteum. This keeps progesterone and estrogen flowing to maintain the decidua until the placenta produces enough progesterone itself (around weeks 8–10)."},
+{"t":"repro","l":"app","q":"A breastfeeding mother under severe stress says her breasts feel full, but milk will not flow when the baby suckles. Which hormonal step is most likely impaired?","o":["Oxytocin-mediated contraction of myoepithelial cells (the milk ejection reflex)","Prolactin-driven milk synthesis in the alveolar epithelial secretory cells","Estrogen-driven growth and branching of the mammary ductal system","Dopamine-mediated suppression of prolactin release from the anterior pituitary gland"],"a":0,"e":"Prolactin makes milk; oxytocin ejects it. Suckling triggers oxytocin release from the posterior pituitary, which contracts the myoepithelial cells around the alveoli (a Gq/Ca²⁺ pathway). Stress and catecholamines inhibit this reflex. Full breasts show that synthesis is preserved."},
+{"t":"repro","l":"app","q":"A tall 19-year-old man with small firm testes, gynecomastia, and infertility has a 47,XXY karyotype. Which hormone profile is expected?","o":["Low testosterone with high LH and FSH (primary hypogonadism)","Low testosterone with low LH and FSH (secondary hypogonadism)","High testosterone with low LH (exogenous androgen pattern)","Normal testosterone with low FSH (isolated FSH deficiency)"],"a":0,"e":"In Klinefelter syndrome the seminiferous tubules and Leydig cells fail. Low testosterone raises LH, and loss of Sertoli inhibin raises FSH. This is primary gonadal failure."},
+{"t":"repro","l":"ana","q":"A 28-year-old woman taking risperidone for schizophrenia develops galactorrhea and stops having periods. What is the most likely mechanism?","o":["D₂ blockade lifts dopamine's inhibition of prolactin, and high prolactin suppresses GnRH pulses","The drug stimulates oxytocin release, which inhibits ovulation and triggers continuous milk flow","The drug raises estrogen, which directly causes galactorrhea and amenorrhea","The drug causes primary ovarian failure, with high FSH and low estradiol levels"],"a":0,"e":"Hypothalamic dopamine (via D₂/Gi) tonically inhibits pituitary lactotrophs. Antipsychotics that block D₂ release this brake, causing hyperprolactinemia and milk production. Prolactin also suppresses GnRH pulsatility, so LH and FSH fall, causing anovulation and amenorrhea (hypogonadotropic), not ovarian failure."},
+{"t":"repro","l":"eva","q":"A 30-year-old woman who wants to conceive has amenorrhea, galactorrhea, very high prolactin, and a 7-mm pituitary microadenoma. What is the most appropriate first-line treatment?","o":["A dopamine agonist such as cabergoline to lower prolactin and restore ovulation","Immediate transsphenoidal surgery to remove the pituitary microadenoma","Estrogen–progestin oral contraceptives to restore regular menses and protect bone","A dopamine antagonist such as metoclopramide to block the tumor's receptors"],"a":0,"e":"Dopamine agonists act on lactotroph D₂ receptors to lower prolactin and usually shrink prolactinomas. Once prolactin falls, GnRH pulses return and ovulation resumes. Surgery is reserved for failure or intolerance. Oral contraceptives would prevent the pregnancy she wants, and dopamine antagonists would raise prolactin further."},
+{"t":"neuro","l":"und","q":"Why does myelination greatly increase nerve conduction velocity?","o":["Myelin raises membrane resistance and lowers capacitance, so current jumps node to node","Myelin contains voltage-gated Na⁺ channels spread along the whole internode","Myelin lowers the internal resistance of the axon, so longitudinal current flows faster","Myelin makes the axon wider, and wider axons always conduct impulses faster"],"a":0,"e":"Myelin insulates the internode, so less current leaks out and less charge is needed to depolarize the membrane. The local current spreads quickly to the next node of Ranvier, where Na⁺ channels are concentrated, and the action potential regenerates only at the nodes. Axon diameter also increases velocity by lowering internal resistance."},
+{"t":"neuro","l":"und","q":"Why does light hyperpolarize, rather than depolarize, a rod photoreceptor?","o":["Light activates transducin and PDE; cGMP falls, so cGMP-gated cation channels close","Light opens voltage-gated Na⁺ channels in the rod outer segment, causing inward current","Light increases cGMP, which opens K⁺ channels in the rod outer segment","Light closes K⁺ channels in the inner segment, trapping positive charge"],"a":0,"e":"In darkness, high cGMP holds cation channels open (the dark current), keeping rods depolarized at about −40 mV with steady glutamate release. Light starts the rhodopsin → transducin → PDE cascade, which lowers cGMP and closes the channels. The cell hyperpolarizes (toward −70 mV) and releases less glutamate."},
+{"t":"neuro","l":"und","q":"Why is hair-cell depolarization in the cochlea driven mainly by K⁺ influx rather than Na⁺ influx?","o":["Endolymph bathing the stereocilia is K⁺-rich and positive, so opened channels let K⁺ flow in","Hair cells have no Na⁺ in the extracellular fluid that surrounds any part of their membrane","K⁺ channels in hair cells are voltage-gated only and open before any Na⁺ channels","Perilymph is rich in K⁺, and it bathes the apical stereocilia of the hair cells"],"a":0,"e":"The stria vascularis keeps the scala media endolymph high in K⁺ at about +80 mV. When stereocilia bend toward the tallest cilium, tip-link-gated channels open, and the large electrochemical gradient drives K⁺ into the hair cell. This opens voltage-gated Ca²⁺ channels and triggers transmitter release."},
+{"t":"neuro","l":"und","q":"Why does hyperventilation temporarily lower intracranial pressure in a patient with brain swelling?","o":["Lower PaCO₂ constricts cerebral vessels, reducing cerebral blood volume","Hyperventilation raises CSF production, which flushes out the edema","Hyperventilation raises mean arterial pressure and cerebral perfusion pressure","Lower PaCO₂ dilates cerebral vessels, improving venous drainage"],"a":0,"e":"Cerebral vessels are very sensitive to PaCO₂ through perivascular H⁺. Hypocapnia causes vasoconstriction, which lowers cerebral blood volume and ICP within minutes. Excessive or prolonged hyperventilation risks ischemia because it also lowers cerebral blood flow."},
+{"t":"neuro","l":"und","q":"During a knee-jerk reflex, why do the hamstrings relax while the quadriceps contract?","o":["Quadriceps Ia afferents excite inhibitory interneurons that suppress hamstring motor neurons","Golgi tendon organs in the hamstrings fire and relax them via autogenic inhibition","Hamstring spindles are stretched by the tap and inhibit their own motor neurons","Cortical commands relax the hamstrings voluntarily just before the quadriceps begin to contract"],"a":0,"e":"Ia fibers synapse directly on quadriceps α-motor neurons (the monosynaptic excitatory reflex). They also excite inhibitory Ia interneurons that inhibit the α-motor neurons of the antagonist muscles, so the movement happens without opposing force."},
+{"t":"neuro","l":"app","q":"Tapping the patellar tendon produces a brisk knee extension. Which receptor starts this reflex?","o":["Muscle spindle (annulospiral ending) in the quadriceps","Golgi tendon organ within the patellar tendon itself","Pacinian corpuscles in the skin overlying the patellar tendon","Free nerve endings in the capsule of the knee joint"],"a":0,"e":"The tap briefly stretches the quadriceps, stretching its intrafusal fibers. Primary (Ia) spindle endings fire, exciting L3–L4 α-motor neurons monosynaptically, so the quadriceps contracts. Golgi tendon organs sense tension and inhibit (Ib) the same muscle."},
+{"t":"neuro","l":"app","q":"A week after a stroke involving the left internal capsule, a patient has right-sided weakness. Which finding in the right limbs is expected?","o":["Spasticity, hyperreflexia, and an extensor plantar (Babinski) response","Flaccid paralysis with fasciculations and muscle atrophy in the limbs","Absent reflexes with normal muscle tone in the affected limbs","Intention tremor with normal strength, tone, and reflexes in the limbs"],"a":0,"e":"An upper motor neuron lesion removes descending inhibition of spinal reflex circuits, so reflex gain rises. The result is spasticity, brisk reflexes, clonus, and a Babinski sign (after an initial flaccid \"shock\" phase). Fasciculations and atrophy are lower motor neuron signs."},
+{"t":"neuro","l":"app","q":"A 65-year-old man has a resting pill-rolling tremor, cogwheel rigidity, and slow, shuffling movements. Which neurochemical deficit explains these findings?","o":["Loss of nigrostriatal dopaminergic neurons from the substantia nigra","Loss of cholinergic neurons in the nucleus basalis of Meynert","Degeneration of cerebellar Purkinje cells and their GABA output","Loss of GABAergic striatal neurons with a relative increase in dopamine"],"a":0,"e":"In Parkinson disease, loss of nigrostriatal dopamine reduces activity in the direct (movement-facilitating) pathway and releases the indirect pathway. The net effect is excess thalamic inhibition, causing bradykinesia, rigidity, and resting tremor. Levodopa replaces dopamine. Loss of GABAergic striatal neurons causes Huntington chorea."},
+{"t":"neuro","l":"app","q":"A patient has a tremor that worsens as her finger approaches a target, overshoots when pointing, and cannot perform rapid alternating movements. Strength is normal. Where is the lesion?","o":["Cerebellum (same side as the symptoms)","Basal ganglia (opposite side to the symptoms)","Primary motor cortex (opposite side)","Dorsal columns (same side as the symptoms)"],"a":0,"e":"The cerebellum compares intended and actual movement and corrects errors in timing and scaling. Damage causes ataxia, dysmetria, intention tremor, and dysdiadochokinesia on the same side as the lesion, with strength relatively preserved. Basal ganglia disease causes resting tremor and bradykinesia."},
+{"t":"neuro","l":"app","q":"A patient with a large pituitary macroadenoma extending upward reports bumping into objects on both sides. Which visual field defect is expected?","o":["Bitemporal hemianopia from compression of the crossing nasal fibers at the chiasm","Right homonymous hemianopia from a lesion of the left optic tract behind the chiasm","Complete blindness in one eye from a compressive lesion of that optic nerve","Contralateral superior quadrantanopia from a temporal lobe (Meyer loop) lesion"],"a":0,"e":"Nasal retinal fibers, which carry the temporal visual fields, cross in the chiasm. A tumor pressing up from below compresses them and causes loss of both temporal fields. Lesions behind the chiasm cause contralateral homonymous defects, and optic nerve lesions cause loss of vision in one eye."},
+{"t":"neuro","l":"app","q":"A 35-year-old woman has slowly progressive hearing loss in the left ear. On Weber testing, sound lateralizes to the left, and on the left Rinne test, bone conduction is louder than air conduction. What type of hearing loss is this?","o":["Conductive hearing loss in the left ear (e.g., otosclerosis fixing the stapes)","Sensorineural hearing loss in the left ear (e.g., an acoustic neuroma on that side)","Sensorineural hearing loss in the right ear (e.g., noise exposure)","Normal hearing with a benign variation in the tuning fork test results"],"a":0,"e":"In conductive loss, sound fails to reach the cochlea through the air path (ossicles), so bone conduction beats air conduction on Rinne, and Weber lateralizes to the affected ear because ambient noise is masked there. In sensorineural loss, Weber lateralizes to the better ear and Rinne stays positive (air louder than bone)."},
+{"t":"neuro","l":"app","q":"A farmer exposed to an organophosphate insecticide has pinpoint pupils, bradycardia, bronchorrhea, wheezing, and diarrhea. Which drug directly counters these muscarinic effects, and how?","o":["Atropine, a competitive antagonist at muscarinic (M₂/M₃) receptors","Propranolol, a nonselective β-adrenergic antagonist that slows the heart","Phenylephrine, a selective α₁-adrenergic agonist that raises blood pressure","Neostigmine, a quaternary, peripherally acting acetylcholinesterase inhibitor"],"a":0,"e":"Organophosphates inhibit acetylcholinesterase, so ACh builds up. Excess M₃ activity causes gland secretion, bronchoconstriction, GI hypermotility, and miosis, and excess M₂ activity causes bradycardia. Atropine blocks muscarinic receptors. Pralidoxime reactivates the enzyme and helps with the nicotinic weakness. Neostigmine would make things worse."},
+{"t":"neuro","l":"app","q":"In a sleep study, a patient's EEG shows low-voltage, fast, desynchronized activity similar to wakefulness, with rapid eye movements and near-complete skeletal muscle atonia. Which state of brain activity is this?","o":["REM (paradoxical) sleep, the dreaming stage","Stage N3 slow-wave sleep with delta waves","Relaxed wakefulness with eyes closed (alpha)","Stage N2 sleep with spindles and K-complexes"],"a":0,"e":"REM sleep has an EEG resembling wakefulness (paradoxical sleep), bursts of rapid eye movements, vivid dreaming, and brainstem-mediated inhibition of spinal motor neurons (atonia). N3 has high-amplitude delta waves. N2 has spindles and K-complexes. Relaxed eyes-closed wakefulness has an alpha rhythm."},
+{"t":"neuro","l":"app","q":"After bilateral damage to the medial temporal lobes (hippocampi), a patient remembers his childhood clearly but cannot remember anyone he met after the injury. Which memory function is lost?","o":["Forming new declarative (explicit) memories: anterograde amnesia","Retrieval of all previously stored memories: complete retrograde amnesia","Procedural memory for learning and performing new motor skills","Immediate working memory span for digits and short word lists"],"a":0,"e":"The hippocampus is needed to consolidate new facts and events into long-term storage. Bilateral damage causes dense anterograde amnesia while leaving older, already-consolidated memories, working memory, and procedural learning (which depends on the basal ganglia and cerebellum) relatively intact."},
+{"t":"neuro","l":"ana","q":"After a knife wound to the back at T10, a patient has right leg weakness and loss of vibration and position sense in the right leg, but loss of pain and temperature in the left leg. What is the lesion?","o":["Right hemisection of the spinal cord (Brown-Séquard syndrome)","Left hemisection of the spinal cord at the T10 level","Anterior spinal artery occlusion at the T10 level","Central cord syndrome from cervical hyperextension"],"a":0,"e":"The corticospinal tract and dorsal columns carry fibers from the same side of the body at cord level, so a right hemisection causes ipsilateral weakness and ipsilateral loss of vibration and position sense. Spinothalamic fibers cross within 1–2 segments of entry, so pain and temperature are lost on the opposite side below the lesion."},
+{"t":"neuro","l":"ana","q":"A patient with rapidly progressive symmetric weakness and absent reflexes has nerve conduction studies showing markedly reduced conduction velocities and prolonged distal latencies, with relatively preserved amplitudes. What does this pattern indicate?","o":["A demyelinating neuropathy (e.g., Guillain–Barré syndrome)","An axonal neuropathy with loss of nerve fibers","A primary muscle disease (myopathy) with normal nerves","A neuromuscular junction disorder (e.g., myasthenia gravis)"],"a":0,"e":"Conduction velocity depends on myelin. Demyelination slows conduction and can cause conduction block, while the number of axons (reflected in amplitude) is initially preserved. Axonal loss mainly lowers amplitude with near-normal velocity. The classic form of Guillain–Barré is acute inflammatory demyelinating polyneuropathy."},
+{"t":"neuro","l":"eva","q":"A patient with severe traumatic brain injury has an ICP of 28 mmHg and a MAP of 80 mmHg. Which management strategy is most physiologically appropriate?","o":["Lower ICP (head elevation, osmotherapy, sedation) while keeping CPP (MAP − ICP) at 60–70 mmHg","Sustained aggressive hyperventilation to a PaCO₂ of 20 mmHg to shrink cerebral blood volume","Lower MAP with vasodilators to reduce cerebral blood flow and thus ICP","Permissive hypercapnia to increase cerebral blood flow and oxygen delivery"],"a":0,"e":"CPP ≈ MAP − ICP = 80 − 28 = 52 mmHg here, which is too low. The goal is to protect perfusion by lowering ICP and supporting MAP. Hypocapnia lowers ICP through vasoconstriction but can cause ischemia, so it is only a short-term bridge. Hypercapnia dilates cerebral vessels and raises ICP."}
+];
+
+/* ============================================================
+   QUIZ MODE: logic
+   ============================================================ */
+(function(){
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const TOPIC = Object.fromEntries(QZ_TOPICS.map(t=>[t.id,t]));
+const LEVEL = Object.fromEntries(QZ_LEVELS.map(l=>[l.id,l]));
+const LEVEL_ORDER = QZ_LEVELS.map(l=>l.id);
+const TOPIC_ORDER = QZ_TOPICS.map(t=>t.id);
+
+let selTopics = new Set(TOPIC_ORDER);
+let selLevels = new Set(LEVEL_ORDER);
+let topicLevels = {};           // per-topic tab level selection
+QZ_TOPICS.forEach(t=> topicLevels[t.id] = new Set(LEVEL_ORDER));
+let count = 20;
+let activeSetupTab = 'all';
+let questions = [], idx = 0, score = 0, answers = [];
+
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function countOf(t,l){ return QZ_QUESTIONS.filter(q=>(!t||q.t===t)&&(!l||q.l===l)).length; }
+function sortByTOS(list){ return list.slice().sort((a,b)=> TOPIC_ORDER.indexOf(a.t)-TOPIC_ORDER.indexOf(b.t) || LEVEL_ORDER.indexOf(a.l)-LEVEL_ORDER.indexOf(b.l)); }
+
+/* ---------- setup tabs ---------- */
+function buildTabs(wrap, items, active, onPick){
+  wrap.innerHTML='';
+  items.forEach(it=>{
+    const b=document.createElement('button');
+    b.className='qz-tab'+(it.region?' '+it.region:'')+(it.id===active?' on':'');
+    b.innerHTML=(it.num?`<span class="qz-tab-num">${it.num}</span>`:'')+`<span>${esc(it.label)}</span>`+(it.extra?`<span class="qz-tab-score">${it.extra}</span>`:'');
+    b.addEventListener('click',()=>onPick(it.id));
+    wrap.appendChild(b);
+  });
+}
+function renderSetupTabs(){
+  const items=[{id:'all', label:'All systems', num:'✦'}].concat(QZ_TOPICS.map(t=>({id:t.id,label:t.label,num:t.num,region:'region-'+t.id})));
+  buildTabs($('qz-setup-tabs'), items, activeSetupTab, id=>{ activeSetupTab=id; renderSetupTabs(); renderSetupPanel(); });
+}
+function renderSetupPanel(){
+  const all = activeSetupTab==='all';
+  $('qz-panel-all').classList.toggle('qz-hidden', !all);
+  $('qz-panel-topic').classList.toggle('qz-hidden', all);
+  if(all){ updatePoolNote(); return; }
+  const t=TOPIC[activeSetupTab], sel=topicLevels[t.id];
+  const panel=$('qz-panel-topic');
+  panel.className='region-'+t.id;
+  const rows = QZ_LEVELS.filter(l=>countOf(t.id,l.id)>0).map(l=>{
+    const n=countOf(t.id,l.id); const on=sel.has(l.id);
+    return `<div class="qz-level-row${on?' on':''}" data-lv="${l.id}"><span class="qz-box">${on?'✓':''}</span>
+      <span class="qz-level-name"><span class="qz-lv-badge qz-lv-${l.id}">${l.label}</span></span>
+      <span class="qz-level-desc">${esc(l.desc)}</span><span class="qz-level-count">${n} item${n>1?'s':''}</span></div>`;
+  }).join('');
+  const bp = `<table class="qz-blueprint"><tr><th>TOS blueprint</th><th>Weight</th><th>REM</th>${QZ_LEVELS.map(l=>`<th>${l.short}</th>`).join('')}<th>CRE</th><th>Total</th></tr>
+    <tr><td>${esc(t.label)}</td><td>${t.weight}</td><td>–</td>${QZ_LEVELS.map(l=>{const c=countOf(t.id,l.id);return `<td>${c||'–'}</td>`;}).join('')}<td>–</td><td><strong>${countOf(t.id)}</strong></td></tr></table>`;
+  const n = QZ_QUESTIONS.filter(q=>q.t===t.id && sel.has(q.l)).length;
+  panel.innerHTML = `
+    <div class="qz-card">
+      <div class="qz-panel-head"><div class="qz-roman">${t.num}</div><div><h3>${esc(t.label)}</h3><div class="qz-scope"><strong>TOS content:</strong> ${esc(t.scope)}</div></div></div>
+      ${bp}
+    </div>
+    <div class="qz-card">
+      <h3 class="block-title">Questions by cognitive level</h3>
+      <div class="qz-level-list">${rows}</div>
+      <div class="qz-actions"><button class="qz-link-btn" data-act="all">Select all levels</button><button class="qz-link-btn" data-act="none">Clear all</button></div>
+      <div class="qz-warn qz-hidden" id="qz-topic-warn">Pick at least one level.</div>
+      <button class="qz-start-btn" id="qz-topic-start">Start ${esc(t.label)} quiz (${n} question${n===1?'':'s'})</button>
+    </div>`;
+  panel.querySelectorAll('.qz-level-row').forEach(r=>r.addEventListener('click',()=>{
+    const lv=r.dataset.lv; sel.has(lv)?sel.delete(lv):sel.add(lv); renderSetupPanel();
+  }));
+  panel.querySelector('[data-act="all"]').addEventListener('click',()=>{ topicLevels[t.id]=new Set(LEVEL_ORDER); renderSetupPanel(); });
+  panel.querySelector('[data-act="none"]').addEventListener('click',()=>{ topicLevels[t.id]=new Set(); renderSetupPanel(); });
+  $('qz-topic-start').addEventListener('click',()=>{
+    const pool=QZ_QUESTIONS.filter(q=>q.t===t.id && topicLevels[t.id].has(q.l));
+    if(!pool.length){ $('qz-topic-warn').classList.remove('qz-hidden'); return; }
+    questions=shuffle(pool); begin();
+  });
+}
+
+/* ---------- all-topics chips ---------- */
+function makeChip(wrap, set, id, num, label, cnt){
+  const chip=document.createElement('div');
+  chip.className='qz-chip'+(set().has(id)?' on':''); chip.dataset.id=id;
+  chip.innerHTML=`<span class="qz-box">${set().has(id)?'✓':''}</span>${num?`<span class="qz-num">${num}</span>`:''}<span>${label}</span><span class="qz-cnt">${cnt}</span>`;
+  chip.addEventListener('click',()=>{ const s=set(); s.has(id)?s.delete(id):s.add(id); syncChips(); });
+  wrap.appendChild(chip);
+}
+function syncChips(){
+  document.querySelectorAll('#qz-topic-grid .qz-chip').forEach(c=>{ const on=selTopics.has(c.dataset.id); c.classList.toggle('on',on); c.querySelector('.qz-box').textContent=on?'✓':''; });
+  document.querySelectorAll('#qz-level-grid .qz-chip').forEach(c=>{ const on=selLevels.has(c.dataset.id); c.classList.toggle('on',on); c.querySelector('.qz-box').textContent=on?'✓':''; });
+  updatePoolNote();
+}
+QZ_TOPICS.forEach(t=>makeChip($('qz-topic-grid'), ()=>selTopics, t.id, t.num, esc(t.label), countOf(t.id)+' · '+t.weight));
+QZ_LEVELS.forEach(l=>makeChip($('qz-level-grid'), ()=>selLevels, l.id, '', `<span class="qz-lv-badge qz-lv-${l.id}">${l.label}</span>`, countOf(null,l.id)));
+$('qz-topic-all').addEventListener('click',()=>{ selTopics=new Set(TOPIC_ORDER); syncChips(); });
+$('qz-topic-none').addEventListener('click',()=>{ selTopics=new Set(); syncChips(); });
+$('qz-level-all').addEventListener('click',()=>{ selLevels=new Set(LEVEL_ORDER); syncChips(); });
+$('qz-level-none').addEventListener('click',()=>{ selLevels=new Set(); syncChips(); });
+
+[10,20,30,'all'].forEach(opt=>{
+  const b=document.createElement('button');
+  b.className='qz-count-btn'+(opt===count?' on':'');
+  b.textContent= opt==='all' ? 'All matching' : opt+' questions';
+  b.addEventListener('click',()=>{ count=opt; document.querySelectorAll('#qz-count-row .qz-count-btn').forEach(x=>x.classList.remove('on')); b.classList.add('on'); updatePoolNote(); });
+  $('qz-count-row').appendChild(b);
+});
+function currentPool(){ return QZ_QUESTIONS.filter(q=>selTopics.has(q.t)&&selLevels.has(q.l)); }
+function updatePoolNote(){
+  const n=currentPool().length;
+  const take = count==='all' ? n : Math.min(count,n);
+  $('qz-pool-note').textContent = `${n} question${n===1?'':'s'} match your filters. This quiz will use ${take}.`;
+}
+/* Draw a quiz that keeps the TOS proportions as closely as possible */
+function stratifiedDraw(pool, n){
+  if(n>=pool.length) return shuffle(pool);
+  const groups={}; shuffle(pool).forEach(q=>{ const k=q.t+'|'+q.l; (groups[k]=groups[k]||[]).push(q); });
+  const keys=Object.keys(groups);
+  const quota={}; let used=0;
+  const rema=keys.map(k=>{ const exact=groups[k].length/pool.length*n; quota[k]=Math.floor(exact); used+=quota[k]; return [k, exact-quota[k]]; });
+  shuffle(rema).sort((a,b)=>b[1]-a[1]).slice(0, n-used).forEach(([k])=>quota[k]++);
+  let out=[]; keys.forEach(k=>{ out=out.concat(groups[k].slice(0,quota[k])); });
+  return shuffle(out);
+}
+$('qz-start-btn').addEventListener('click',()=>{
+  const pool=currentPool();
+  if(!pool.length){ $('qz-setup-warn').classList.remove('qz-hidden'); return; }
+  $('qz-setup-warn').classList.add('qz-hidden');
+  questions = count==='all' ? shuffle(pool) : stratifiedDraw(pool, count);
+  begin();
+});
+$('qz-full-btn').addEventListener('click',()=>{ questions=shuffle(QZ_QUESTIONS); begin(); });
+
+/* ---------- quiz screen ---------- */
+function scrollTop(){ const m=$('mainContent'); if(m&&m.scrollTo) m.scrollTo({top:0,behavior:'instant'}); window.scrollTo({top:0,behavior:'instant'}); }
+function begin(){
+  idx=0; score=0; answers=[];
+  $('qz-setup-screen').classList.add('qz-hidden');
+  $('qz-results-screen').classList.add('qz-hidden');
+  $('qz-quiz-screen').classList.remove('qz-hidden');
+  render(); scrollTop();
+}
+function render(){
+  const item=questions[idx], t=TOPIC[item.t], l=LEVEL[item.l];
+  $('qz-q-counter').textContent=`Question ${idx+1} of ${questions.length}`;
+  $('qz-q-score').textContent=`Score: ${score}`;
+  $('qz-progress-fill').style.width=(idx/questions.length*100)+'%';
+  $('qz-q-card').className='qz-card region-'+item.t;
+  $('qz-q-topic').textContent=`${t.num} · ${t.label}`;
+  const lv=$('qz-q-level'); lv.className='qz-lv-badge qz-lv-'+item.l; lv.textContent=l.label;
+  $('qz-q-text').textContent=item.q;
+  const letters=['A','B','C','D'];
+  const opts=shuffle(item.o.map((text,i)=>({text,isCorrect:i===item.a})));
+  const wrap=$('qz-q-options'); wrap.innerHTML='';
+  opts.forEach((opt,i)=>{
+    const b=document.createElement('button'); b.className='qz-option';
+    b.innerHTML=`<span class="qz-letter">${letters[i]}</span><span>${esc(opt.text)}</span>`;
+    b.addEventListener('click',()=>choose(b,opt,opts,item));
+    wrap.appendChild(b);
+  });
+  $('qz-q-explain').classList.add('qz-hidden');
+  $('qz-next-btn').classList.add('qz-hidden');
+}
+function choose(btn,opt,opts,item){
+  const btns=document.querySelectorAll('#qz-q-options .qz-option');
+  if([...btns].some(b=>b.classList.contains('qz-locked'))) return;
+  btns.forEach((b,i)=>{ b.classList.add('qz-locked'); if(opts[i].isCorrect) b.classList.add('qz-correct'); else if(b===btn) b.classList.add('qz-incorrect'); else b.classList.add('qz-dim'); });
+  const ok=opt.isCorrect; if(ok) score++;
+  answers.push({item, chosen:opt.text, ok});
+  $('qz-q-score').textContent=`Score: ${score}`;
+  const ex=$('qz-q-explain'); ex.classList.remove('qz-hidden'); ex.classList.toggle('qz-wrong',!ok);
+  $('qz-q-verdict').textContent= ok ? 'Correct.' : 'Not quite. Correct answer: '+item.o[item.a];
+  $('qz-q-explain-text').textContent=item.e;
+  const nb=$('qz-next-btn'); nb.textContent= idx===questions.length-1 ? 'See results' : 'Next question'; nb.classList.remove('qz-hidden');
+}
+$('qz-next-btn').addEventListener('click',()=>{ idx++; if(idx>=questions.length) showResults(); else { render(); scrollTop(); } });
+$('qz-quit-btn').addEventListener('click',()=>{ if(answers.length) showResults(); else { $('qz-quiz-screen').classList.add('qz-hidden'); $('qz-setup-screen').classList.remove('qz-hidden'); } });
+
+/* ---------- results: tabs by major topic, questions grouped by level ---------- */
+let activeResultTab='overview';
+function tally(list){ return {c:list.filter(a=>a.ok).length, n:list.length}; }
+function bar(name, c, n, region){
+  const pct=n?Math.round(c/n*100):0;
+  return `<div class="qz-bar-row${region?' '+region:''}"><span class="qz-bar-name">${name}</span><span class="qz-bar-track"><span class="qz-bar-fill" style="width:${pct}%"></span></span><span class="qz-bar-score">${c}/${n}</span></div>`;
+}
+function showResults(){
+  $('qz-quiz-screen').classList.add('qz-hidden');
+  $('qz-results-screen').classList.remove('qz-hidden');
+  const n=answers.length;
+  $('qz-final-score').textContent=`${score}/${n}`;
+  $('qz-final-pct').textContent=`${n?Math.round(score/n*100):0}% correct` + (n<questions.length?` · ended early (${n} of ${questions.length} answered)`:'');
+  activeResultTab='overview';
+  renderResultTabs(); renderResultPanel();
+  $('qz-retry-missed-btn').classList.toggle('qz-hidden', !answers.some(a=>!a.ok));
+  scrollTop();
+}
+function renderResultTabs(){
+  const items=[{id:'overview',label:'Overview',num:'✦'}];
+  QZ_TOPICS.forEach(t=>{ const list=answers.filter(a=>a.item.t===t.id); if(list.length){ const s=tally(list); items.push({id:t.id,label:t.label,num:t.num,region:'region-'+t.id,extra:`${s.c}/${s.n}`}); } });
+  buildTabs($('qz-result-tabs'), items, activeResultTab, id=>{ activeResultTab=id; renderResultTabs(); renderResultPanel(); });
+}
+function renderResultPanel(){
+  const panel=$('qz-result-panel');
+  if(activeResultTab==='overview'){
+    const topicBars=QZ_TOPICS.map(t=>{ const s=tally(answers.filter(a=>a.item.t===t.id)); return s.n?bar(`${t.num} · ${esc(t.label)}`, s.c, s.n, 'region-'+t.id):''; }).join('');
+    const levelBars=QZ_LEVELS.map(l=>{ const s=tally(answers.filter(a=>a.item.l===l.id)); return s.n?bar(l.label, s.c, s.n):''; }).join('');
+    panel.className='';
+    panel.innerHTML=`<div class="qz-card"><h3 class="block-title">By system</h3><div class="qz-bars">${topicBars}</div></div>
+      <div class="qz-card"><h3 class="block-title">By cognitive level</h3><div class="qz-bars">${levelBars}</div></div>
+      <p class="qz-intro" style="margin-bottom:18px;">Open a system tab above to review every question you answered in that system, grouped by level, with explanations.</p>`;
+    return;
+  }
+  const t=TOPIC[activeResultTab];
+  const list=answers.filter(a=>a.item.t===t.id);
+  const s=tally(list);
+  panel.className='region-'+t.id;
+  const sections=QZ_LEVELS.map(l=>{
+    const lv=list.filter(a=>a.item.l===l.id); if(!lv.length) return '';
+    const ls=tally(lv);
+    const items=lv.map(a=>`<div class="qz-item ${a.ok?'ok':'bad'}">
+        <div class="qz-item-q"><span class="qz-mark">${a.ok?'✓':'✗'}</span>${esc(a.item.q)}</div>
+        ${a.ok?'':`<div class="qz-item-you">Your answer: ${esc(a.chosen)}</div>`}
+        <div class="qz-item-correct">Correct answer: ${esc(a.item.o[a.item.a])}</div>
+        <div class="qz-item-exp">${esc(a.item.e)}</div></div>`).join('');
+    return `<div class="qz-lv-section"><div class="qz-lv-head"><span class="qz-lv-badge qz-lv-${l.id}">${l.label}</span><span class="qz-scope">${esc(l.desc)}</span><span class="qz-lv-score">${ls.c}/${ls.n}</span></div>${items}</div>`;
+  }).join('');
+  panel.innerHTML=`<div class="qz-card">
+      <div class="qz-panel-head"><div class="qz-roman">${t.num}</div><div><h3>${esc(t.label)}: ${s.c}/${s.n}</h3><div class="qz-scope">${esc(t.scope)}</div></div></div>
+      <div class="qz-filter-row"><label><input type="checkbox" id="qz-only-missed"> Show missed only</label></div>
+      <div id="qz-lv-wrap">${sections}</div></div>`;
+  $('qz-only-missed').addEventListener('change',e=>{
+    panel.querySelectorAll('.qz-item.ok').forEach(el=>el.classList.toggle('qz-hidden', e.target.checked));
+    panel.querySelectorAll('.qz-lv-section').forEach(sec=>sec.classList.toggle('qz-hidden', e.target.checked && !sec.querySelector('.qz-item.bad')));
+  });
+}
+$('qz-retry-missed-btn').addEventListener('click',()=>{ questions=shuffle(answers.filter(a=>!a.ok).map(a=>a.item)); begin(); });
+$('qz-restart-btn').addEventListener('click',()=>{ $('qz-results-screen').classList.add('qz-hidden'); $('qz-setup-screen').classList.remove('qz-hidden'); renderSetupTabs(); renderSetupPanel(); scrollTop(); });
+
+renderSetupTabs(); renderSetupPanel();
+})();
+</script>
+
 </body>
 </html>
